@@ -1,0 +1,24 @@
+User
+ id - PK
+ key - FK
+ name
+ -
+ add(key, name): id
+ getName(id): name
+ findUser(key): id
+
+
+AdList
+ id - PK
+ date - FK
+ user - FK - User
+ morning
+ evening
+ pulse
+ description
+ meds
+ -
+ list(userId, [date_navigation]): all
+ add(all): id
+ edit(id, all): id
+ 
