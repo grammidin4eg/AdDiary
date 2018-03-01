@@ -7,8 +7,8 @@ export class AdlistService {
   constructor() { }
   getDemoData(): Ad[] {
      this.AdList = [];
-     this.AdList.push(new Ad(130, 90, 95, 140, 90, 107,'', ''));
-     this.AdList.push(new Ad(126, 90, 84, 140, 90, 107,'', ''));
+     this.AdList.push(new Ad('130;90;95', '','', '140;90;107', '', ''));
+     this.AdList.push(new Ad('120;80;90', '','', '127;87;106', '', ''));
      return this.AdList;
   }
 

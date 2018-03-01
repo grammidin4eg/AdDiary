@@ -12,25 +12,44 @@ export class User {
    }
 }
 
+export class AdValue {
+   up: number;
+   down: number;
+   pulse: number;
+   correct: boolean;
+
+   constructor(value: string) {
+      if(!value) {
+         return;
+      }
+      let arr = value.split(';');
+      if(!arr || arr.length < 2) {
+         return;
+      }
+      this.up = parseInt(arr[0], 10);
+      this.down = parseInt(arr[1], 10);
+      this.pulse = parseInt(arr[2], 10);
+      if( this.up && !isNaN(this.up) && this.down && !isNaN(this.down) && this.pulse && !isNaN(this.pulse)   ) {
+         this.correct = true;
+      }
+   }
+}
+
 export class Ad {
    id: number;
    date: Date;
-   morning1: number;
-   morning2: number;
-   morningPulse: number;
-   evening1: number;
-   evening2: number;
-   eveningPulse: number;
+   value1: AdValue;
+   value2: AdValue;
+   value3: AdValue;
+   value4: AdValue;
    description: string;
    meds: string;
 
-   constructor(morning1, morning2, morningPulse, evening1, evening2, eveningPulse, description, meds) {
-      this.morning1 = morning1;
-      this.morning2 = morning2;
-      this.morningPulse = morningPulse;
-      this.evening1 = evening1;
-      this.evening2 = evening2;
-      this.eveningPulse = eveningPulse;
+   constructor(value1: string, value2: string, value3: string, value4: string, description: string, meds: string) {
+      this.value1 = new AdValue(value1);
+      this.value2 = new AdValue(value2);
+      this.value3 = new AdValue(value3);
+      this.value4 = new AdValue(value4);
       this.description = description;
       this.meds = meds;
    }

@@ -3,16 +3,23 @@ import { NgModule } from '@angular/core';
 
 
 import { AppComponent } from './app.component';
+import { DiaryListComponent } from './diary-list/diary-list.component';
+import { MainPageComponent } from './main-page/main-page.component';
+import { AppRoutingModule } from './/app-routing.module';
+import { AdlistService } from './adlist.service'
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    DiaryListComponent,
+    MainPageComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    AppRoutingModule
   ],
-  providers: [],
+  providers: [AdlistService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
