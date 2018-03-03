@@ -31,3 +31,12 @@ demo - режим
 Например, кинуть врачу.
 
 графики
+
+----------
+
+шаблоны:
+
+http://www.templatemo.com/tm-508-power
+https://templated.co/interphase
+https://templated.co/ion
+

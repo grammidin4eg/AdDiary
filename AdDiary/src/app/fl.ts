@@ -19,17 +19,17 @@ export class AdValue {
    correct: boolean;
 
    constructor(value: string) {
-      if(!value) {
+      if (!value) {
          return;
       }
-      let arr = value.split(';');
-      if(!arr || arr.length < 2) {
+      const arr = value.split(';');
+      if (!arr || arr.length < 2) {
          return;
       }
       this.up = parseInt(arr[0], 10);
       this.down = parseInt(arr[1], 10);
       this.pulse = parseInt(arr[2], 10);
-      if( this.up && !isNaN(this.up) && this.down && !isNaN(this.down) && this.pulse && !isNaN(this.pulse)   ) {
+      if ( this.up && !isNaN(this.up) && this.down && !isNaN(this.down) && this.pulse && !isNaN(this.pulse)   ) {
          this.correct = true;
       }
    }
