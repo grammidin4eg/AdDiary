@@ -23,3 +23,7 @@ AdList
  add(all): id
  edit(id, all): id
  
+Month
+ id - PK
+ date
+ weight
