@@ -2,6 +2,7 @@ User
  id - PK
  key - FK
  name
+ age
  -
  add(key, name): id
  getName(id): name
@@ -27,3 +28,4 @@ Month
  id - PK
  date
  weight
+ value
