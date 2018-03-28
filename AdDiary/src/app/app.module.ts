@@ -12,6 +12,7 @@ import { RegistrationComponent } from './registration/registration.component';
 import { LoginFormComponent } from './login-form/login-form.component';
 import { UserInfoComponent } from './user-info/user-info.component';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { FormsModule } from '@angular/forms';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
   providers: [AdlistService],
   bootstrap: [AppComponent]
