@@ -13,6 +13,7 @@ import { LoginFormComponent } from './login-form/login-form.component';
 import { UserInfoComponent } from './user-info/user-info.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import {UserRegService} from './user-reg.service';
 
 
 @NgModule({
@@ -31,7 +32,7 @@ import { HttpClientModule } from '@angular/common/http';
     FormsModule,
     HttpClientModule
   ],
-  providers: [AdlistService],
+  providers: [AdlistService, UserRegService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
