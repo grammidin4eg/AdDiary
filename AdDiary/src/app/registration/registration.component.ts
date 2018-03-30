@@ -16,9 +16,16 @@ export class RegistrationComponent implements OnInit {
    constructor(private userserv: UserRegService) { }
 
    onSubmit() {
+      // https://habrahabr.ru/post/336280/
       console.log('submit', this.email, this.name, this.age, this.weight);
-      const res = this.userserv.Registration(this.email, this.name, this.password, this.age, this.weight);
-      console.log('res', res);
+      this.userserv.Registration(this.email, this.name, this.password, this.age, this.weight).subscribe(value => {
+          // value - результат
+          console.log('value', value);
+        },
+        error => {
+          // error - объект ошибки
+          console.log('error', error);
+        });
    }
 
    ngOnInit() {
