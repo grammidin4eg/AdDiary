@@ -15,12 +15,9 @@ export class UserRegService {
     const params = new CallParams('User', 'Registration', 'None', {
       'email': email,
       'password': password,
-      'fields': {
-        'name': name,
-        'email': email,
-        'age': age,
-        'weight': weight
-      }
+      'name': name,
+      'age': age,
+      'weight': weight
     });
     return this.http.post<SimboResult>(BLURL, params);
   }
