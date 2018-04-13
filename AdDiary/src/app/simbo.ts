@@ -1,7 +1,7 @@
 export class SimboResult {
-  RESULT: String;
-  ERROR: String;
-  DATA: String;
+  RESULT: string;
+  ERROR: string;
+  DATA: string;
   constructor(result) {
      this.RESULT = result.RESULT;
      this.ERROR = result.ERROR;
@@ -12,7 +12,7 @@ export class SimboResult {
      return (this.RESULT === 'OK');
   }
 
-  getError(): String {
+  getError(): string {
      return this.ERROR;
   }
 
@@ -20,11 +20,16 @@ export class SimboResult {
      return this.DATA;
   }
 
+  getList() {
+   const list = JSON.parse(this.getData());
+   return list;
+  }
+
   getInsertId() {
      return this.DATA ? this.DATA['INSERT_ID'] : null;
   }
 
-  errorEqu(errorId: String): boolean {
+  errorEqu(errorId: string): boolean {
      return (this.DATA === errorId);
   }
 }

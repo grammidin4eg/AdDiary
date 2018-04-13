@@ -22,4 +22,12 @@ export class UserRegService {
     return this.http.post<SimboResult>(BLURL, params);
   }
 
+  Login(email, password): Observable<SimboResult> {
+   const params = new CallParams('User', 'LoginPassword', 'None', {
+      'login': email,
+      'password': password,
+    });
+    return this.http.post<SimboResult>(BLURL, params);
+  }
+
 }

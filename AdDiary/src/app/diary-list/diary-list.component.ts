@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { AdlistService } from '../adlist.service'
+import { AdlistService } from '../adlist.service';
 
 @Component({
   selector: 'app-diary-list',
