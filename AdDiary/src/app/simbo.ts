@@ -21,8 +21,7 @@ export class SimboResult {
   }
 
   getList() {
-   const list = JSON.parse(this.getData());
-   return list;
+   return this.DATA['LIST'];
   }
 
   getInsertId() {

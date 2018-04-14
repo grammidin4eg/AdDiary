@@ -10,6 +10,8 @@ export class UserRegService {
 
   constructor(private http: HttpClient) { }
 
+  userData;
+
   Registration(email, name, password, age, weight): Observable<SimboResult> {
     // id, name, hkey, email
     const params = new CallParams('User', 'Registration', 'None', {
@@ -28,6 +30,24 @@ export class UserRegService {
       'password': password,
     });
     return this.http.post<SimboResult>(BLURL, params);
+  }
+
+  setUserData(data) {
+     this.userData = data;
+     /*
+     age:"33"
+     email:"mail_ego@list.ru"
+     id:"14"
+     name:"Юрий"
+     weight:"140"
+     */
+  }
+
+  getUserId() {
+     if (!this.userData) {
+        return null;
+     }
+     return this.userData.id;
   }
 
 }
