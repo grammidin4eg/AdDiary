@@ -14,6 +14,8 @@ import { UserInfoComponent } from './user-info/user-info.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import {UserRegService} from './user-reg.service';
+import { TextMaskModule } from 'angular2-text-mask';
+import { AdInputComponent } from './ad-input/ad-input.component';
 
 
 @NgModule({
@@ -24,12 +26,14 @@ import {UserRegService} from './user-reg.service';
     ConstructComponent,
     RegistrationComponent,
     LoginFormComponent,
-    UserInfoComponent
+    UserInfoComponent,
+    AdInputComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    TextMaskModule,
     HttpClientModule
   ],
   providers: [AdlistService, UserRegService],

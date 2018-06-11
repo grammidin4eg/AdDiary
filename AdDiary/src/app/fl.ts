@@ -17,21 +17,15 @@ export class AdValue {
     down: number;
     pulse: number;
     correct: boolean;
+    edit: boolean = false;
+    value: string = "";
 
     constructor(value: string) {
         if (!value) {
             return;
         }
-        const arr = value.split(';');
-        if (!arr || arr.length < 2) {
-            return;
-        }
-        this.up = parseInt(arr[0], 10);
-        this.down = parseInt(arr[1], 10);
-        this.pulse = parseInt(arr[2], 10);
-        if (this.up && !isNaN(this.up) && this.down && !isNaN(this.down) && this.pulse && !isNaN(this.pulse)) {
-            this.correct = true;
-        }
+        this.value = value;
+        this.update();
     }
 
     toString(): string {
@@ -39,6 +33,34 @@ export class AdValue {
             return '';
         }
         return `${this.up}/${this.down}/${this.pulse}`;
+    }
+
+    setEdit(value: boolean) {
+        if(!value && this.edit) {
+            this.update();
+        }
+        this.edit = value;
+    }
+
+    isEdit(): boolean {
+        return this.edit;
+    }
+
+    update() {
+        console.log('update', this.value);
+        this.value = this.value.replace(/;/g, '/');
+        const arr = this.value.split('/');
+        if (!arr || arr.length < 2) {
+            return;
+        }        
+        console.log('update2', arr);
+        this.up = parseInt(arr[0], 10);
+        this.down = parseInt(arr[1], 10);
+        this.pulse = parseInt(arr[2], 10);
+        if (this.up && !isNaN(this.up) && this.down && !isNaN(this.down) && this.pulse && !isNaN(this.pulse)) {
+            this.correct = true;
+        }
+        console.log('update3', this);
     }
 }
 

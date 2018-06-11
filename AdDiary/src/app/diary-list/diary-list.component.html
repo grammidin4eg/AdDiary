@@ -16,7 +16,17 @@
     <tbody>
       <tr *ngFor="let ad of visData" [ngClass]="{'info': ad.curDate}">
           <td align="center">{{ad.day}}</td>
-          <td align="center">{{ad.value1}}</td>
+          <td class="adValueTd" align="center" (click)="valueClick(ad.value1)">            
+            <!-- todo ad-input -->
+            <div class="adValueText" *ngIf="!ad.value1.isEdit()">{{ad.value1.value}}</div>
+            <input 
+            class="adValueInput"
+            [textMask]="{mask: inputMask}"
+            *ngIf="ad.value1.isEdit()" 
+            (keyup.enter)="updateValue(ad.value1)"
+            (blur)="updateValue(ad.value1)"
+            [(ngModel)]="ad.value1.value" placeholder="120/80/90"/>
+          </td>
           <td align="center">{{ad.value2}}</td>
           <td align="center">{{ad.value3}}</td>
           <td align="center">{{ad.value4}}</td>

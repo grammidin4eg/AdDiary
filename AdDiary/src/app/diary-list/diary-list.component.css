@@ -5,3 +5,15 @@
 .list {
     margin: 0 80px;
 }
+
+.adValueInput {
+    width: 69px;
+}
+
+.adValueTd {
+    height: 43px;
+}
+
+.adValueText {    
+    margin-top: 3px;
+}
