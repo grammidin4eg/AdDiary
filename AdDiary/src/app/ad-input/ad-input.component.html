@@ -1,3 +1,23 @@
-<p>
-  ad-input works!
-</p>
+<div class="adValueInputBox" (click)="valueClick()">
+  <div class="adValueText" *ngIf="!data.isEdit()">{{data}}</div>
+  <div class="adValueInput" *ngIf="data.isEdit()">
+    <input 
+    class="UpValue adValueInputField"
+    [textMask]="{mask: inputMask}"
+    (keyup.enter)="updateValue()"    
+    [(ngModel)]="data.up" placeholder="120"/>
+    <span>/</span>
+    <input 
+    class="DownValue adValueInputField"
+    [textMask]="{mask: inputMask}"
+    (keyup.enter)="updateValue()"    
+    [(ngModel)]="data.down" placeholder="80"/>
+    <span>/</span>
+    <input 
+    class="PulseValue adValueInputField"
+    [textMask]="{mask: inputMask}"
+    (keyup.enter)="updateValue()"
+    (blur)="updateValue()"
+    [(ngModel)]="data.pulse" placeholder="90"/>    
+  </div>  
+</div>

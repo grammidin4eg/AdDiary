@@ -35,10 +35,7 @@ export class AdValue {
         return `${this.up}/${this.down}/${this.pulse}`;
     }
 
-    setEdit(value: boolean) {
-        if(!value && this.edit) {
-            this.update();
-        }
+    setEdit(value: boolean) {        
         this.edit = value;
     }
 
@@ -47,20 +44,20 @@ export class AdValue {
     }
 
     update() {
-        console.log('update', this.value);
+        console.log('updateFL', this.value);
         this.value = this.value.replace(/;/g, '/');
         const arr = this.value.split('/');
         if (!arr || arr.length < 2) {
             return;
         }        
-        console.log('update2', arr);
+        console.log('updateFL2', arr);
         this.up = parseInt(arr[0], 10);
         this.down = parseInt(arr[1], 10);
         this.pulse = parseInt(arr[2], 10);
         if (this.up && !isNaN(this.up) && this.down && !isNaN(this.down) && this.pulse && !isNaN(this.pulse)) {
             this.correct = true;
         }
-        console.log('update3', this);
+        console.log('updateFL3', this);
     }
 }
 

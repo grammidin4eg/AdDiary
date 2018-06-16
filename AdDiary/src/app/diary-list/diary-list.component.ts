@@ -13,8 +13,7 @@ export class DiaryListComponent implements OnInit {
   id: number;
   curMonth: number;
   data: Ad[];
-  visData: Ad[];
-  public inputMask = [/[0-9]/, /[0-9]/, /[0-9]/, '/', /[0-9]/, /[0-9]/, /[0-9]/, '/', /[0-9]/, /[0-9]/, /[0-9]/]
+  visData: Ad[];  
 
   constructor(private route: ActivatedRoute, private adListService: AdlistService) { }
 
@@ -33,19 +32,5 @@ export class DiaryListComponent implements OnInit {
     //отобразить данные
     this.visData = this.adListService.fillMonthData(this.curMonth);
     console.log('visData', this.visData);
-  }
-
-  valueClick(curValue: AdValue) {
-    console.log('click', curValue);
-    this.visData.forEach(curData => {      
-      curData.value1.setEdit(false);
-    });
-    curValue.setEdit(true);
-  }
-
-  updateValue(curValue: AdValue) {
-    console.log('updateValue', curValue);    
-    curValue.setEdit(false);
-  }
-
+  }  
 }

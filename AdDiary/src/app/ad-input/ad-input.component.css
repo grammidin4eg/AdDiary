@@ -1,0 +1,15 @@
+.adValueInputBox {
+    width: 92px;
+    height: 26px;
+}
+
+.adValueInputField {
+    width: 30px;
+}
+
+.adValueInput {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    align-items: center;
+}
