@@ -6,7 +6,23 @@ const listLoaded = (list) => {
     }
 };
 
+const openRegistration = () => {
+    return {
+        type: ACTIONS.OPEN_REGISTRATION,
+        payload: null
+    }
+};
+
+const openLogin = () => {
+    return {
+        type: ACTIONS.OPEN_LOGIN,
+        payload: null
+    }
+};
+
 
 export {
-    listLoaded
+    listLoaded,
+    openRegistration,
+    openLogin
 };

@@ -1,5 +1,6 @@
 import React from "react";
 import "./landing.css";
+import LandingForm from '../landing-form'
 
 const Landing = () => {
   return (
@@ -11,6 +12,9 @@ const Landing = () => {
           </a>
           <a className="btn btn-primary" href="#">
             Помочь сайту
+          </a>
+          <a className="btn btn-primary" href="#">
+            Войти
           </a>
         </div>
       </nav>
@@ -24,22 +28,7 @@ const Landing = () => {
                 Дневник давления онлайн
               </h1>
             </div>
-            <div className="col-md-10 col-lg-8 col-xl-7 mx-auto">
-              <form>
-                <div className="form-row">
-                  <div className="col-12 col-md-6">
-                  <button                    
-                    className="btn btn-block btn-lg btn-primary">Войти
-                  </button>
-                  </div>
-                  <div className="col-12 col-md-6">
-                    <button                      
-                      className="btn btn-block btn-lg btn-primary">Регистрация (бесплатно)
-                    </button>
-                  </div>
-                </div>
-              </form>
-            </div>
+            <LandingForm></LandingForm>
           </div>
         </div>
       </header>
