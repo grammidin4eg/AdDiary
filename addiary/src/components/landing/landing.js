@@ -38,7 +38,7 @@ const Landing = () => {
           <div className="row">
             <div className="col-lg-4">
               <div className="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">                
-                <i class="fas fa-clock feature-icon"></i>                
+                <i className="fas fa-clock feature-icon"></i>                
                 <h3>Измеряйте регулярно</h3>
                 <p className="lead mb-0">
                 Регулярные записи значений АД очень полезны для врача. На их основе он может скорректировать назначенное пациенту лечение.
@@ -47,9 +47,9 @@ const Landing = () => {
             </div>
             <div className="col-lg-4">
               <div className="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
-              <i class="fas fa-desktop feature-icon"></i>
+              <i className="fas fa-desktop feature-icon"></i>
                 <h3>Электронный дневник</h3>
-                <p className="lead mb-0 device-features">
+                <div className="lead mb-0 device-features">
                   <ul>
                     <li>Доступен всегда, с любого компьютера, телефона</li>
                     <li>Удобно заполнять</li>
@@ -57,12 +57,12 @@ const Landing = () => {
                     <li>Подсвечивает дни, когда давление было высоким</li>
                     <li>Удобно просматривать измерения</li>
                   </ul>
-                </p>
+                </div>
               </div>
             </div>
             <div className="col-lg-4">
               <div className="features-icons-item mx-auto mb-0 mb-lg-3">
-                <i class="fas fa-cloud feature-icon"></i>
+                <i className="fas fa-cloud feature-icon"></i>
                 <h3>Поделиться записями</h3>
                 <p className="lead mb-0">
                 Сохраните на компьютер или распечатайте.                
