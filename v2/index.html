@@ -10,17 +10,42 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css"
         integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
     <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
     <title>Дневник давления</title>
 </head>
 
 <body>
-    <div class="container-fluid">
+    <div class="container-fluid" id="app">
         <div class="row logo-block">
             <div class="col-md-12 logo">
-                <h2>Электронный дневник давления</h2>
-                <div class="button-panel">
-                    <button type="button" class="btn btn-primary">Войти</button>
-                    <button type="button" class="btn btn-primary">Регистрация</button>
+                <div class="title-panel top-panel" v-if="showLanding">
+                    <h2>Электронный дневник давления</h2>
+                    <div class="button-panel">
+                        <button type="button" class="btn btn-primary">Войти</button>
+                        <button type="button" class="btn btn-primary"
+                            @click="openRegistrationForm()">Регистрация</button>
+                    </div>
+                </div>
+                <div class="registration-panel top-panel" v-if="showRegistrationForm">
+                    <h4>Регистрация</h4>
+                    <form>
+                        <div class="form-group">
+                            <label for="regEmail">Почта</label>
+                            <input v-model.lazy="regEmail" :class="formRegEmail" type="email" class="form-control" id="regEmail" placeholder="Почта">
+                        </div>
+                        <div class="form-group">
+                                <label for="regAge">Возраст</label>
+                                <input v-model.lazy="regAge" type="number" class="form-control" id="regAge" placeholder="Возраст">
+                            </div>
+                        <div class="form-group">
+                            <label for="regPassword">Пароль</label>
+                            <input v-model="regPassword" type="password" class="form-control" id="regPassword"
+                                placeholder="Пароль">
+                        </div>
+                        <fieldset :disabled="diabledRegSubmit">
+                            <button type="submit" class="btn btn-default btn-primary">Submit</button>
+                        </fieldset>
+                    </form>
                 </div>
             </div>
         </div>
@@ -66,7 +91,10 @@
         </div>
     </div>
 </body>
+<script src="./js/addiary.js"></script>
 <!-- todo 
+    регистрация (почта, пароль, имя, возраст)
+
     Помочь сайту
     Инструкция правильного измерения
     сохранять регистрацию
@@ -75,4 +103,5 @@
 
     удобный "умный" ввод
 -->
+
 </html>

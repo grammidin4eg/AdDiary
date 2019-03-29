@@ -1,11 +1,11 @@
 .logo {
     background-color: #00000063;
-    padding: 59px 30px;
+    height: 58vmax;    
     text-align: center;
-    background-image: url(./img/logo_400_240.jpg);
+    /*background-image: url(./img/logo_400_240.jpg);
     background-blend-mode: color;
     background-repeat: no-repeat;
-    background-position: center;
+    background-position: center;*/
 }
 
 .button-panel {
@@ -28,10 +28,34 @@
 @media screen and (min-width: 768px) {
     .logo {
         background-image: url(./img/logo_1600_900.jpg);
-        padding: 190px 30px;
+        background-blend-mode: color;
+        background-repeat: no-repeat;
+        background-position: center;
+        height: 46vmax;
+        max-height: 450px;
     }
 }
 
 .logo h2 {
     color: white;
+}
+
+.registration-panel {
+    text-align: left;
+    color: white;    
+    max-height: 340px;
+}
+
+.title-panel {
+    max-height: 149px;
+}
+
+.top-panel {
+    max-width: 400px;
+    margin: auto;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;    
 }
