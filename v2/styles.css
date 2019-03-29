@@ -1,0 +1,24 @@
+.logo {
+    background-color: #00000063;
+    padding: 59px 30px;
+    text-align: center;
+    background-image: url(./img/logo_400_240.jpg);
+    background-blend-mode: color;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.button-panel {
+    margin-top: 20px;
+}
+
+@media screen and (min-width: 768px) {
+    .logo {
+        background-image: url(./img/logo_1600_900.jpg);
+        padding: 190px 30px;
+    }
+}
+
+.logo h2 {
+    color: white;
+}
