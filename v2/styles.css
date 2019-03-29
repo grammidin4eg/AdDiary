@@ -59,3 +59,8 @@
     right: 0;
     bottom: 0;    
 }
+
+.footer-block {
+    background-color: currentColor;
+    margin-top: 12px;
+}
