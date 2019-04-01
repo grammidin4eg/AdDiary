@@ -6,12 +6,16 @@ export default class UserService extends SimboServiceVirtual {
         super('user');
     }
 
-    register() {
-        return this.exec('register', {login: 'testLogin', password: '123', name: 'User'});
+    register(login, password, age) {
+        return this.exec('register', {login, password, age});
     }
 
-    login() {
-        return this.exec('login', {login: 'testLogin', password: '123'});
+    login(login, password) {
+        return this.exec('login', {login, password});
+    }
+
+    error() {
+        return this.exec('error', {});
     }
     
     get() {

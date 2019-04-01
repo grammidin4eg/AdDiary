@@ -31,19 +31,19 @@
                     <form>
                         <div class="form-group">
                             <label for="regEmail">Почта</label>
-                            <input v-model.lazy="regEmail" :class="formRegEmail" type="email" class="form-control" id="regEmail" placeholder="Почта">
+                            <input v-model.lazy.trim="regEmail" :class="formRegEmail" type="email" class="form-control" id="regEmail" placeholder="Почта">
                         </div>
                         <div class="form-group">
                                 <label for="regAge">Возраст</label>
-                                <input v-model.lazy="regAge" type="number" class="form-control" id="regAge" placeholder="Возраст">
+                                <input v-model.lazy.number="regAge" :class="formRegAge" type="number" class="form-control" id="regAge" placeholder="Возраст">
                             </div>
                         <div class="form-group">
                             <label for="regPassword">Пароль</label>
-                            <input v-model="regPassword" type="password" class="form-control" id="regPassword"
+                            <input v-model.trim="regPassword" :class="formRegPassword" type="password" class="form-control" id="regPassword"
                                 placeholder="Пароль">
                         </div>
                         <fieldset :disabled="diabledRegSubmit">
-                            <button type="submit" class="btn btn-default btn-primary">Submit</button>
+                            <button type="submit" @click.prevent="regFormConfirm()" class="btn btn-default btn-primary">Submit</button>
                         </fieldset>
                     </form>
                 </div>

@@ -17,10 +17,13 @@ export default class SimboServiceVirtual {
                 data = this.data;
                 break;            
             case 'register':
-                data = {name: 'UserName', roleName: 'user', roleAdmin: false};
+                data = {id: 777, email: 'samplemail@mail.com', age: 34};
                 break;
             case 'login':
-                data = {name: 'UserName', roleName: 'user', roleAdmin: false};
+                data = {id: 777, email: 'samplemail@mail.com', age: 34};
+                break;
+            case 'error':
+                data="error";
                 break;
             default:
                 data = 'OK';
