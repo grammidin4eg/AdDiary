@@ -15,104 +15,123 @@
 </head>
 
 <body>
-    <div class="container-fluid" id="app">
-        <div class="row logo-block">
-            <div class="col-md-12 logo">
-                <div class="title-panel top-panel" v-if="showLanding">
-                    <h2>Электронный дневник давления</h2>
-                    <div class="button-panel">
-                        <button type="button" class="btn btn-primary">Войти</button>
-                        <button type="button" class="btn btn-primary"
-                            @click="openRegistrationForm()">Регистрация</button>
-                    </div>
-                </div>
-                <div class="registration-panel top-panel" v-if="showRegistrationForm">
-                    <h4>Регистрация</h4>
-                    <form>
-                        <div class="form-group">
-                            <label for="regEmail">Почта</label>
-                            <input v-model.lazy.trim="regEmail" :class="formRegEmail" type="email" class="form-control" id="regEmail" placeholder="Почта">
+    <div id="app">
+        <div class="container-fluid" v-if="!showTable">
+            <div class="row logo-block">
+                <div class="col-md-12 logo">
+                    <div class="title-panel top-panel" v-if="showLanding">
+                        <h2>Электронный дневник давления</h2>
+                        <div class="button-panel">
+                            <button type="button" class="btn btn-primary" @click="openLoginForm()">Войти</button>
+                            <button type="button" class="btn btn-primary"
+                                @click="openRegistrationForm()">Регистрация</button>
                         </div>
-                        <div class="form-group">
-                                <label for="regAge">Возраст</label>
-                                <input v-model.lazy.number="regAge" :class="formRegAge" type="number" class="form-control" id="regAge" placeholder="Возраст">
+                    </div>
+                    <div class="registration-panel top-panel" v-if="showRegistrationForm">
+                        <div v-if="regError" class="alert alert-danger" role="alert">
+                            {{ regError }}
+                        </div>
+                        <h4 v-if="!regError">Регистрация</h4>
+                        <form>
+                            <div class="form-group">
+                                <label for="regEmail">Почта</label>
+                                <input v-model.lazy.trim="regEmail" :class="formRegEmail" type="email"
+                                    class="form-control" id="regEmail" placeholder="Почта">
                             </div>
-                        <div class="form-group">
-                            <label for="regPassword">Пароль</label>
-                            <input v-model.trim="regPassword" :class="formRegPassword" type="password" class="form-control" id="regPassword"
-                                placeholder="Пароль">
-                        </div>
-                        <fieldset :disabled="diabledRegSubmit">
-                            <button type="submit" @click.prevent="regFormConfirm()" class="btn btn-default btn-primary">Submit</button>
-                        </fieldset>
-                    </form>
-                </div>
-            </div>
-        </div>
-        <div class="row delimer"></div>
-        <div class="row info-block">
-            <div class="col-lg-4">
-                <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
-                    <i class="fas fa-clock feature-icon"></i>
-                    <h3>Измеряйте регулярно</h3>
-                    <p class="lead mb-0">
-                        Регулярные записи значений АД очень полезны для врача. На их основе он может скорректировать
-                        назначенное пациенту лечение.
-                    </p>
-                </div>
-            </div>
-            <div class="col-lg-4">
-                <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
-                    <i class="fas fa-desktop feature-icon"></i>
-                    <h3>Электронный дневник</h3>
-                    <div class="lead mb-0 device-features">
-                        <ul>
-                            <li>Доступен всегда, с любого компьютера, телефона</li>
-                            <li>Удобно заполнять</li>
-                            <li>Сам считает средние показатели АД</li>
-                            <li>Подсвечивает дни, когда давление было высоким</li>
-                            <li>Удобно просматривать измерения</li>
-                        </ul>
+                            <div class="form-group" v-if="!isLoginForm">
+                                <label for="regAge">Возраст</label>
+                                <input v-model.lazy.number="regAge" :class="formRegAge" type="number"
+                                    class="form-control" id="regAge" placeholder="Возраст">
+                            </div>
+                            <div class="form-group">
+                                <label for="regPassword">Пароль</label>
+                                <input v-model.trim="regPassword" :class="formRegPassword" type="password"
+                                    class="form-control" id="regPassword" placeholder="Пароль">
+                            </div>
+                            <div class="btn-group" role="group" aria-label="Basic example">
+                                <fieldset :disabled="diabledRegSubmit">
+                                    <button type="submit" @click.prevent="regFormConfirm()"
+                                        class="btn btn-default btn-primary" v-if="!isLoginForm">Регистрация</button>
+                                    <button type="submit" @click.prevent="regFormConfirm()"
+                                        class="btn btn-default btn-primary" v-if="isLoginForm">Войти</button>
+                                </fieldset>
+                                <button @click="regFormCancel()" type="button" class="btn btn-secondary">Отмена</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-4">
-                <div class="features-icons-item mx-auto mb-0 mb-lg-3">
-                    <i class="fas fa-cloud feature-icon"></i>
-                    <h3>Поделиться записями</h3>
-                    <p class="lead mb-0">
-                        Сохраните на компьютер или распечатайте.
-                    </p>
-                    <p class="lead mb-0">
-                        Можно кинуть ссылку на ваш дневник. Удобно при онлайн консультации с врачом.
+            <div class="row delimer"></div>
+            <div class="row info-block">
+                <div class="col-lg-4">
+                    <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
+                        <i class="fas fa-clock feature-icon"></i>
+                        <h3>Измеряйте регулярно</h3>
+                        <p class="lead mb-0">
+                            Регулярные записи значений АД очень полезны для врача. На их основе он может скорректировать
+                            назначенное пациенту лечение.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
+                        <i class="fas fa-desktop feature-icon"></i>
+                        <h3>Электронный дневник</h3>
+                        <div class="lead mb-0 device-features">
+                            <ul>
+                                <li>Доступен всегда, с любого компьютера, телефона</li>
+                                <li>Удобно заполнять</li>
+                                <li>Сам считает средние показатели АД</li>
+                                <li>Подсвечивает дни, когда давление было высоким</li>
+                                <li>Удобно просматривать измерения</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="features-icons-item mx-auto mb-0 mb-lg-3">
+                        <i class="fas fa-cloud feature-icon"></i>
+                        <h3>Поделиться записями</h3>
+                        <p class="lead mb-0">
+                            Сохраните на компьютер или распечатайте.
+                        </p>
+                        <p class="lead mb-0">
+                            Можно кинуть ссылку на ваш дневник. Удобно при онлайн консультации с врачом.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="row footer-block">
+                <div class="col-lg-6 h-100 text-center text-lg-left my-auto">
+                    <ul class="list-inline mb-2">
+                        <li class="list-inline-item">
+                            <a href="#">О проекте</a>
+                        </li>
+                        <li class="list-inline-item">&sdot;</li>
+                        <li class="list-inline-item">
+                            <a href="#">Контакты</a>
+                        </li>
+                        <li class="list-inline-item">&sdot;</li>
+                        <li class="list-inline-item">
+                            <a href="#">Поддержать</a>
+                        </li>
+                        <li class="list-inline-item">&sdot;</li>
+                        <li class="list-inline-item">
+                            <a href="#">Privacy Policy</a>
+                        </li>
+                    </ul>
+                    <p class="text-muted small mb-4 mb-lg-0">
+                        &copy; Карачевцев Ю.Ю. 2019. Все права защищены.
                     </p>
                 </div>
             </div>
         </div>
-        <div class="row footer-block">
-            <div class="col-lg-6 h-100 text-center text-lg-left my-auto">
-              <ul class="list-inline mb-2">
-                <li class="list-inline-item">
-                  <a href="#">О проекте</a>
-                </li>
-                <li class="list-inline-item">&sdot;</li>
-                <li class="list-inline-item">
-                  <a href="#">Контакты</a>
-                </li>
-                <li class="list-inline-item">&sdot;</li>
-                <li class="list-inline-item">
-                  <a href="#">Поддержать</a>
-                </li>
-                <li class="list-inline-item">&sdot;</li>
-                <li class="list-inline-item">
-                  <a href="#">Privacy Policy</a>
-                </li>
-              </ul>
-              <p class="text-muted small mb-4 mb-lg-0">
-                &copy; Карачевцев Ю.Ю. 2019. Все права защищены.
-              </p>
-            </div>              
-          </div>
+        <div class="container-fluid" v-if="showTable">
+            <div v-if="regError" class="alert alert-danger" role="alert">
+                {{ regError }}
+            </div>
+            TABLE!
+        </div>
     </div>
 </body>
 <script src="./dist/bundle.js"></script>

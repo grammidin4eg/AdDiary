@@ -6,7 +6,7 @@ export default class AdDiaryService extends SimboServiceVirtual {
         super('addiary');
     }
 
-    list() {
+    list(userId) {
         return this.exec('list', {});
     }
 
@@ -24,5 +24,9 @@ export default class AdDiaryService extends SimboServiceVirtual {
 
     isEditRights() {
         return true;
+    }
+
+    error() {
+        return this.exec('error', {});
     }
 }

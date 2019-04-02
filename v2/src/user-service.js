@@ -14,6 +14,10 @@ export default class UserService extends SimboServiceVirtual {
         return this.exec('login', {login, password});
     }
 
+    saveLocal(userObj) {
+        localStorage.setItem('adDiaryUserObj', JSON.stringify(userObj))
+    }
+
     error() {
         return this.exec('error', {});
     }
