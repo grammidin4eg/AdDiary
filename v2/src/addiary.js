@@ -39,20 +39,27 @@ new Vue({
             this.curState = APP_STATE.LOGIN_FORM;
         },
 
-        regFormConfirm() {
-            console.log('confirm', this.regEmail, this.regPassword, this.regAge);
-            userService.register(this.regEmail, this.regPassword, this.regAge).then(result => {
-                console.log('result user', result);
-                this.regError = '';
-                if (result.id) {
-                    userService.saveLocal(result);
-                    this.userObj = result;
-                    this.loadTable();
-                }
-            }, error => {
-                console.log('error', error);
-                this.regError = error;
-            });
+        showError(error) {
+            console.log('error', error);
+            this.regError = error;
+        },
+
+        login(_userObj) {
+            console.log('result user', _userObj);
+            this.regError = '';
+            if (_userObj.id) {
+                userService.saveLocal(_userObj);
+                this.userObj = _userObj;
+                this.loadTable();
+            }
+        },
+
+        regFormConfirm() {       
+            if (this.isLoginForm) {
+                userService.login(this.regEmail, this.regPassword).then(this.login, this.showError);
+            } else {
+                userService.register(this.regEmail, this.regPassword, this.regAge).then(this.login, this.showError);
+            }            
         },
 
         regFormCancel() {
@@ -63,11 +70,7 @@ new Vue({
             adDiaryService.list(this.userObj.id).then(result => {
                 console.log('result list', result);
                 this.curState = APP_STATE.TABLE;
-            }, error => {
-                console.log('error', error);
-                this.regError = error;
-                this.curState = APP_STATE.TABLE;
-            })
+            }, this.showError);
         }
     },
 
@@ -88,8 +91,8 @@ new Vue({
             return (this.curState === APP_STATE.TABLE);
         },
 
-        diabledRegSubmit() {            
-            return !(this.formRegEmail && this.formRegAge && this.regPassword);
+        disabledRegSubmit() {            
+            return !(this.formRegEmail && (this.formRegAge || (this.curState === APP_STATE.LOGIN_FORM)) && this.regPassword);
         },
 
         formRegEmail() {

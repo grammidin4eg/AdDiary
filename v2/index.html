@@ -49,7 +49,7 @@
                                     class="form-control" id="regPassword" placeholder="Пароль">
                             </div>
                             <div class="btn-group" role="group" aria-label="Basic example">
-                                <fieldset :disabled="diabledRegSubmit">
+                                <fieldset :disabled="disabledRegSubmit">
                                     <button type="submit" @click.prevent="regFormConfirm()"
                                         class="btn btn-default btn-primary" v-if="!isLoginForm">Регистрация</button>
                                     <button type="submit" @click.prevent="regFormConfirm()"
@@ -100,10 +100,17 @@
                         </p>
                     </div>
                 </div>
+            </div>            
+        </div>
+        <div class="container-fluid" v-if="showTable">
+            <div v-if="regError" class="alert alert-danger" role="alert">
+                {{ regError }}
             </div>
-            <div class="row footer-block">
+            TABLE!
+        </div>
+        <div class="row footer-block">
                 <div class="col-lg-6 h-100 text-center text-lg-left my-auto">
-                    <ul class="list-inline mb-2">
+                    <ul class="list-inline mb-2 footer-button-container">
                         <li class="list-inline-item">
                             <a href="#">О проекте</a>
                         </li>
@@ -125,13 +132,6 @@
                     </p>
                 </div>
             </div>
-        </div>
-        <div class="container-fluid" v-if="showTable">
-            <div v-if="regError" class="alert alert-danger" role="alert">
-                {{ regError }}
-            </div>
-            TABLE!
-        </div>
     </div>
 </body>
 <script src="./dist/bundle.js"></script>
