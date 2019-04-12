@@ -13,6 +13,8 @@ module.exports = {
         filename: 'bundle.js'
     },
 
+    mode: 'development',//development, production
+
     module: {
         rules: [
             { test: /\.js$/, loader: "babel-loader" }
