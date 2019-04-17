@@ -7,7 +7,7 @@ export default class AdDiaryService extends SimboServiceVirtual {
     }
 
     list(userId) {
-        return this.exec('list', {});
+        return this.exec('list', {user: userId});
     }
 
     add() {

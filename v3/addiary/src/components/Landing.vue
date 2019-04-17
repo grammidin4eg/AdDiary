@@ -114,10 +114,8 @@
 
 <script>
 import UserService from '../user-service';
-import AdDiaryService from '../addiary-service';
 
 const userService = new UserService();
-const adDiaryService = new AdDiaryService();
 
 const LANDING_STATE = {
     LANDING: 0,
@@ -161,12 +159,11 @@ export default {
     },
 
     showError(error) {
-      console.log("error", error);
+      console.error("error", error);
       this.regError = error;
     },
 
-    login(_userObj) {
-      console.log("result user", _userObj);
+    login(_userObj) {      
       this.regError = "";
       if (_userObj.id) {
         userService.saveLocal(_userObj);
@@ -192,11 +189,8 @@ export default {
     },
 
     loadTable() {
-      adDiaryService.list(this.userObj.id).then(result => {
-        console.log("result list", result);
-        this.curState = LANDING_STATE.TABLE;
-        this.$emit('openDiary', this.userObj);
-      }, this.showError);
+      this.curState = LANDING_STATE.TABLE;
+      this.$emit('openDiary', this.userObj);      
     }
   },
 
@@ -229,7 +223,7 @@ export default {
     },
 
     formRegEmail() {
-      return !!this.regEmail ? "is-valid" : ""; //is-invalid
+      return this.regEmail ? "is-valid" : ""; //is-invalid
     },
 
     formRegAge() {
@@ -265,6 +259,10 @@ export default {
 
 .button-panel {
     margin-top: 20px;
+}
+
+.button-panel button {
+  margin-right: 12px;
 }
 
 .info-block {

@@ -2,7 +2,7 @@
   <div id="app">
     <landing v-if="showLanding" v-on:openDiary="openDiary"></landing>
     <!-- <img alt="Vue logo" src="./assets/logo.png"> -->
-    <AdTable v-if="showTable"/>
+    <AdTable v-if="showTable" :user="user"/>
     <div class="row footer-block">
       <div class="col-lg-6 h-100 text-center text-lg-left my-auto">
         <ul class="list-inline mb-2 footer-button-container">
@@ -54,14 +54,12 @@ export default {
     const savedUserVal = localStorage.getItem('adDiaryUserObj');
     if (savedUserVal) {      
       this.openDiary(JSON.parse(savedUserVal));
-    }
-    console.log("check local user", this.user);
+    }    
   },
 
   methods: {
     openDiary(user) {
-      this.user = user;
-      console.log('openDiary', user);
+      this.user = user;      
       this.appState = APP_STATE.TABLE;
     }
   },
@@ -82,6 +80,7 @@ export default {
 .footer-block {
     background-color: currentColor;
     margin-top: 12px;
+    width: 100%;
 }
 
 .footer-button-container {

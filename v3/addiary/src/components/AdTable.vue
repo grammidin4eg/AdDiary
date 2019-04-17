@@ -1,24 +1,88 @@
 <template>
   <div class="container-fluid">
     <div v-if="regError" class="alert alert-danger" role="alert">{{ regError }}</div>
-    TABLE!
+    <table class="table table-striped table-bordered">
+      <thead>
+        <tr>
+          <th scope="col"></th>
+          <th scope="col" colspan="3">Утро</th>
+          <th scope="col" colspan="3">Вечер</th>
+          <th scope="col"></th>
+          <th scope="col"></th>
+        </tr>
+        <tr>
+          <th scope="col">Дата</th>
+          <th scope="col">sys</th>
+          <th scope="col">dia</th>
+          <th scope="col">пульс</th>
+          <th scope="col">sys</th>
+          <th scope="col">dia</th>
+          <th scope="col">пульс</th>
+          <th scope="col">Состояние</th>
+          <th scope="col">Лекарства</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="item in items" :key="item.id">
+          <th scope="row">{{ item.date }}</th>
+          <td>{{ item.period1.sys }}</td>
+          <td>{{ item.period1.dia }}</td>
+          <td>{{ item.period1.pulse }}</td>
+          <td>{{ item.period2.sys }}</td>
+          <td>{{ item.period2.dia }}</td>
+          <td>{{ item.period2.pulse }}</td>
+          <td>{{ item.comment }}</td>
+          <td>{{ item.med }}</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </template>
 
 <script>
+import AdDiaryService from "../addiary-service";
+
+const adDiaryService = new AdDiaryService();
+
 export default {
   name: "AdTable",
   props: {
-    
+    user: null
   },
   data() {
     return {
-      regError: null
+      regError: null,
+      itemsData: null
+    };
+  },
+  computed: {
+    items() {      
+      if (this.user) {
+        if (this.itemsData) {
+          return this.itemsData;
+        } else {
+          this.loadTable();
+          return null;
+        }
+      } 
+
+      return null;      
     }
   },
+  methods: {
+    loadTable() {
+      adDiaryService.list(this.user.id).then(result => {
+        console.log("result list", result);
+         this.itemsData = result;
+      }, this.showError);
+    }
+  }
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+th, td {
+  text-align: center;
+}
 </style>
