@@ -1,6 +1,7 @@
 <template>
-  <div class="container-fluid">
+  <div class="container-fluid adtable">
     <div v-if="regError" class="alert alert-danger" role="alert">{{ regError }}</div>
+    <editor v-if="showEditor" itemProp="curEditItem"/>
     <table class="table table-striped table-bordered">
       <thead>
         <tr>
@@ -23,7 +24,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="item in items" :key="item.id">
+        <tr v-for="item in items" :key="item.id" class="table-row" @click="onItemClick(item)">
           <th scope="row">{{ item.date }}</th>
           <td>{{ item.period1.sys }}</td>
           <td>{{ item.period1.dia }}</td>
@@ -41,18 +42,21 @@
 
 <script>
 import AdDiaryService from "../addiary-service";
+import Editor from './Editor';
 
 const adDiaryService = new AdDiaryService();
 
 export default {
   name: "AdTable",
   props: {
-    user: null
+    user: Object
   },
   data() {
     return {
       regError: null,
-      itemsData: null
+      itemsData: null,
+      curEditItem: {},
+      showEditor: false
     };
   },
   computed: {
@@ -75,7 +79,16 @@ export default {
         console.log("result list", result);
          this.itemsData = result;
       }, this.showError);
+    },
+
+    onItemClick(item) {
+      console.log('item click', item);
+      this.curEditItem = item;
+      this.showEditor = true;
     }
+  },
+  components: {
+    Editor
   }
 };
 </script>
@@ -84,5 +97,14 @@ export default {
 <style scoped>
 th, td {
   text-align: center;
+}
+
+tr.table-row:hover {
+  background-color: blanchedalmond;
+  cursor: pointer;
+}
+
+.adtable {
+  flex-grow: 1;
 }
 </style>

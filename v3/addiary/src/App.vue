@@ -77,6 +77,12 @@ export default {
 </script>
 
 <style>
+#app {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
 .footer-block {
     background-color: currentColor;
     margin-top: 12px;
