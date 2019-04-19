@@ -1,7 +1,7 @@
 <template>
   <div class="container-fluid adtable">
     <div v-if="regError" class="alert alert-danger" role="alert">{{ regError }}</div>
-    <editor v-if="showEditor" itemProp="curEditItem"/>
+    <editor v-if="showEditor" :itemProp="curEditItem" @endEdit="editorEndEdit"/>
     <table class="table table-striped table-bordered">
       <thead>
         <tr>
@@ -85,6 +85,10 @@ export default {
       console.log('item click', item);
       this.curEditItem = item;
       this.showEditor = true;
+    },
+
+    editorEndEdit() {
+      this.showEditor = false;
     }
   },
   components: {

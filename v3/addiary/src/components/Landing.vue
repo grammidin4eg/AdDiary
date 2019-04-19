@@ -190,7 +190,7 @@ export default {
 
     loadTable() {
       this.curState = LANDING_STATE.TABLE;
-      this.$emit('openDiary', this.userObj);      
+      this.$emit('openDiary', this.userObj);
     }
   },
 
