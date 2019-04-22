@@ -3,7 +3,7 @@
     <landing v-if="showLanding" v-on:openDiary="openDiary"></landing>
     <!-- <img alt="Vue logo" src="./assets/logo.png"> -->
     <AdTable v-if="showTable" :user="user"/>
-    <div class="row footer-block">
+    <div class="container-fluid footer-block">
       <div class="col-lg-6 h-100 text-center text-lg-left my-auto">
         <ul class="list-inline mb-2 footer-button-container">
           <li class="list-inline-item">

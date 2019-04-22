@@ -15,6 +15,7 @@
                 id="regEmail"
                 placeholder="sys/dis/пульс"
                 v-model="inputModel"
+                v-on:focus="activatedEdit()"
               >
         </div>
         <div class="meds"></div>
@@ -36,27 +37,38 @@ export default {
         return {
             item: this.itemProp,
             switcherDay: true,
-            inputModel: '',
-            imputObj: this.itemProp.period1,
-            firstLoad: true
+            objDay: this.itemProp.period1,
+            objEvening: this.itemProp.period2,
+            inputObj: this.itemProp.period1,
+            inputModel: this.getObjText(this.itemProp.period1)
         }
     },
     beforeUpdate() {
-        console.log('update', this.firstLoad, this.imputObj, this.inputModel);
-        if (!this.firstLoad) {
+        console.log('beforeUpdate', this.inputObj, this.inputModel);
+        /*if (!this.firstLoad) {
             this.firstLoad = false;
-            if (this.imputObj.sys) {
-                this.inputModel = `${this.imputObj.sys}/${this.imputObj.dia}/${this.imputObj.pulse}`;
+            if (this.inputObj.sys) {
+                this.inputModel = `${this.inputObj.sys}/${this.inputObj.dia}/${this.inputObj.pulse}`;
             }
-        }        
-    },
+        }*/
+    },    
+
     methods: {
         close() {
             this.$emit('endEdit');
         },
 
         switchBtn(val) {            
-            this.switcherDay = val;
+            this.switcherDay = val;                   
+        },
+
+        getObjText(obj) {
+            return `${obj.sys}/${obj.dia}/${obj.pulse}`;
+        },
+
+        activatedEdit(event) {
+            console.log('activated');
+            //this.inputModel = this.getObjText(this.inputObj);
         }
     },
     computed: {
