@@ -30,5 +30,10 @@ export default {
   data: () => ({
     //
   }),
+  computed: {
+    error() {
+      return this.$store.getters.getError()
+    }
+  }
 };
 </script>

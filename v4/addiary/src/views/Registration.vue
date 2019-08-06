@@ -15,6 +15,7 @@
                     prepend-icon="person"
                     v-model="login"
                     :rules="[rules.required, rules.email]"
+                    :disabled="loading"
                     type="mail"
                   ></v-text-field>
 
@@ -28,6 +29,7 @@
                     :append-icon="show1 ? 'visibility' : 'visibility_off'"
                     :rules="[rules.required, rules.min]"
                     :type="show1 ? 'text' : 'password'"
+                    :disabled="loading"
                     @click:append="show1 = !show1"
                     hint="At least 8 characters"
                   ></v-text-field>
@@ -35,7 +37,8 @@
               </v-card-text>
               <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn color="primary" @click.prevent="validate()">Registration</v-btn>
+                <v-btn color="primary" @click.prevent="validate()" 
+                :loading="loading" :disabled="loading">Registration</v-btn>
               </v-card-actions>
             </v-card>
           </v-flex>
@@ -50,6 +53,7 @@
                 password: '',
                 login: '',
                 show1: false,
+                loading: false,
                 rules: {
                     required: value => !!value || 'Required.',
                     min: v => v.length >= 7 || 'Min 7 characters',
@@ -63,7 +67,12 @@
         methods: {
             validate () {
                 if (this.$refs.form.validate()) {
-                    console.log('validate');
+                  this.loading = true;
+                  this.$store.dispatch('registration', {
+                    login: this.login,
+                    password: this.password
+                  });
+                  //console.log('validate');
                 }
             }
         },
