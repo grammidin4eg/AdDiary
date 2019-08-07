@@ -1,3 +1,4 @@
+import firebase from 'firebase'
 export default {
     state: {
         isAuth: false,
@@ -14,15 +15,14 @@ export default {
         userId: (state) => state.id,
     },
     actions: {
-        registration({commit}, {email, password}) {
-            firebase.auth().createUserWithEmailAndPassword(email, password)
+        registration({commit}, {login, password}) {
+            commit('setError', null);
+            firebase.auth().createUserWithEmailAndPassword(login, password)
             .then(res => {
-                console.log('user', res);
                 commit('setUser', res.user.uid);
             })
             .catch(function(error) {
                 commit('setError', error.message);
-                console.error(error);
             });
         }
     }

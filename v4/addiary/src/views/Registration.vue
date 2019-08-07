@@ -76,6 +76,28 @@
                 }
             }
         },
+
+        computed: {
+          isError() {
+            return this.$store.getters.isError
+          },
+          isAuth() {
+            return this.$store.getters.isAuth
+          }
+        },
+
+        watch: {
+          isError(value) {
+              if (value && this.loading) {
+                this.loading = false;
+              }
+          },
+          isAuth(value) {
+            if (value) {
+              this.$router.push('/');
+            }
+          }
+        }
     }
 </script>
 

@@ -16,6 +16,9 @@
     </v-app-bar>
 
     <v-content>
+      <v-alert class="error-alert" v-if="error" dismissible color="red" border="left" elevation="2" colored-border icon="mdi-cloud-alert">
+      {{error}}
+    </v-alert>
       <router-view />
     </v-content>
   </v-app>
@@ -28,12 +31,23 @@ export default {
   components: {
   },
   data: () => ({
-    //
+    
   }),
   computed: {
     error() {
-      return this.$store.getters.getError()
+      return this.$store.getters.getError
     }
   }
 };
 </script>
+
+<style lang="sass" scoped>
+  .error-alert
+    position: fixed
+    top: 0px
+    left: 0px
+    z-index: 100
+    right: 0px
+  
+</style>
+

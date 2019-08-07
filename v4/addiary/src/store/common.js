@@ -13,6 +13,7 @@ export default {
     },
     getters: {
         getError: (state) => state.error,
+        isError: (state) => !!state.error,
     },
     actions: {
   
