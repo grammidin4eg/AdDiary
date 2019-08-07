@@ -8,6 +8,8 @@ import * as firebase from "firebase/app";
 import "firebase/auth";
 import "firebase/firestore";
 
+import Lang from 'vuejs-localization';
+
 Vue.config.productionTip = false
 
 firebase.initializeApp({
@@ -19,6 +21,13 @@ firebase.initializeApp({
   messagingSenderId: "807585666905",
   appId: "1:807585666905:web:db83fd9f501e6b83"
 });
+
+
+Lang.requireAll(require.context('./lang', true, /\.js$/));
+ 
+Vue.use(Lang);
+
+//this.$lang.setLang('ru');
 
 new Vue({
   router,

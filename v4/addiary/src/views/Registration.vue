@@ -4,13 +4,13 @@
           <v-flex xs12 sm8 md4>
             <v-card class="elevation-12">
               <v-toolbar color="primary" dark flat>
-                <v-toolbar-title>Registration</v-toolbar-title>
+                <v-toolbar-title>{{$lang.messages.Registration}}</v-toolbar-title>
                 <v-spacer></v-spacer>
               </v-toolbar>
               <v-card-text>
                 <v-form ref="form">
                   <v-text-field
-                    label="e-mail"
+                    :label="$lang.messages.email"
                     name="login"
                     prepend-icon="person"
                     v-model="login"
@@ -21,7 +21,7 @@
 
                   <v-text-field
                     id="password"
-                    label="Password"
+                    :label="$lang.messages.password"
                     name="password"
                     prepend-icon="lock"
                     counter
@@ -31,14 +31,13 @@
                     :type="show1 ? 'text' : 'password'"
                     :disabled="loading"
                     @click:append="show1 = !show1"
-                    hint="At least 8 characters"
                   ></v-text-field>
                 </v-form>
               </v-card-text>
               <v-card-actions>
                 <v-spacer></v-spacer>
                 <v-btn color="primary" @click.prevent="validate()" 
-                :loading="loading" :disabled="loading">Registration</v-btn>
+                :loading="loading" :disabled="loading">{{$lang.messages.Registration}}</v-btn>
               </v-card-actions>
             </v-card>
           </v-flex>
@@ -55,11 +54,11 @@
                 show1: false,
                 loading: false,
                 rules: {
-                    required: value => !!value || 'Required.',
-                    min: v => v.length >= 7 || 'Min 7 characters',
+                    required: value => !!value || this.$lang.messages.Required,
+                    min: v => v.length >= 7 || this.$lang.messages.min7char,
                     email: value => {
                         const pattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-                        return pattern.test(value) || 'Invalid e-mail.'
+                        return pattern.test(value) || this.$lang.messages.invalidEmail
                     },
                 }
             }
