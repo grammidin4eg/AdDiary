@@ -4,7 +4,7 @@
           <v-flex xs12 sm8 md4>
             <v-card class="elevation-12">
               <v-toolbar color="primary" dark flat>
-                <v-toolbar-title>{{$lang.messages.Registration}}</v-toolbar-title>
+                <v-toolbar-title>{{formTitle}}</v-toolbar-title>
                 <v-spacer></v-spacer>
               </v-toolbar>
               <v-card-text>
@@ -37,7 +37,7 @@
               <v-card-actions>
                 <v-spacer></v-spacer>
                 <v-btn color="primary" @click.prevent="validate()" 
-                :loading="loading" :disabled="loading">{{$lang.messages.Registration}}</v-btn>
+                :loading="loading" :disabled="loading">{{formTitle}}</v-btn>
               </v-card-actions>
             </v-card>
           </v-flex>
@@ -67,11 +67,11 @@
             validate () {
                 if (this.$refs.form.validate()) {
                   this.loading = true;
-                  this.$store.dispatch('registration', {
+                  const action = this.isLogin ? 'login' : 'registration'
+                  this.$store.dispatch(action, {
                     login: this.login,
                     password: this.password
                   });
-                  //console.log('validate');
                 }
             }
         },
@@ -82,6 +82,12 @@
           },
           isAuth() {
             return this.$store.getters.isAuth
+          },
+          isLogin() {
+            return this.$route.name === 'login'
+          },
+          formTitle() {
+            return (this.isLogin) ?  this.$lang.messages.Login : this.$lang.messages.Registration;
           }
         },
 

@@ -2,7 +2,7 @@
   <v-app>
     <v-app-bar app>
       <v-toolbar-title class="headline">
-        <span class="font-weight-light">{{$lang.messages.AppName}}</span>
+        <router-link to="/" class="headline__link"><span class="font-weight-light">{{$lang.messages.AppName}}</span></router-link>
       </v-toolbar-title>
       <v-spacer></v-spacer>
       <!-- кнопка смены языка -->
@@ -48,6 +48,7 @@ export default {
     if (language === 'ru') {
       this.curLang = language;
       this.$lang.setLang(language);
+      this.$store.dispatch('setLang', language);
     }
   },
   data: () => ({
@@ -62,6 +63,7 @@ export default {
     onChangeLang(value) {
       this.$lang.setLang(value);
       this.curLang = value;
+      this.$store.dispatch('setLang', language);
     }
   }
 };
@@ -74,6 +76,9 @@ export default {
     left: 0px
     z-index: 100
     right: 0px
+  
+  .headline__link
+    text-decoration: none
   
 </style>
 

@@ -23,6 +23,11 @@ export default new Router({
       path: '/reg',
       name: 'registration',
       component: () => import('./views/Registration.vue')
+    },
+    {
+      path: '/login',
+      name: 'login',
+      component: () => import('./views/Registration.vue')
     }
   ],
   mode: 'history'

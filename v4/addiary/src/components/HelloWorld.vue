@@ -15,6 +15,7 @@
 
       <v-flex mb-4>
        <router-link to="/reg">Registration</router-link>
+       | <router-link to="/login">Login</router-link>
       </v-flex>
     </v-layout>
   </v-container>

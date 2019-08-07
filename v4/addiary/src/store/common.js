@@ -1,6 +1,9 @@
+import { cpus } from "os";
+
 export default {
     state: {
-        error: null
+        error: null,
+        lang: 'en'
     },
     mutations: {
         setError(state, errorText) {
@@ -9,13 +12,20 @@ export default {
 
         clearError(state) {
             state.error = null;
+        },
+
+        setLang(state, lang) {
+            state.lang = lang;
         }
     },
     getters: {
         getError: (state) => state.error,
         isError: (state) => !!state.error,
+        lang: (state) => state.lang
     },
     actions: {
-  
+        setLang({commit}, lang) {
+            commit('setLang', lang);
+        }
     }
 }

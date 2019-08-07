@@ -1,4 +1,6 @@
 import firebase from 'firebase'
+import {getErrorText} from './error-code'
+
 export default {
     state: {
         isAuth: false,
@@ -15,14 +17,27 @@ export default {
         userId: (state) => state.id,
     },
     actions: {
-        registration({commit}, {login, password}) {
+        registration({commit, getters}, {login, password}) {
             commit('setError', null);
             firebase.auth().createUserWithEmailAndPassword(login, password)
             .then(res => {
                 commit('setUser', res.user.uid);
             })
             .catch(function(error) {
-                commit('setError', error.message);
+                commit('setError', getErrorText(error, getters.lang));
+                console.error('registration', error);
+            });
+        },
+
+        login({commit, getters}, {login, password}) {
+            commit('setError', null);
+            firebase.auth().signInWithEmailAndPassword(login, password)
+            .then(res => {
+                commit('setUser', res.user.uid);
+            })
+            .catch(function(error) {
+                commit('setError', getErrorText(error, getters.lang));
+                console.error('login', error);
             });
         }
     }
