@@ -63,7 +63,7 @@ export default {
     onChangeLang(value) {
       this.$lang.setLang(value);
       this.curLang = value;
-      this.$store.dispatch('setLang', language);
+      this.$store.dispatch('setLang', value);
     }
   }
 };
