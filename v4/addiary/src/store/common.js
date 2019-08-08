@@ -1,5 +1,3 @@
-import { cpus } from "os";
-
 export default {
     state: {
         error: null,

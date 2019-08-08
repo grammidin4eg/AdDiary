@@ -1,9 +1,45 @@
 <template>
   <v-app>
     <v-app-bar app>
-      <v-toolbar-title class="headline">
+      <v-toolbar-title class="headline title-container">
         <router-link to="/" class="headline__link"><span class="font-weight-light">{{$lang.messages.AppName}}</span></router-link>
       </v-toolbar-title>
+      <v-spacer></v-spacer>
+      <!-- выбор даты -->
+      <v-flex xs11 sm5 class="headline__link__month-picker-panel">
+      <v-btn class="mx-2" fab small outlined @click="changeDate(-1)">
+        <v-icon>mdi-chevron-left</v-icon>
+      </v-btn> 
+      <div class="headline__link__month-picker-panel__field"> 
+      <v-menu
+        ref="menu"
+        v-model="menu"
+        :close-on-content-click="false"
+        :return-value.sync="date"
+        transition="scale-transition"
+        offset-y
+        full-width
+        max-width="290px"
+        min-width="290px"
+      >
+        <template v-slot:activator="{ on }">
+          <v-text-field
+            v-model="date"
+            label=""
+            prepend-icon="event"
+            readonly
+            v-on="on"
+          ></v-text-field>
+        </template>
+        <v-date-picker @input="$refs.menu.save(date);menu = false" v-model="date" type="month" no-title scrollable>
+        </v-date-picker>
+      </v-menu>
+      </div>
+
+      <v-btn class="mx-2" fab small outlined @click="changeDate(1)">
+        <v-icon>mdi-chevron-right</v-icon>
+      </v-btn>
+      </v-flex>
       <v-spacer></v-spacer>
       <!-- кнопка смены языка -->
       <v-menu transition="slide-y-transition" bottom>
@@ -52,7 +88,9 @@ export default {
     }
   },
   data: () => ({
-    curLang: 'en'
+    curLang: 'en',
+    date: new Date().toISOString().substr(0, 7),
+    menu: false,
   }),
   computed: {
     error() {
@@ -64,6 +102,12 @@ export default {
       this.$lang.setLang(value);
       this.curLang = value;
       this.$store.dispatch('setLang', value);
+    },
+    changeDate(delimer) {
+      const curDate = new Date(this.date + '-01');
+      const curMonth = curDate.getMonth() + delimer;
+      curDate.setMonth(curMonth);
+      this.date = curDate.toISOString().substr(0, 7);
     }
   }
 };
@@ -79,6 +123,17 @@ export default {
   
   .headline__link
     text-decoration: none
+  
+  .headline__link__month-picker-panel
+    margin-top: 18px
+    display: inline-flex
+    align-items: baseline
+  
+  .headline__link__month-picker-panel__field
+    max-width: 123px
+  
+  .title-container
+    width: 30%
   
 </style>
 
