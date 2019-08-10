@@ -33,5 +33,10 @@ new Vue({
   router,
   store,
   vuetify,
+  created() {
+    firebase.auth().onAuthStateChanged((user) => {
+      this.$store.dispatch('stateChange', user);
+    });
+  },
   render: h => h(App)
 }).$mount('#app')

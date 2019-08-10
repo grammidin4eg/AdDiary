@@ -5,3 +5,5 @@ v2/node_modules
 v2/js
 /v2/package-lock.json
 /v2/dist/bundle.js
+.directory
+v4/addiary/yarn.lock

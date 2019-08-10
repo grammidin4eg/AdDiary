@@ -1,11 +1,18 @@
+import {getErrorText} from './error-code'
+
 export default {
     state: {
         error: null,
         lang: 'en'
     },
     mutations: {
-        setError(state, errorText) {
-            state.error = errorText;
+        setError(state, error) {
+            console.error('ERROR', error);
+            if (typeof error === 'string') {
+                state.error = error;
+            } else {
+                state.error = getErrorText(error, state.lang);
+            }
         },
 
         clearError(state) {

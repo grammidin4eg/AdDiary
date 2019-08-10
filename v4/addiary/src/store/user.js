@@ -1,5 +1,4 @@
 import firebase from 'firebase'
-import {getErrorText} from './error-code'
 
 export default {
     state: {
@@ -10,6 +9,10 @@ export default {
         setUser(state, uid) {
             state.id = uid;
             state.isAuth = true;
+        },
+        clearUser(state) {
+            state.id = null;
+            state.isAuth = false;
         }
     },
     getters: {
@@ -17,28 +20,34 @@ export default {
         userId: (state) => state.id,
     },
     actions: {
-        registration({commit, getters}, {login, password}) {
+        registration({commit}, {login, password}) {
             commit('setError', null);
             firebase.auth().createUserWithEmailAndPassword(login, password)
             .then(res => {
-                commit('setUser', res.user.uid);
+                //commit('setUser', res.user.uid);
             })
             .catch(function(error) {
-                commit('setError', getErrorText(error, getters.lang));
-                console.error('registration', error);
+                commit('setError', error);
             });
         },
 
-        login({commit, getters}, {login, password}) {
+        login({commit}, {login, password}) {
             commit('setError', null);
             firebase.auth().signInWithEmailAndPassword(login, password)
             .then(res => {
-                commit('setUser', res.user.uid);
+                //commit('setUser', res.user.uid);
             })
             .catch(function(error) {
-                commit('setError', getErrorText(error, getters.lang));
-                console.error('login', error);
+                commit('setError', error);
             });
+        },
+
+        stateChange({commit}, user) {
+            if (user && user.uid) {
+                commit('setUser', user.uid);
+            } else {
+                commit('clearUser');
+            }
         }
     }
 }
