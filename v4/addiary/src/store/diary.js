@@ -3,32 +3,43 @@ import user from './user';
 
 export default {
     state: {
-        items: []
+        items: [],
+        year: new Date().getFullYear(),
+        month: (new Date().getMonth() + 1)
     },
     mutations: {
         setItems(state, items) {
             state.items = items;
+        },
+
+        setSelectedDate(state, {year, month}) {
+            state.year = year;
+            state.month = month;
         }
     },
     getters: {
         items: (state) => state.items,
         itemsCount: (state) => state.items.length,
+        year: (state) => state.year,
+        month: (state) => state.month,
     },
     actions: {
+        setSelectedDate({commit}, value) {
+            commit('setSelectedDate', value);
+        },
         getItems({commit, getters}) {
             commit('clearError');
             const userId = getters.userId + '';
-            console.log('userId', userId);
-            if (userId) {
+            const curYear = getters.year;
+            const curMonth = getters.month;
+            if (userId && curYear && curMonth) {
                 firebase.firestore().collection('diary')
-                .where("user", "==", userId).where("year", "==", 2019).where("month", "==", 8)
+                .where("user", "==", userId).where("year", "==", curYear).where("month", "==", curMonth)
                 .get().then((snapshot) => {
                     console.log(snapshot, snapshot.size);
                     let ladderArray = [];
                     snapshot.forEach((doc) => {
-                        let _data = doc.data();
-                        delete _data.user;
-                        ladderArray.push(_data);
+                        ladderArray.push(doc.data().value);
                     });
                     console.log('RES!!!!!!', ladderArray);
                     commit('setItems', ladderArray);

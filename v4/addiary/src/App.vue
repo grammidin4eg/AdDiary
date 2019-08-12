@@ -108,6 +108,10 @@ export default {
       const curMonth = curDate.getMonth() + delimer;
       curDate.setMonth(curMonth);
       this.date = curDate.toISOString().substr(0, 7);
+      this.$store.dispatch('setSelectedDate', {
+        year: curDate.getFullYear(),
+        month: (curMonth + 1)
+      })
     }
   }
 };
