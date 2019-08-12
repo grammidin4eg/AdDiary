@@ -10,6 +10,8 @@ export function getErrorText(error, lang) {
             errorTextMap.set('auth/email-already-in-use', 'Пользователь с такой электронной почтой уже существует.');
             errorTextMap.set('auth/user-not-found', 'Пользователь с такой электронной почтой не зарегистрирован.');
             errorTextMap.set('auth/wrong-password', 'Неверный пароль');
+            errorTextMap.set('PERMISSION_DENIED', 'Ошибка получения данных.');
+            errorTextMap.set('permission-denied', 'Доступ запрещен. Попробуйте перелогиниться в системе.');
             //errorTextMap.set('', '');            
         }
 

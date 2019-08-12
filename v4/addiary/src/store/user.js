@@ -21,7 +21,7 @@ export default {
     },
     actions: {
         registration({commit}, {login, password}) {
-            commit('setError', null);
+            commit('clearError');
             firebase.auth().createUserWithEmailAndPassword(login, password)
             .then(res => {
                 //commit('setUser', res.user.uid);
@@ -32,7 +32,7 @@ export default {
         },
 
         login({commit}, {login, password}) {
-            commit('setError', null);
+            commit('clearError');
             firebase.auth().signInWithEmailAndPassword(login, password)
             .then(res => {
                 //commit('setUser', res.user.uid);
@@ -42,9 +42,10 @@ export default {
             });
         },
 
-        stateChange({commit}, user) {
+        stateChange({commit, dispatch}, user) {
             if (user && user.uid) {
                 commit('setUser', user.uid);
+                dispatch('getItems');
             } else {
                 commit('clearUser');
             }

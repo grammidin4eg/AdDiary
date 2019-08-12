@@ -7,7 +7,12 @@ export default {
     },
     mutations: {
         setError(state, error) {
-            console.error('ERROR', error);
+            if (!error) {
+                return;
+            }
+
+            console.error('ERROR obj', error, 'code:', error.code);
+
             if (typeof error === 'string') {
                 state.error = error;
             } else {
