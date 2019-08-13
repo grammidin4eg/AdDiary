@@ -42,21 +42,7 @@
       </v-flex>
       <v-spacer></v-spacer>
       <!-- кнопка смены языка -->
-      <v-menu transition="slide-y-transition" bottom>
-      <template v-slot:activator="{ on }">
-        <v-btn text small v-on="on">
-          {{curLang}}
-        </v-btn>
-      </template>
-      <v-list>
-        <v-list-item @click="onChangeLang('en')">
-          <v-list-item-title>English</v-list-item-title>
-        </v-list-item>
-        <v-list-item @click="onChangeLang('ru')">
-          <v-list-item-title>Русский</v-list-item-title>
-        </v-list-item>
-      </v-list>
-    </v-menu>
+      <lang-button></lang-button>
 
     </v-app-bar>
 
@@ -70,10 +56,12 @@
 </template>
 
 <script>
+import LangButton from './components/LangButton'
 
 export default {
   name: 'App',
   components: {
+    LangButton
   },
   beforeMount() {
     let language = window.navigator ? (window.navigator.language ||
@@ -88,7 +76,6 @@ export default {
     }
   },
   data: () => ({
-    curLang: 'en',
     date: new Date().toISOString().substr(0, 7),
     menu: false,
   }),
@@ -98,11 +85,6 @@ export default {
     }
   }, 
   methods: {
-    onChangeLang(value) {
-      this.$lang.setLang(value);
-      this.curLang = value;
-      this.$store.dispatch('setLang', value);
-    },
     changeDate(delimer) {
       const curDate = new Date(this.date + '-01');
       const curMonth = curDate.getMonth() + delimer;
