@@ -99,7 +99,7 @@
           },
           isAuth(value) {
             if (value) {
-              this.$router.push('/');
+              this.$router.push('/diary');
             }
           }
         }

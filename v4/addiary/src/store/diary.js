@@ -39,7 +39,16 @@ export default {
                     console.log(snapshot, snapshot.size);
                     let ladderArray = [];
                     snapshot.forEach((doc) => {
-                        ladderArray.push(doc.data().value);
+                        let _data = doc.data().value;
+                        _data.amsys = _data.am.sys;
+                        _data.amdia = _data.am.dia;
+                        _data.ampulse = _data.am.pulse;
+
+                        _data.pmsys = _data.pm.sys;
+                        _data.pmdia = _data.pm.dia;
+                        _data.pmpulse = _data.pm.pulse;
+
+                        ladderArray.push(_data);
                     });
                     console.log('RES!!!!!!', ladderArray);
                     commit('setItems', ladderArray);
