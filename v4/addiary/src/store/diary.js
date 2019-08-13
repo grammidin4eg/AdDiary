@@ -1,5 +1,4 @@
 import firebase from 'firebase'
-import user from './user';
 
 export default {
     state: {
@@ -24,8 +23,9 @@ export default {
         month: (state) => state.month,
     },
     actions: {
-        setSelectedDate({commit}, value) {
+        setSelectedDate({commit, dispatch}, value) {
             commit('setSelectedDate', value);
+            dispatch('getItems');
         },
         getItems({commit, getters}) {
             commit('clearError');

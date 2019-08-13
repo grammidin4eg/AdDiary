@@ -24,7 +24,7 @@
             v-on="on"
           ></v-text-field>
         </template>
-        <v-date-picker @input="$refs.menu.save(date);menu = false" v-model="date" type="month" no-title scrollable>
+        <v-date-picker @input="chooseMonth" v-model="date" type="month" no-title scrollable>
         </v-date-picker>
       </v-menu>
       </div>
@@ -43,15 +43,32 @@ export default {
         menu: false
     }),
     methods: {
+        getDateObj(date) {
+          if (!date) {
+            date = this.date;
+          }
+          return new Date(date + '-01');
+        },
+
         changeDate(delimer) {
-            const curDate = new Date(this.date + '-01');
+            const curDate = this.getDateObj();
             const curMonth = curDate.getMonth() + delimer;
             curDate.setMonth(curMonth);
-            this.date = curDate.toISOString().substr(0, 7);
-            this.$store.dispatch('setSelectedDate', {
-                year: curDate.getFullYear(),
-                month: (curMonth + 1)
-            })
+            this.setNewDate(curDate);
+        },
+
+        chooseMonth(date) {
+          this.$refs.menu.save(date);
+          this.menu = false;
+          this.setNewDate(this.getDateObj(date));
+        },
+
+        setNewDate(curDate) {
+          this.date = curDate.toISOString().substr(0, 7);
+          this.$store.dispatch('setSelectedDate', {
+            year: curDate.getFullYear(),
+            month: (curDate.getMonth() + 1)
+          })
         }
     }
 }
