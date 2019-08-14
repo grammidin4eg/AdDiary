@@ -6,5 +6,14 @@ module.exports = {
     password: 'password',
     Required: 'Required',
     min7char: 'Min 7 characters',
-    invalidEmail: 'Invalid e-mail.'
+    invalidEmail: 'Invalid e-mail.',
+    Day: 'Day',
+    TimesOfDay: 'Times of day',
+    Pulse: 'Pulse',
+    Comment: 'Comment',
+    Morning: 'Morning',
+    Evening: 'Evening',
+    Save: 'Save',
+    Cancel: 'Cancel',
+    DELETE_MSG: 'Are you sure you want to delete this item?',
 }

@@ -35,19 +35,17 @@ export default {
             if (userId && curYear && curMonth) {
                 firebase.firestore().collection('diary')
                 .where("user", "==", userId).where("year", "==", curYear).where("month", "==", curMonth)
+                .orderBy("day").orderBy("am", 'desc')
                 .get().then((snapshot) => {
                     console.log(snapshot, snapshot.size);
                     let ladderArray = [];
+                    let lastDay;
                     snapshot.forEach((doc) => {
-                        let _data = doc.data().value;
-                        _data.amsys = _data.am.sys;
-                        _data.amdia = _data.am.dia;
-                        _data.ampulse = _data.am.pulse;
-
-                        _data.pmsys = _data.pm.sys;
-                        _data.pmdia = _data.pm.dia;
-                        _data.pmpulse = _data.pm.pulse;
-
+                        let _data = doc.data();
+                        _data.amtext = _data.am ? 'Утро' : 'Вечер';
+                        //Evening
+                        _data.secondDay = (lastDay === _data.day);
+                        lastDay = _data.day;
                         ladderArray.push(_data);
                     });
                     console.log('RES!!!!!!', ladderArray);

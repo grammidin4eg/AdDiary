@@ -20,19 +20,19 @@
               <v-container grid-list-md>
                 <v-layout wrap>
                   <v-flex xs12 sm6 md4>
-                    <v-text-field v-model="editedItem.day" label="Число"></v-text-field>
+                    <v-text-field v-model="editedItem.day" :label="$lang.messages.Day"></v-text-field>
                   </v-flex>
                   <v-flex xs12 sm6 md4>
-                    <v-text-field v-model="editedItem.amsys" label="SYS"></v-text-field>
+                    <v-text-field v-model="editedItem.sys" label="SYS"></v-text-field>
                   </v-flex>
                   <v-flex xs12 sm6 md4>
-                    <v-text-field v-model="editedItem.amdia" label="DIA"></v-text-field>
+                    <v-text-field v-model="editedItem.dia" label="DIA"></v-text-field>
                   </v-flex>
                   <v-flex xs12 sm6 md4>
-                    <v-text-field v-model="editedItem.ampulse" label="Пульс"></v-text-field>
+                    <v-text-field v-model="editedItem.pulse" :label="$lang.messages.Pulse"></v-text-field>
                   </v-flex>
                   <v-flex xs12 sm6 md4>
-                    <v-text-field v-model="editedItem.comment" label="Комментарий"></v-text-field>
+                    <v-text-field v-model="editedItem.comment" :label="$lang.messages.Comment"></v-text-field>
                   </v-flex>
                 </v-layout>
               </v-container>
@@ -40,8 +40,8 @@
 
             <v-card-actions>
               <v-spacer></v-spacer>
-              <v-btn color="blue darken-1" text @click="close">Cancel</v-btn>
-              <v-btn color="blue darken-1" text @click="save">Save</v-btn>
+              <v-btn color="blue darken-1" text @click="close">{{$lang.messages.Cancel}}</v-btn>
+              <v-btn color="blue darken-1" text @click="save">{{$lang.messages.Save}}</v-btn>
             </v-card-actions>
           </v-card>
         </v-dialog>
@@ -62,6 +62,13 @@
         delete
       </v-icon>
     </template>
+    <template v-slot:item.am="{ item }">
+      <span v-if="item.am">{{$lang.messages.Morning}}</span>
+      <span v-if="!item.am">{{$lang.messages.Evening}}</span>
+    </template>
+    <template v-slot:item.day="{ item }">
+      <span v-if="!item.secondDay">{{item.day}}</span>
+    </template>
   </v-data-table>
 </template>
 
@@ -69,35 +76,35 @@
   export default {
     data: () => ({
       dialog: false,
-      headers: [
-        {text: 'Число', align: 'left', width: 50, value: 'day', divider: true },
-        { text: 'SYS', value: 'amsys', width: 50},
-        { text: 'DIA', value: 'amdia', width: 50 },
-        { text: 'Пульс', value: 'ampulse', width: 50, divider: true },
-        { text: 'SYS', value: 'pmsys', width: 50},
-        { text: 'DIA', value: 'pmdia', width: 50 },
-        { text: 'Пульс', value: 'pmpulse', width: 50, divider: true },
-        { text: 'Комментарий', value: 'comment' },
-        { text: 'Actions', value: 'action', sortable: false, align: 'right', width: 50 },
-      ],
       editedIndex: -1,
       editedItem: {
         day: '',
-        amsys: 0,
-        amdia: 0,
-        ampulse: 0,
+        sys: 0,
+        dia: 0,
+        pulse: 0,
         comment: 0,
       },
       defaultItem: {
         day: '',
-        amsys: 0,
-        amdia: 0,
-        ampulse: 0,
+        sys: 0,
+        dia: 0,
+        pulse: 0,
         comment: 0,
       },
     }),
 
     computed: {
+      headers() {
+        return [
+          {text: this.$lang.messages.Day, align: 'left', width: 40, value: 'day', divider: true },
+          {text: this.$lang.messages.TimesOfDay, width: 50, value: 'am', divider: true, sortable: false },
+          { text: 'SYS', value: 'sys', width: 50, sortable: false},
+          { text: 'DIA', value: 'dia', width: 50, sortable: false },
+          { text: this.$lang.messages.Pulse, value: 'pulse', width: 50, divider: true, sortable: false },
+          { text: this.$lang.messages.Comment, value: 'comment', sortable: false },
+          { text: '', value: 'action', sortable: false, align: 'right', width: 100 },
+        ];
+      },
       formTitle () {
         return this.editedIndex === -1 ? 'New Item' : 'Edit Item'
       },
@@ -120,7 +127,7 @@
 
       deleteItem (item) {
         const index = this.items.indexOf(item)
-        confirm('Are you sure you want to delete this item?') && this.items.splice(index, 1)
+        confirm(this.$lang.messages.DELETE_MSG) && this.items.splice(index, 1)
       },
 
       close () {
