@@ -50,6 +50,7 @@ export default {
                         let _data = doc.data();
                         _data.amtext = _data.am ? 'Утро' : 'Вечер';
                         _data.secondDay = (lastDay === _data.day);
+                        _data.id = doc.id;
                         lastDay = _data.day;
                         ladderArray.push(_data);
                     });
@@ -58,6 +59,49 @@ export default {
                 }).catch(error => commit('setError', error)).finally(() => {
                     commit('setDiaryLoading', false);
                 });
+            }
+        },
+        setItem({commit, dispatch, getters}, _value) {
+            if (_value && _value.id) {
+                const value = Object.assign({}, _value);
+                const id = _value.id;
+                delete value.id;
+
+                value.year = getters.year;
+                value.month = getters.month;
+                value.user = getters.userId;
+
+                firebase.firestore().collection("diary").doc(id).set(value)
+                .then(() => {})
+                .catch((error) => {
+                    commit('setError', error)
+                    dispatch('getItems');
+                })
+            }
+        },
+
+        addItem({commit, dispatch, getters}, value) {
+            if (value) {
+                value.year = getters.year;
+                value.month = getters.month;
+                value.user = getters.userId;
+
+                firebase.firestore().collection("diary").add(value)
+                .then(() => {})
+                .catch((error) => {
+                    commit('setError', error)
+                    dispatch('getItems');
+                })
+            }
+        },
+
+        deleteItem({commit}, id) {
+            if (id) {
+                firebase.firestore().collection("diary").doc(id).delete()
+                .catch((error) => {
+                    commit('setError', error)
+                    dispatch('getItems');
+                })
             }
         }
     }

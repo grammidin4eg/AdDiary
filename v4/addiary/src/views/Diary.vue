@@ -225,7 +225,10 @@ export default {
 
     deleteItem(item) {
       const index = this.items.indexOf(item);
-      confirm(this.$lang.messages.DELETE_MSG) && this.items.splice(index, 1);
+      if (confirm(this.$lang.messages.DELETE_MSG)) {
+        this.$store.dispatch('deleteItem', item.id);
+        this.items.splice(index, 1);
+      }
     },
 
     close() {
@@ -240,8 +243,10 @@ export default {
       if (this.$refs.form.validate()) {
         if (this.editedIndex > -1) {
           Object.assign(this.items[this.editedIndex], this.editedItem);
+          this.$store.dispatch('setItem', this.editedItem);
         } else {
           this.items.push(this.editedItem);
+          this.$store.dispatch('addItem', this.editedItem);
         }
         this.close();
       }
