@@ -15,5 +15,10 @@ module.exports = {
     Evening: 'Вечер',
     Save: 'Сохранить',
     Cancel: 'Отмена',
-    DELETE_MSG: 'Удалить запись?'
+    DELETE_MSG: 'Удалить запись?',
+    NewItem: 'Новая запись',
+    EditItem: 'Редактировать запись',
+    ruleNumber: 'Необходимо ввести число',
+    ruleNumberVal: 'Некорретное число',
+    ruleMaxComment: 'Слишком большой текст'
 }

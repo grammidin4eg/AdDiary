@@ -4,7 +4,8 @@ export default {
     state: {
         items: [],
         year: new Date().getFullYear(),
-        month: (new Date().getMonth() + 1)
+        month: (new Date().getMonth() + 1),
+        diaryLoading: false
     },
     mutations: {
         setItems(state, items) {
@@ -14,6 +15,9 @@ export default {
         setSelectedDate(state, {year, month}) {
             state.year = year;
             state.month = month;
+        },
+        setDiaryLoading(state, value) {
+            state.diaryLoading = value;
         }
     },
     getters: {
@@ -21,6 +25,7 @@ export default {
         itemsCount: (state) => state.items.length,
         year: (state) => state.year,
         month: (state) => state.month,
+        diaryLoading: (state) => state.diaryLoading,
     },
     actions: {
         setSelectedDate({commit, dispatch}, value) {
@@ -29,6 +34,7 @@ export default {
         },
         getItems({commit, getters}) {
             commit('clearError');
+            commit('setDiaryLoading', true);
             const userId = getters.userId + '';
             const curYear = getters.year;
             const curMonth = getters.month;
@@ -37,20 +43,21 @@ export default {
                 .where("user", "==", userId).where("year", "==", curYear).where("month", "==", curMonth)
                 .orderBy("day").orderBy("am", 'desc')
                 .get().then((snapshot) => {
-                    console.log(snapshot, snapshot.size);
+                    //console.log(snapshot, snapshot.size);
                     let ladderArray = [];
                     let lastDay;
                     snapshot.forEach((doc) => {
                         let _data = doc.data();
                         _data.amtext = _data.am ? 'Утро' : 'Вечер';
-                        //Evening
                         _data.secondDay = (lastDay === _data.day);
                         lastDay = _data.day;
                         ladderArray.push(_data);
                     });
-                    console.log('RES!!!!!!', ladderArray);
+                    //console.log('RES!!!!!!', ladderArray);
                     commit('setItems', ladderArray);
-                }).catch(error => commit('setError', error));
+                }).catch(error => commit('setError', error)).finally(() => {
+                    commit('setDiaryLoading', false);
+                });
             }
         }
     }
