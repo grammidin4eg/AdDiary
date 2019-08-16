@@ -6,7 +6,7 @@
       </v-toolbar-title>
       <v-spacer></v-spacer>
       <!-- выбор даты -->
-      <month-picker></month-picker>
+      <month-picker v-if="inDiaryPage"></month-picker>
       <v-spacer></v-spacer>
       <!-- кнопка смены языка -->
       <lang-button></lang-button>
@@ -19,6 +19,13 @@
     </v-alert>
       <router-view />
     </v-content>
+    <v-footer absolute class="font-weight-medium">
+      <v-col class="text-center" cols="12">
+        <router-link to="/reg">Registration</router-link>
+       | <router-link to="/login">Login</router-link>
+       | <router-link to="/diary">Diary page</router-link>
+      </v-col>
+    </v-footer>
   </v-app>
 </template>
 
@@ -50,6 +57,9 @@ export default {
   computed: {
     error() {
       return this.$store.getters.getError
+    },
+    inDiaryPage() {
+      return this.$route.name === 'diary';
     }
   }, 
   methods: {
