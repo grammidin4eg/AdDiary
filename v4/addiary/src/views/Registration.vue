@@ -1,7 +1,7 @@
 <template>
   <v-container fluid fill-height>
     <v-layout align-center justify-center>
-      <v-flex xs12 sm8 md4>
+      <v-flex xs12 sm8 md4 class="reg-card">
         <v-card class="elevation-12">
           <v-toolbar color="primary" dark flat>
             <v-toolbar-title>{{formTitle}}</v-toolbar-title>
@@ -36,6 +36,8 @@
           </v-card-text>
           <v-card-actions>
             <v-spacer></v-spacer>
+            <span v-if="isLogin" class="body-2 mr-1">{{$lang.messages.doYouHaveAccaunt}}</span>
+            <router-link v-if="isLogin" to="/reg" class="mr-4">{{$lang.messages.toRegistrarion}}</router-link>
             <v-btn
               color="primary"
               @click.prevent="validate()"
@@ -112,5 +114,7 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="sass" scoped>
+  .reg-card
+    min-height: 323px
 </style>

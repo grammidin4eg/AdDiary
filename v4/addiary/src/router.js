@@ -15,11 +15,13 @@ export default new Router({
     {
       path: '/reg',
       name: 'registration',
+      beforeEnter: logOut,
       component: () => import('./views/Registration.vue')
     },
     {
       path: '/login',
       name: 'login',
+      beforeEnter: logOut,
       component: () => import('./views/Registration.vue')
     },
     {
@@ -37,7 +39,6 @@ export default new Router({
 })
 
 function checkAuth(next, waitCounter) {
-  console.log('curU', waitCounter, firebase.auth().currentUser);
   if (firebase.auth().currentUser) {
     next();
   } else {
@@ -50,9 +51,13 @@ function checkAuth(next, waitCounter) {
       next('/login');
     }
   }
-
 }
 
 function AuthGuard(from, to, next) {
   checkAuth(next, 10);
+}
+
+function logOut(from, to, next) {
+  firebase.auth().signOut();
+  next();
 }

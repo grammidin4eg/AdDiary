@@ -20,5 +20,8 @@ module.exports = {
     EditItem: 'Редактировать запись',
     ruleNumber: 'Необходимо ввести число',
     ruleNumberVal: 'Некорретное число',
-    ruleMaxComment: 'Слишком большой текст'
+    ruleMaxComment: 'Слишком большой текст',
+    gotoDiary: 'Открыть дневник',
+    toRegistrarion: 'Зарегистрируйтесь',
+    doYouHaveAccaunt: 'Еще нет аккаунта?'
 }

@@ -1,8 +1,8 @@
 <template>
   <v-app>
     <v-app-bar app>
-      <v-toolbar-title class="headline title-container">
-        <router-link to="/" class="headline__link"><span class="font-weight-light">{{$lang.messages.AppName}}</span></router-link>
+      <v-toolbar-title class="headline" :class="{'title-container' : inDiaryPage}">
+        <router-link to="/" class="headline__link"><v-icon x-large color="blue darken-2" class="d-flex d-sm-none home-icon">home</v-icon><span class="font-weight-light d-none d-sm-flex">{{$lang.messages.AppName}}</span></router-link>
       </v-toolbar-title>
       <v-spacer></v-spacer>
       <!-- выбор даты -->
@@ -77,6 +77,9 @@ export default {
   
   .title-container
     width: 30%
+  
+  .home-icon
+    width: 40px
   
 </style>
 

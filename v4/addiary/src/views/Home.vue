@@ -1,9 +1,8 @@
 <template>
-  <v-container fluid fill-height>
+  <v-container fluid fill-height class="home-backgroung">
     <v-layout align-center justify-center>
       <section>
-        <v-parallax src="https://firebasestorage.googleapis.com/v0/b/endorfinevue.appspot.com/o/assets%2FNight-Club-Clubbing-Jobs-Abroad2.jpg?alt=media&token=82bbda7d-5df4-430b-9217-adaf1c8485c5" height="600">
-          <v-layout column align-center justify-center class="white--text">
+        <v-layout column align-center justify-center class="white--text">
             <h1
               class="white--text mb-2 display-1 text-xs-center"
               style="font-weight: 900; text-shadow: 3px 2px #000000"
@@ -12,9 +11,8 @@
               class="white--text subheading mb-3 text-xs-center"
               style="font-weight: 900; text-shadow: 2px 2px #000000"
             >Unlesh your creativity without limitations</div>
-            <v-btn class="blue lighten-2 mt-5" dark large href="/pre-made-themes">Get Started</v-btn>
+            <v-btn class="blue lighten-2 mt-5" dark large href="/diary">{{$lang.messages.gotoDiary}}</v-btn>
           </v-layout>
-        </v-parallax>
       </section>
     </v-layout>
   </v-container>
@@ -23,3 +21,9 @@
 <script>
 export default {};
 </script>
+
+<style lang="sass">
+  .home-backgroung
+    background-image: url('https://firebasestorage.googleapis.com/v0/b/addiary-e3891.appspot.com/o/bright-light-textures2.jpg?alt=media&token=7cac1678-4c6c-451a-8475-3df997cf70fe')
+    background-repeat: repeat
+</style>

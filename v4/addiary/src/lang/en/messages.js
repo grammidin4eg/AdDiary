@@ -20,5 +20,8 @@ module.exports = {
     EditItem: 'Edit Item',
     ruleNumber: 'You must enter a number',
     ruleNumberVal: 'Non-correct number',
-    ruleMaxComment: 'Text too big'
+    ruleMaxComment: 'Text too big',
+    gotoDiary: 'Open diary',
+    toRegistrarion: 'Registration',
+    doYouHaveAccaunt: "Don't have an account yet?"
 }
