@@ -25,6 +25,7 @@ export default {
             firebase.auth().createUserWithEmailAndPassword(login, password)
             .then(res => {
                 //commit('setUser', res.user.uid);
+                firebase.auth().currentUser.sendEmailVerification();
             })
             .catch(function(error) {
                 commit('setError', error);
