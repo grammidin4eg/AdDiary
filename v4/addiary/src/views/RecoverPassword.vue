@@ -4,10 +4,9 @@
       <v-flex xs12 sm8 md4 class="reg-card">
         <v-card class="elevation-12">
           <v-toolbar color="primary" dark flat>
-            <v-toolbar-title>{{formTitle}}</v-toolbar-title>
+            <v-toolbar-title>{{$lang.messages.Restore}}</v-toolbar-title>
             <v-spacer></v-spacer>
-            <router-link v-if="isLogin" to="/reg"><v-btn class="ml-2" outlined color="white">{{$lang.messages.Registration}}</v-btn></router-link>
-            <router-link v-if="!isLogin" to="/login"><v-btn class="ml-2" outlined color="white">{{$lang.messages.Login}}</v-btn></router-link>
+            <router-link to="/reg"><v-btn class="ml-2" outlined color="white">{{$lang.messages.Registration}}</v-btn></router-link>
           </v-toolbar>
           <v-card-text>
             <v-form ref="form">
@@ -20,31 +19,16 @@
                 :disabled="loading"
                 type="mail"
               ></v-text-field>
-
-              <v-text-field
-                id="password"
-                :label="$lang.messages.password"
-                name="password"
-                prepend-icon="lock"
-                counter
-                v-model="password"
-                :append-icon="show1 ? 'visibility' : 'visibility_off'"
-                :rules="[rules.required, rules.min]"
-                :type="show1 ? 'text' : 'password'"
-                :disabled="loading"
-                @click:append="show1 = !show1"
-              ></v-text-field>
             </v-form>
           </v-card-text>
           <v-card-actions>
             <v-spacer></v-spacer>
-            <router-link v-if="isLogin" to="/restore" class="mr-4">{{$lang.messages.fogotPassword}}</router-link>
             <v-btn
               color="primary"
               @click.prevent="validate()"
               :loading="loading"
               :disabled="loading"
-            >{{formTitle}}</v-btn>
+            >{{$lang.messages.Restore}}</v-btn>
           </v-card-actions>
         </v-card>
       </v-flex>
@@ -56,13 +40,11 @@
 export default {
   data() {
     return {
-      password: "",
       login: "",
       show1: false,
       loading: false,
       rules: {
         required: value => !!value || this.$lang.messages.Required,
-        min: v => v.length >= 7 || this.$lang.messages.min7char,
         email: value => {
           const pattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
           return pattern.test(value) || this.$lang.messages.invalidEmail;
@@ -74,11 +56,7 @@ export default {
     validate() {
       if (this.$refs.form.validate()) {
         this.loading = true;
-        const action = this.isLogin ? "login" : "registration";
-        this.$store.dispatch(action, {
-          login: this.login,
-          password: this.password
-        });
+        this.$store.dispatch("recover", this.login);
       }
     }
   },
@@ -87,16 +65,8 @@ export default {
     isError() {
       return this.$store.getters.isError;
     },
-    isAuth() {
-      return this.$store.getters.isAuth;
-    },
-    isLogin() {
-      return this.$route.name === "login";
-    },
-    formTitle() {
-      return this.isLogin
-        ? this.$lang.messages.Login
-        : this.$lang.messages.Registration;
+    getEvent() {
+      return this.$store.getters.getEvent;
     }
   },
 
@@ -106,9 +76,10 @@ export default {
         this.loading = false;
       }
     },
-    isAuth(value) {
-      if (value) {
-        this.$router.push("/diary");
+    getEvent(value) {
+      if (value === 'recover-done') {
+        this.$store.dispatch("clearEvent");
+        this.$router.push("/login");
       }
     }
   }

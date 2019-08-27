@@ -23,5 +23,7 @@ module.exports = {
     ruleMaxComment: 'Text too big',
     gotoDiary: 'Open diary',
     toRegistrarion: 'Registration',
-    doYouHaveAccaunt: "Don't have an account yet?"
+    doYouHaveAccaunt: "Don't have an account yet?",
+    fogotPassword: 'Forgot your password?',
+    Restore: 'Restore'
 }

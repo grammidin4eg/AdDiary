@@ -25,6 +25,11 @@ export default new Router({
       component: () => import('./views/Registration.vue')
     },
     {
+      path: '/restore',
+      name: 'restore',
+      component: () => import('./views/RecoverPassword.vue')
+    },
+    {
       path: '/diary',
       name: 'diary',
       beforeEnter: AuthGuard,
