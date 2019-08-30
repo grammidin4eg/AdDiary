@@ -5,7 +5,10 @@
       :items="items"
       :loading="diaryLoading"
       disable-sort
+      hide-default-footer
+      :items-per-page="100"
       class="elevation-1"
+      ref="datatable"
     >
       <template v-slot:top>
         <v-toolbar flat color="white">
@@ -41,6 +44,8 @@
                       <v-text-field
                         v-model="editedItem.sys"
                         label="SYS"
+                        v-if="dialog"
+                        autofocus
                         :rules="[rules.required, rules.lenField]"
                       ></v-text-field>
                     </v-flex>
@@ -54,6 +59,7 @@
                     <v-flex xs4 sm4 md4>
                       <v-text-field
                         v-model="editedItem.pulse"
+                        v-on:keypress.enter.prevent="save()"
                         :label="$lang.messages.Pulse"
                         :rules="[rules.required, rules.lenField]"
                       ></v-text-field>
@@ -63,6 +69,7 @@
                     <v-flex>
                       <v-text-field
                         v-model="editedItem.comment"
+                        v-on:keypress.enter.prevent="save()"
                         :label="$lang.messages.Comment"
                         :rules="[rules.maxStr]"
                       ></v-text-field>

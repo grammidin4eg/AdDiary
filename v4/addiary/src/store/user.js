@@ -3,28 +3,30 @@ import firebase from 'firebase'
 export default {
     state: {
         isAuth: false,
-        id: null
+        id: null,
+        userName: ''
     },
     mutations: {
-        setUser(state, uid) {
-            state.id = uid;
+        setUser(state, user) {
+            state.id = user.uid;
             state.isAuth = true;
+            state.userName = user.email;
         },
         clearUser(state) {
             state.id = null;
             state.isAuth = false;
-        }
+        },
     },
     getters: {
         isAuth: (state) => state.isAuth,
         userId: (state) => state.id,
+        userName: (state) => state.userName,
     },
     actions: {
         registration({ commit }, { login, password }) {
             commit('clearError');
             firebase.auth().createUserWithEmailAndPassword(login, password)
                 .then(res => {
-                    //commit('setUser', res.user.uid);
                     firebase.auth().currentUser.sendEmailVerification();
                 })
                 .catch(function (error) {
@@ -36,7 +38,6 @@ export default {
             commit('clearError');
             firebase.auth().signInWithEmailAndPassword(login, password)
                 .then(res => {
-                    //commit('setUser', res.user.uid);
                 })
                 .catch(function (error) {
                     commit('setError', error);
@@ -59,7 +60,7 @@ export default {
 
         stateChange({ commit, dispatch }, user) {
             if (user && user.uid) {
-                commit('setUser', user.uid);
+                commit('setUser', user);
                 dispatch('getItems');
             } else {
                 commit('clearUser');

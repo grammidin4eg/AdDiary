@@ -1,6 +1,6 @@
 <template>
     <v-flex xs11 sm5 class="headline__link__month-picker-panel">
-      <v-btn class="mx-2" fab small outlined @click="changeDate(-1)">
+      <v-btn class="mx-2" fab small outlined @click="changeDate(-1)" :disabled="diaryLoading">
         <v-icon>mdi-chevron-left</v-icon>
       </v-btn> 
       <div class="headline__link__month-picker-panel__field"> 
@@ -9,6 +9,7 @@
         v-model="menu"
         :close-on-content-click="false"
         :return-value.sync="date"
+        :disabled="diaryLoading"
         transition="scale-transition"
         offset-y
         full-width
@@ -29,7 +30,7 @@
       </v-menu>
       </div>
 
-      <v-btn class="mx-2" fab small outlined @click="changeDate(1)">
+      <v-btn class="mx-2" fab small outlined @click="changeDate(1)" :disabled="diaryLoading">
         <v-icon>mdi-chevron-right</v-icon>
       </v-btn>
       </v-flex>
@@ -42,6 +43,11 @@ export default {
         date: new Date().toISOString().substr(0, 7),
         menu: false
     }),
+    computed: {
+       diaryLoading() {
+          return this.$store.getters.diaryLoading;
+       }
+    },
     methods: {
         getDateObj(date) {
           if (!date) {

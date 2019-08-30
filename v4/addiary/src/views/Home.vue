@@ -10,7 +10,7 @@
             <div
               class="white--text subheading mb-3 text-xs-center"
               style="font-weight: 900; text-shadow: 2px 2px #000000"
-            >Unlesh your creativity without limitations</div>
+            >{{userName}}</div>
             <v-btn class="blue lighten-2 mt-5" dark large href="/diary">{{$lang.messages.gotoDiary}}</v-btn>
           </v-layout>
       </section>
@@ -19,7 +19,13 @@
 </template>
 
 <script>
-export default {};
+export default {
+   computed: {
+      userName() {
+        return this.$store.getters.userName;
+      }
+   }
+};
 </script>
 
 <style lang="sass">

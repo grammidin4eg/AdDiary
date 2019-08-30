@@ -28,6 +28,7 @@
                 prepend-icon="lock"
                 counter
                 v-model="password"
+                v-on:keypress.enter.prevent="validate()"
                 :append-icon="show1 ? 'visibility' : 'visibility_off'"
                 :rules="[rules.required, rules.min]"
                 :type="show1 ? 'text' : 'password'"
