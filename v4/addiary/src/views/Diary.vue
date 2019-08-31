@@ -79,6 +79,7 @@
               </v-card-text>
 
               <v-card-actions>
+                <v-btn color="red darken-1" text @click="deleteItem(editedItem);close()">{{$lang.messages.Delete}}</v-btn>
                 <v-spacer></v-spacer>
                 <v-btn color="blue darken-1" text @click="close">{{$lang.messages.Cancel}}</v-btn>
                 <v-btn color="blue darken-1" text @click="save">{{$lang.messages.Save}}</v-btn>
@@ -88,16 +89,20 @@
           </v-dialog>
         </v-toolbar>
       </template>
-      <template v-slot:item.action="{ item }">
-        <v-icon class="mr-2" @click="editItem(item)">edit</v-icon>
-        <v-icon @click="deleteItem(item)">delete</v-icon>
-      </template>
-      <template v-slot:item.am="{ item }">
-        <span v-if="item.am">{{$lang.messages.Morning}}</span>
-        <span v-if="!item.am">{{$lang.messages.Evening}}</span>
-      </template>
-      <template v-slot:item.day="{ item }">
-        <span v-if="!item.secondDay">{{item.day}}</span>
+      <template v-slot:item="{item}">
+        <tr @click="editItem(item)" class="data-grid-row">
+          <td class="text-left">
+            <span v-if="!item.secondDay">{{item.day}}</span>
+          </td>
+          <td class="text-start">
+            <span v-if="item.am">{{$lang.messages.Morning}}</span>
+            <span v-if="!item.am">{{$lang.messages.Evening}}</span>
+          </td>
+          <td class="text-start">{{item.sys}}</td>
+          <td class="text-start">{{item.dia}}</td>
+          <td class="text-start">{{item.pulse}}</td>
+          <td class="text-start">{{item.comment}}</td>
+        </tr>
       </template>
     </v-data-table>
     <v-btn color="pink" dark fixed right fab class="add-button" @click="createItem">
@@ -173,13 +178,6 @@ export default {
           text: this.$lang.messages.Comment,
           value: "comment",
           sortable: false
-        },
-        {
-          text: "",
-          value: "action",
-          sortable: false,
-          align: "right",
-          width: 100
         }
       ];
     },
@@ -273,6 +271,10 @@ export default {
 <style lang="scss" scoped>
 .add-button {
   bottom: 15px;
+}
+
+.data-grid-row {
+  cursor: pointer;
 }
 </style>
 

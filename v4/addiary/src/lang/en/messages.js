@@ -16,6 +16,7 @@ module.exports = {
     Save: 'Save',
     Cancel: 'Cancel',
     DELETE_MSG: 'Are you sure you want to delete this item?',
+    Delete: 'Delete',
     NewItem: 'New Item',
     EditItem: 'Edit Item',
     ruleNumber: 'You must enter a number',

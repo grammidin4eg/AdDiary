@@ -16,6 +16,7 @@ module.exports = {
     Save: 'Сохранить',
     Cancel: 'Отмена',
     DELETE_MSG: 'Удалить запись?',
+    Delete: 'Удалить',
     NewItem: 'Новая запись',
     EditItem: 'Редактировать запись',
     ruleNumber: 'Необходимо ввести число',
