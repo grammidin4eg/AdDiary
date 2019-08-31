@@ -95,7 +95,7 @@ export default {
             }
         },
 
-        deleteItem({commit}, id) {
+        deleteItem({commit, dispatch}, id) {
             if (id) {
                 firebase.firestore().collection("diary").doc(id).delete()
                 .catch((error) => {

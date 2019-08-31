@@ -26,7 +26,7 @@ export default {
         registration({ commit }, { login, password }) {
             commit('clearError');
             firebase.auth().createUserWithEmailAndPassword(login, password)
-                .then(res => {
+                .then(() => {
                     firebase.auth().currentUser.sendEmailVerification();
                 })
                 .catch(function (error) {
@@ -37,7 +37,7 @@ export default {
         login({ commit }, { login, password }) {
             commit('clearError');
             firebase.auth().signInWithEmailAndPassword(login, password)
-                .then(res => {
+                .then(() => {
                 })
                 .catch(function (error) {
                     commit('setError', error);
@@ -49,7 +49,7 @@ export default {
             commit('clearEvent');
             if (mail) {
                 firebase.auth().sendPasswordResetEmail(mail)
-                    .then(res => {
+                    .then(() => {
                         commit('setEvent', 'recover-done');
                     })
                     .catch(function (error) {

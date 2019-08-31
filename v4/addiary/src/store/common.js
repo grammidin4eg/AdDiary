@@ -12,7 +12,7 @@ export default {
                 return;
             }
 
-            console.error('ERROR obj', error, 'code:', error.code);
+            //console.error('ERROR obj', error, 'code:', error.code);
 
             if (typeof error === 'string') {
                 state.error = error;
