@@ -38,6 +38,9 @@
                         <v-radio :label="$lang.messages.Evening" :value="false"></v-radio>
                       </v-radio-group>
                     </v-flex>
+                    <v-flex xs3 sm3 md3>
+                      <v-text-field v-model="editedItem.time" v-mask="editedItem.timeMask" label="Время" :rules="[rules.required]"></v-text-field>
+                    </v-flex>
                   </v-layout>
                   <v-layout wrap>
                     <v-flex xs4 sm4 md4>
@@ -113,7 +116,10 @@
 
 <script>
 import { setTimeout } from 'timers';
+import { mask } from 'vue-the-mask';
+
 export default {
+  directives: {mask},
   data() {
     return {
       dialog: false,
@@ -124,7 +130,9 @@ export default {
         dia: 0,
         pulse: 0,
         comment: 0,
-        am: true
+        am: true,
+        time: '',
+        timeMask: '##:##'
       },
       defaultItem: {
         day: new Date().getDate(),
@@ -132,7 +140,9 @@ export default {
         dia: null,
         pulse: null,
         comment: null,
-        am: new Date().getHours() < 18
+        am: new Date().getHours() < 18,
+        time: new Date().toLocaleTimeString('ru', {hour: '2-digit', minute: '2-digit'}),
+        timeMask: '##:##'
       },
       rules: {
         required: value => !!value || this.$lang.messages.Required,
@@ -214,12 +224,15 @@ export default {
     editItem(item) {
       this.editedIndex = this.items.indexOf(item);
       this.editedItem = Object.assign({}, item);
+      this.editedItem.timeMask = this.defaultItem.timeMask;
+      this.editedItem.time = item.time || '';
       this.dialog = true;
     },
 
     createItem() {
       this.editedIndex = -1;
       this.editedItem = Object.assign({}, this.defaultItem);
+      this.editedItem.time = new Date().toLocaleTimeString('ru', {hour: '2-digit', minute: '2-digit'});
       this.dialog = true;
       setTimeout(() => {
         if (this.$refs.form) {

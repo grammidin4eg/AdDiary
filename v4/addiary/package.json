@@ -12,6 +12,7 @@
     "firebase": "^6.3.4",
     "vue": "^2.6.10",
     "vue-router": "^3.0.3",
+    "vue-the-mask": "^0.11.1",
     "vuejs-localization": "^1.0.3",
     "vuetify": "^2.0.0",
     "vuex": "^3.0.1"

@@ -10,6 +10,8 @@ import "firebase/firestore";
 
 import Lang from 'vuejs-localization';
 
+import VueTheMask from 'vue-the-mask';
+
 Vue.config.productionTip = false
 
 firebase.initializeApp({
@@ -28,6 +30,9 @@ Lang.requireAll(require.context('./lang', true, /\.js$/));
 Vue.use(Lang);
 
 //this.$lang.setLang('ru');
+
+Vue.use(VueTheMask);
+
 
 new Vue({
   router,
