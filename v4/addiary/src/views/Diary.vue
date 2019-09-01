@@ -268,14 +268,12 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-.add-button {
-  bottom: 15px;
-}
+<style lang="sass" scoped>
+.add-button
+  bottom: 15px
 
-.data-grid-row {
-  cursor: pointer;
-}
+.data-grid-row
+  cursor: pointer
 </style>
 
 <style lang="scss">
@@ -290,5 +288,9 @@ export default {
 
 .diary .v-data-table-header-mobile {
   display: none;
+}
+
+tr.data-grid-row {
+  cursor: pointer;
 }
 </style>

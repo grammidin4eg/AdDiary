@@ -15,6 +15,7 @@ export default {
         clearUser(state) {
             state.id = null;
             state.isAuth = false;
+            state.userName = '';
         },
     },
     getters: {
@@ -65,6 +66,11 @@ export default {
             } else {
                 commit('clearUser');
             }
+        },
+
+        clearUser({commit}) {
+            commit('clearUser');
+            firebase.auth().signOut();
         }
     }
 }

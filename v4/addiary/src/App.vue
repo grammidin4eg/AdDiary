@@ -8,6 +8,8 @@
       <!-- выбор даты -->
       <month-picker v-if="inDiaryPage"></month-picker>
       <v-spacer></v-spacer>
+      <!-- имя пользователя -->
+      <user-name-button></user-name-button>
       <!-- кнопка смены языка -->
       <lang-button></lang-button>
 
@@ -32,12 +34,14 @@
 <script>
 import LangButton from './components/LangButton'
 import MonthPicker from './components/MonthPicker'
+import UserNameButton from './components/UserNameButton'
 
 export default {
   name: 'App',
   components: {
     LangButton,
-    MonthPicker
+    MonthPicker,
+    UserNameButton
   },
   beforeMount() {
     let language = window.navigator ? (window.navigator.language ||
@@ -59,7 +63,7 @@ export default {
       return this.$store.getters.getError
     },
     inDiaryPage() {
-      return this.$route.name === 'diary';
+      return (this.$route.name === 'diary') || (this.$route.name === 'home');
     }
   }, 
   methods: {
