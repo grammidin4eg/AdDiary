@@ -1,8 +1,8 @@
 <template>
     <v-menu transition="slide-y-transition" bottom v-if="userName">
       <template v-slot:activator="{ on }">
-        <v-btn text small v-on="on">
-          <span class="headline__user-name">{{userName}}</span>
+        <v-btn text small v-on="on" :title="userName">
+          <v-icon>mdi-account</v-icon>
         </v-btn>
       </template>
       <v-list>

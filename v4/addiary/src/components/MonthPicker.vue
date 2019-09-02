@@ -1,6 +1,6 @@
 <template>
     <v-flex xs11 sm5 class="headline__link__month-picker-panel">
-      <v-btn class="mx-2" fab small outlined @click="changeDate(-1)" :disabled="diaryLoading">
+      <v-btn class="mx-2" fab small outlined @click="changeDate(-1)" :disabled="diaryLoading" :title="$lang.messages.PrevMonth">
         <v-icon>mdi-chevron-left</v-icon>
       </v-btn> 
       <div class="headline__link__month-picker-panel__field"> 
@@ -25,12 +25,12 @@
             v-on="on"
           ></v-text-field>
         </template>
-        <v-date-picker @input="chooseMonth" v-model="date" type="month" no-title scrollable>
+        <v-date-picker @input="chooseMonth" v-model="date" type="month" no-title scrollable :locale="curLang">
         </v-date-picker>
       </v-menu>
       </div>
 
-      <v-btn class="mx-2" fab small outlined @click="changeDate(1)" :disabled="diaryLoading">
+      <v-btn class="mx-2" fab small outlined @click="changeDate(1)" :disabled="diaryLoading" :title="$lang.messages.NextMonth">
         <v-icon>mdi-chevron-right</v-icon>
       </v-btn>
       </v-flex>
@@ -46,6 +46,10 @@ export default {
     computed: {
        diaryLoading() {
           return this.$store.getters.diaryLoading;
+       },
+
+       curLang() {
+          return this.$store.getters.lang;
        }
     },
     methods: {

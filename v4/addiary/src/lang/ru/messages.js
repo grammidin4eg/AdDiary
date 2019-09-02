@@ -27,5 +27,7 @@ module.exports = {
     toRegistrarion: 'Зарегистрируйтесь',
     doYouHaveAccaunt: 'Еще нет аккаунта?',
     fogotPassword: 'Забыли пароль?',
-    Restore: 'Восстановить'
-}
+    Restore: 'Восстановить',
+    NextMonth: 'Следующий месяц',
+    PrevMonth: 'Предыдущий месяц'
+};
