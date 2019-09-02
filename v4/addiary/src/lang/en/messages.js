@@ -9,6 +9,7 @@ module.exports = {
     invalidEmail: 'Invalid e-mail.',
     Day: 'Day',
     TimesOfDay: 'Times of day',
+    Time: 'Time',
     Pulse: 'Pulse',
     Comment: 'Comment',
     Morning: 'Morning',

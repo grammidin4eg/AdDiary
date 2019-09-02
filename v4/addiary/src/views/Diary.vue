@@ -32,12 +32,6 @@
                         :rules="[rules.required, rules.lenMonth]"
                       ></v-text-field>
                     </v-flex>
-                    <v-flex xs9 sm9 md9>
-                      <v-radio-group v-model="editedItem.am" row>
-                        <v-radio :label="$lang.messages.Morning" :value="true"></v-radio>
-                        <v-radio :label="$lang.messages.Evening" :value="false"></v-radio>
-                      </v-radio-group>
-                    </v-flex>
                     <v-flex xs3 sm3 md3>
                       <v-text-field v-model="editedItem.time" v-mask="editedItem.timeMask" label="Время" :rules="[rules.required]"></v-text-field>
                     </v-flex>
@@ -98,9 +92,10 @@
             <span v-if="!item.secondDay">{{item.day}}</span>
           </td>
           <td class="text-start">
-            <span v-if="item.am">{{$lang.messages.Morning}}</span>
-            <span v-if="!item.am">{{$lang.messages.Evening}}</span>
+            <span v-if="!isPmValue(item)">{{$lang.messages.Morning}}</span>
+            <span v-if="isPmValue(item)">{{$lang.messages.Evening}}</span>
           </td>
+          <td class="text-start">{{item.time}}</td>
           <td class="text-start">{{item.sys}}</td>
           <td class="text-start">{{item.dia}}</td>
           <td class="text-start">{{item.pulse}}</td>
@@ -130,7 +125,6 @@ export default {
         dia: 0,
         pulse: 0,
         comment: 0,
-        am: true,
         time: '',
         timeMask: '##:##'
       },
@@ -140,7 +134,6 @@ export default {
         dia: null,
         pulse: null,
         comment: null,
-        am: new Date().getHours() < 18,
         time: new Date().toLocaleTimeString('ru', {hour: '2-digit', minute: '2-digit'}),
         timeMask: '##:##'
       },
@@ -172,6 +165,13 @@ export default {
           text: this.$lang.messages.TimesOfDay,
           width: 50,
           value: "am",
+          divider: true,
+          sortable: false
+        },
+        {
+          text: this.$lang.messages.Time,
+          width: 50,
+          value: "time",
           divider: true,
           sortable: false
         },
@@ -236,7 +236,7 @@ export default {
       this.dialog = true;
       setTimeout(() => {
         if (this.$refs.form) {
-          this.$refs.form.resetValidation();  
+          this.$refs.form.resetValidation();
         }
       }, 200);
     },
@@ -276,6 +276,13 @@ export default {
         return this.$lang.messages.ruleNumber;
       }
       return val > len ? this.$lang.messages.ruleNumberVal : false;
+    },
+
+    isPmValue(item) {
+       if (!item || !item.time) {
+          return null;
+       }
+       return (parseInt(item.time.substr(0, 2), 10) > 17);
     }
   }
 };

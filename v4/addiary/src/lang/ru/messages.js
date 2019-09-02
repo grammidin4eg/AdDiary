@@ -9,6 +9,7 @@ module.exports = {
     invalidEmail: 'Неверный формат почты',
     Day: 'Число',
     TimesOfDay: 'Время суток',
+    Time: 'Время',
     Pulse: 'Пульс',
     Comment: 'Комментарий',
     Morning: 'Утро',
