@@ -41,7 +41,7 @@ export default {
             if (userId && curYear && curMonth) {
                 firebase.firestore().collection('diary')
                 .where("user", "==", userId).where("year", "==", curYear).where("month", "==", curMonth)
-                .orderBy("day").orderBy("am", 'desc')
+                .orderBy("day").orderBy("time", 'asc')
                 .get().then((snapshot) => {
                     //console.log(snapshot, snapshot.size);
                     let ladderArray = [];
@@ -66,6 +66,7 @@ export default {
                 const value = Object.assign({}, _value);
                 const id = _value.id;
                 delete value.id;
+                delete value.timeMask;
 
                 value.year = getters.year;
                 value.month = getters.month;
@@ -80,11 +81,13 @@ export default {
             }
         },
 
-        addItem({commit, dispatch, getters}, value) {
-            if (value) {
+        addItem({commit, dispatch, getters}, _value) {
+            if (_value) {
+                const value = Object.assign({}, _value);
                 value.year = getters.year;
                 value.month = getters.month;
                 value.user = getters.userId;
+                delete value.timeMask;
 
                 firebase.firestore().collection("diary").add(value)
                 .then(() => {})

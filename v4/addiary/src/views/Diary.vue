@@ -5,7 +5,9 @@
       :items="items"
       :loading="diaryLoading"
       disable-sort
+      disable-pagination
       hide-default-footer
+      disable-filtering
       :items-per-page="100"
       class="elevation-1"
       ref="datatable"
@@ -115,7 +117,7 @@
         </v-toolbar>
       </template>
       <template v-slot:item="{item}">
-        <tr @click="editItem(item)" class="data-grid-row">
+        <tr @click="editItem(item)" class="data-grid-row" :class="getGLevel(item)">
           <td class="text-left">
             <span v-if="!item.secondDay">{{item.day}}</span>
           </td>
@@ -312,6 +314,19 @@ export default {
           return null;
        }
        return (parseInt(item.time.substr(0, 2), 10) > 17);
+    },
+
+    getGLevel(item) {
+       let level = 0;
+       if ((item.sys > 129) || (item.dia > 84)) {
+          level++;
+       }
+
+       if ((item.sys > 139) || (item.dia > 89)) {
+          level++;
+       }
+
+       return 'level-' + level;
     }
   }
 };
@@ -341,5 +356,29 @@ export default {
 
 tr.data-grid-row {
   cursor: pointer;
+}
+
+.data-grid-row.level-0 {
+  background-color: #86ca86c4;
+}
+
+.data-grid-row.level-1 {
+  background-color: #e7e743bd;
+}
+
+.data-grid-row.level-2 {
+  background-color: #fbb8b8bd;
+}
+
+.theme--light.v-data-table tbody tr.data-grid-row.level-0:hover:not(.v-data-table__expand-row) {
+  background-color: #86ca86;
+}
+
+.theme--light.v-data-table tbody tr.data-grid-row.level-1:hover:not(.v-data-table__expand-row) {
+  background-color: #e7e743;
+}
+
+.theme--light.v-data-table tbody tr.data-grid-row.level-2:hover:not(.v-data-table__expand-row) {
+  background-color: #fbb8b8;
 }
 </style>
