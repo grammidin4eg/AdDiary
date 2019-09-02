@@ -25,15 +25,43 @@
               <v-card-text>
                 <v-container grid-list-md>
                   <v-layout wrap>
-                    <v-flex xs3 sm3 md3>
+                    <v-flex xs3 sm3 md2>
                       <v-text-field
                         v-model="editedItem.day"
                         :label="$lang.messages.Day"
                         :rules="[rules.required, rules.lenMonth]"
                       ></v-text-field>
                     </v-flex>
-                    <v-flex xs3 sm3 md3>
-                      <v-text-field v-model="editedItem.time" v-mask="editedItem.timeMask" label="Время" :rules="[rules.required]"></v-text-field>
+                    <v-flex xs4 sm4 md3>
+                      <v-menu
+                              ref="timeMenu"
+                              v-model="timeMenu"
+                              :close-on-content-click="false"
+                              :nudge-right="40"
+                              :return-value.sync="editedItem.time"
+                              transition="scale-transition"
+                              offset-y
+                              full-width
+                              max-width="290px"
+                              min-width="290px"
+                      >
+                        <template v-slot:activator="{ on }">
+                          <v-text-field
+                                  v-model="editedItem.time"
+                                  :label="$lang.messages.Time"
+                                  prepend-icon="access_time"
+                                  readonly
+                                  v-on="on"
+                          ></v-text-field>
+                        </template>
+                        <v-time-picker
+                                v-if="timeMenu"
+                                v-model="editedItem.time"
+                                format="24hr"
+                                full-width
+                                @click:minute="$refs.timeMenu.save(editedItem.time)"
+                        ></v-time-picker>
+                      </v-menu>
                     </v-flex>
                   </v-layout>
                   <v-layout wrap>
@@ -146,7 +174,8 @@ export default {
           return this.ruleNumber(value, 300);
         },
         maxStr: v => !v || v.length < 60 || this.$lang.messages.ruleMaxComment
-      }
+      },
+      timeMenu: null
     };
   },
 
