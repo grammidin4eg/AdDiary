@@ -52,9 +52,6 @@
             }
          }
       },
-      computed: {
-
-      },
       methods: {
          saveUserOptions() {
             if (this.$refs.form.validate()) {
