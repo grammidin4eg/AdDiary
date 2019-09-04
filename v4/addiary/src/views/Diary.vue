@@ -303,7 +303,7 @@ export default {
 
     ruleNumber(value, len) {
       const val = parseInt(value, 10);
-      if (!val || isNaN(val)) {
+      if (!val || (value.match && !value.match(/^\d+$/)) || isNaN(val)) {
         return this.$lang.messages.ruleNumber;
       }
       return val > len ? this.$lang.messages.ruleNumberVal : false;

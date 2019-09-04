@@ -109,7 +109,8 @@ export default {
     },
     isAuth(value) {
       if (value) {
-        this.$router.push("/diary");
+        const page = this.isLogin ? '/' : '/profile';
+        this.$router.push(page);
       }
     }
   }

@@ -6,8 +6,11 @@
         </v-btn>
       </template>
       <v-list>
+        <v-list-item class="v-list-item--link">
+           <router-link to="/profile" tag="div">{{$lang.messages.UserSettings}}</router-link>
+        </v-list-item>
         <v-list-item @click="onLogOut()">
-          <v-list-item-title>Выйти</v-list-item-title>
+          <v-list-item-title>{{$lang.messages.Exit}}</v-list-item-title>
         </v-list-item>
       </v-list>
     </v-menu>

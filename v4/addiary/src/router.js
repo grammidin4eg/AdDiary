@@ -36,6 +36,12 @@ export default new Router({
       component: () => import('./views/Diary.vue')
     },
     {
+      path: '/profile',
+      name: 'profile',
+      beforeEnter: AuthGuard,
+      component: () => import('./views/UserProfile.vue')
+    },
+    {
       path: '*',
       redirect: '/'
     }

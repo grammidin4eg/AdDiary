@@ -29,5 +29,12 @@ module.exports = {
     fogotPassword: 'Забыли пароль?',
     Restore: 'Восстановить',
     NextMonth: 'Следующий месяц',
-    PrevMonth: 'Предыдущий месяц'
+    PrevMonth: 'Предыдущий месяц',
+    UserSettings: 'Настройки пользователя',
+    Exit: 'Выйти',
+    Age: 'Возраст',
+    Weight: 'Вес',
+    Sex: 'Пол',
+    SexMale: 'Мужской',
+    SexFeMale: 'Женский'
 };
