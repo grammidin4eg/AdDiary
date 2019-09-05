@@ -133,6 +133,7 @@
         </tr>
       </template>
     </v-data-table>
+    <div class="bottom-spacer"></div>
     <v-btn color="pink" dark fixed right fab class="add-button" @click="createItem">
       <v-icon>add</v-icon>
     </v-btn>
@@ -274,10 +275,12 @@ export default {
 
     deleteItem(item) {
       const index = this.items.indexOf(item);
-      if (confirm(this.$lang.messages.DELETE_MSG)) {
-        this.$store.dispatch('deleteItem', item.id);
-        this.items.splice(index, 1);
-      }
+      this.$store.dispatch('deleteItem', item.id);
+      this.items.splice(index, 1);
+      // if (confirm(this.$lang.messages.DELETE_MSG)) {
+      //   this.$store.dispatch('deleteItem', item.id);
+      //   this.items.splice(index, 1);
+      // }
     },
 
     close() {
@@ -338,6 +341,11 @@ export default {
 
 .data-grid-row
   cursor: pointer
+
+.bottom-spacer
+  height: 60px
+  width: 100%
+
 </style>
 
 <style lang="scss">
