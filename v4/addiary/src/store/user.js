@@ -4,7 +4,8 @@ export default {
     state: {
         isAuth: false,
         id: null,
-        userName: ''
+        userName: '',
+        profile: {}
     },
     mutations: {
         setUser(state, user) {
@@ -17,11 +18,16 @@ export default {
             state.isAuth = false;
             state.userName = '';
         },
+
+        setProfile(state, value) {
+           state.profile = value;
+        }
     },
     getters: {
         isAuth: (state) => state.isAuth,
         userId: (state) => state.id,
         userName: (state) => state.userName,
+        userProfile: (state) => state.profile,
     },
     actions: {
         registration({ commit }, { login, password }) {
@@ -71,6 +77,31 @@ export default {
         clearUser({commit}) {
             commit('clearUser');
             firebase.auth().signOut();
+        },
+
+        setUserProfile({commit, getters}, value) {
+           if (value) {
+              commit('setProfile', value);
+              commit('clearError');
+              const userId = getters.userId + '';
+              if (userId) {
+                 firebase.firestore().collection('profile').doc(userId)
+                    .set(value).catch(error => commit('setError', error));
+              }
+           }
+        },
+
+        getUserProfile({commit, getters}) {
+           commit('clearError');
+           const userId = getters.userId + '';
+           if (userId) {
+              firebase.firestore().collection('profile').doc(userId)
+                 .get().then((doc) => {
+                 if (doc.exists) {
+                    commit('setProfile', doc.data())
+                 }
+              }).catch(error => commit('setError', error));
+           }
         }
     }
 }

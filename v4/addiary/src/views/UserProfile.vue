@@ -52,10 +52,17 @@
             }
          }
       },
+      created() {
+         this.$store.dispatch('getUserProfile');
+      },
       methods: {
          saveUserOptions() {
             if (this.$refs.form.validate()) {
-               //
+               this.$store.dispatch('setUserProfile', {
+                  birth: this.birth,
+                  weight: this.weight
+               });
+               this.$router.push('/');
             }
          },
 
@@ -70,6 +77,15 @@
       computed: {
          userName() {
             return this.$store.getters.userName;
+         },
+         userProfile() {
+            return this.$store.getters.userProfile;
+         }
+      },
+      watch: {
+         userProfile(value) {
+            this.birth = value.birth;
+            this.weight = value.weight;
          }
       }
    }
