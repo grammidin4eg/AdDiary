@@ -1,8 +1,8 @@
 <template>
   <v-app>
     <v-app-bar app>
-      <v-toolbar-title class="headline" :class="{'title-container' : inDiaryPage}">
-        <router-link to="/" class="headline__link"><v-icon x-large color="blue darken-2" class="d-flex d-sm-none home-icon">home</v-icon><span class="font-weight-light d-none d-sm-flex">{{$lang.messages.AppName}}</span></router-link>
+      <v-toolbar-title class="headline" :class="{'title-container' : inDiaryPage && !isMobile}">
+        <router-link to="/" class="headline__link"><v-icon v-if="!inDiaryPage" x-large color="blue darken-2" class="d-flex d-sm-none home-icon">home</v-icon><span class="font-weight-light d-none d-sm-flex">{{$lang.messages.AppName}}</span></router-link>
       </v-toolbar-title>
       <v-spacer></v-spacer>
       <!-- выбор даты -->
@@ -21,13 +21,14 @@
     </v-alert>
       <router-view />
     </v-content>
-    <v-footer absolute class="font-weight-medium">
-      <v-col class="text-center" cols="12">
-        <router-link to="/reg">Registration</router-link>
-       | <router-link to="/login">Login</router-link>
-       | <router-link to="/diary">Diary page</router-link>
-       | <router-link to="/profile">Profile</router-link>
-      </v-col>
+    <v-footer dark class="grey darken-3" absolute>
+        <v-flex class="footer-panel">
+            <a href="http://karachevtsevuu.ru" class="mr-4" target="_blank">&copy; Karachevtsev Yu.Yu.</a>
+            <span class="mr-4"> | </span>
+            <a href="mailto:w3gSee@mail.ru" class="mr-4">{{$lang.messages.FindError}}?</a>
+            <span class="mr-4"> | </span>
+            <a href="https://money.yandex.ru/to/41001512641224" class="mr-4" target="_blank">{{$lang.messages.DonateProject}}</a>
+        </v-flex>
     </v-footer>
   </v-app>
 </template>
@@ -36,6 +37,7 @@
 import LangButton from './components/LangButton'
 import MonthPicker from './components/MonthPicker'
 import UserNameButton from './components/UserNameButton'
+import { isMobile } from 'mobile-device-detect'
 
 export default {
   name: 'App',
@@ -65,6 +67,9 @@ export default {
     },
     inDiaryPage() {
       return (this.$route.name === 'diary') || (this.$route.name === 'home');
+    },
+    isMobile() {
+        return isMobile;
     }
   }, 
   methods: {
@@ -85,6 +90,8 @@ export default {
   
   .home-icon
     width: 40px
-  
+
+  .footer-panel a
+    color: white
 </style>
 

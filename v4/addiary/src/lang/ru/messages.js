@@ -19,7 +19,7 @@ module.exports = {
     DELETE_MSG: 'Удалить запись?',
     Delete: 'Удалить',
     NewItem: 'Новая запись',
-    EditItem: 'Редактировать запись',
+    EditItem: 'Редактировать',
     ruleNumber: 'Необходимо ввести число',
     ruleNumberVal: 'Некорретное число',
     ruleMaxComment: 'Слишком большой текст',
@@ -36,5 +36,7 @@ module.exports = {
     Weight: 'Вес',
     Sex: 'Пол',
     SexMale: 'Мужской',
-    SexFeMale: 'Женский'
+    SexFeMale: 'Женский',
+    FindError: 'Нашли ошибку',
+    DonateProject: 'Поддержать проект'
 };

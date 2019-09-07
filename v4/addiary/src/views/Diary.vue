@@ -8,6 +8,7 @@
       disable-pagination
       hide-default-footer
       disable-filtering
+      fixed-header
       :items-per-page="100"
       class="elevation-1"
       ref="datatable"
@@ -72,6 +73,7 @@
                         v-model="editedItem.sys"
                         label="SYS"
                         v-if="dialog"
+                        type="number"
                         autofocus
                         :rules="[rules.required, rules.lenField]"
                       ></v-text-field>
@@ -80,12 +82,14 @@
                       <v-text-field
                         v-model="editedItem.dia"
                         label="DIA"
+                        type="number"
                         :rules="[rules.required, rules.lenField]"
                       ></v-text-field>
                     </v-flex>
                     <v-flex xs4 sm4 md4>
                       <v-text-field
                         v-model="editedItem.pulse"
+                        type="number"
                         v-on:keypress.enter.prevent="save()"
                         :label="$lang.messages.Pulse"
                         :rules="[rules.required, rules.lenField]"

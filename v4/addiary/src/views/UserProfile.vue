@@ -14,15 +14,15 @@
                     :label="$lang.messages.Age"
                     name="birth"
                     v-model="birth"
+                    type="number"
                     :rules="[rules.lenAge]"
-                    type="text"
             ></v-text-field>
             <v-text-field
                     :label="$lang.messages.Weight"
                     name="weight"
                     v-model="weight"
+                    type="number"
                     :rules="[rules.lenAge]"
-                    type="text"
             ></v-text-field>
           </v-form>
         </v-row>

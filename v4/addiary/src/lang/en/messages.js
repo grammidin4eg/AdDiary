@@ -36,5 +36,7 @@ module.exports = {
     Weight: 'Weight',
     Sex: 'Sex',
     SexMale: 'Male',
-    SexFeMale: 'Female'
+    SexFeMale: 'Female',
+    FindError: 'Find error',
+    DonateProject: 'Donate project'
 };
