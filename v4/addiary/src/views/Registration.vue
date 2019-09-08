@@ -80,6 +80,18 @@ export default {
           login: this.login,
           password: this.password
         });
+        if ((this.$route.name === "login") && localStorage) {
+          localStorage.setItem('addiary-login', this.login);
+        }
+      }
+    }
+  },
+
+  created() {
+    if ((this.$route.name === "login") && localStorage) {
+      const storedLogin = localStorage.getItem('addiary-login');
+      if (storedLogin) {
+        this.login = storedLogin;
       }
     }
   },

@@ -11,7 +11,7 @@ module.exports = {
     TimesOfDay: 'Times of day',
     Time: 'Time',
     Pulse: 'Pulse',
-    Comment: 'Comment',
+    Comment: 'Comment (well-being, arrhythmia, medications, left / right hand)',
     Morning: 'Morning',
     Evening: 'Evening',
     Save: 'Save',

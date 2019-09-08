@@ -66,6 +66,7 @@ export default {
         },
 
         stateChange({ commit, dispatch }, user) {
+            console.log('stateChange', user);
             if (user && user.uid) {
                 commit('setUser', user);
                 dispatch('getItems');

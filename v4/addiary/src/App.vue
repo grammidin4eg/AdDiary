@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <v-app-bar app>
-      <v-toolbar-title class="headline" :class="{'title-container' : inDiaryPage && !isMobile}">
+      <v-toolbar-title v-if="!isMobile" class="headline" :class="{'title-container' : inDiaryPage}">
         <router-link to="/" class="headline__link"><v-icon v-if="!inDiaryPage" x-large color="blue darken-2" class="d-flex d-sm-none home-icon">home</v-icon><span class="font-weight-light d-none d-sm-flex">{{$lang.messages.AppName}}</span></router-link>
       </v-toolbar-title>
       <v-spacer></v-spacer>

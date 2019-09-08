@@ -110,7 +110,7 @@
               </v-card-text>
 
               <v-card-actions>
-                <v-btn color="red darken-1" text @click="deleteItem(editedItem);close()">{{$lang.messages.Delete}}</v-btn>
+                <v-btn v-if="editedIndex > 0"  color="red darken-1" text @click="deleteItem(editedItem);close()">{{$lang.messages.Delete}}</v-btn>
                 <v-spacer></v-spacer>
                 <v-btn color="blue darken-1" text @click="close">{{$lang.messages.Cancel}}</v-btn>
                 <v-btn color="blue darken-1" text @click="save">{{$lang.messages.Save}}</v-btn>
@@ -138,9 +138,11 @@
       </template>
     </v-data-table>
     <div class="bottom-spacer"></div>
-    <v-btn color="pink" dark fixed right fab class="add-button" @click="createItem">
+    <v-scale-transition>
+    <v-btn v-if="showAddButton" color="pink" dark fixed right fab class="add-button" @click="createItem">
       <v-icon>add</v-icon>
     </v-btn>
+    </v-scale-transition>
   </div>
 </template>
 
@@ -161,7 +163,7 @@ export default {
         pulse: 0,
         comment: 0,
         time: '',
-        timeMask: '##:##'
+        timeMask: '##:##',
       },
       defaultItem: {
         day: new Date().getDate(),
@@ -182,8 +184,16 @@ export default {
         },
         maxStr: v => !v || v.length < 60 || this.$lang.messages.ruleMaxComment
       },
-      timeMenu: null
+      timeMenu: null,
+      showAddButton: false,
     };
+  },
+
+  mounted() {
+    setTimeout(() => {
+      this.showAddButton = true;
+      this.$vuetify.goTo('.bottom-spacer');
+    }, 800);
   },
 
   computed: {

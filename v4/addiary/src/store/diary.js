@@ -30,6 +30,7 @@ export default {
     actions: {
         setSelectedDate({commit, dispatch}, value) {
             commit('setSelectedDate', value);
+            console.log('setSelectedDate', value);
             dispatch('getItems');
         },
         getItems({commit, getters}) {
@@ -43,7 +44,7 @@ export default {
                 .where("user", "==", userId).where("year", "==", curYear).where("month", "==", curMonth)
                 .orderBy("day").orderBy("time", 'asc')
                 .get().then((snapshot) => {
-                    //console.log(snapshot, snapshot.size);
+                    console.log('getItems', snapshot,);
                     let ladderArray = [];
                     let lastDay;
                     snapshot.forEach((doc) => {
