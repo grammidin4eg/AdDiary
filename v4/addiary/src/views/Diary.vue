@@ -75,6 +75,7 @@
                         v-if="dialog"
                         type="number"
                         autofocus
+                        @keyup="onFieldKeyPress($event, editedItem.sys, 3)"
                         :rules="[rules.required, rules.lenField]"
                       ></v-text-field>
                     </v-flex>
@@ -83,6 +84,8 @@
                         v-model="editedItem.dia"
                         label="DIA"
                         type="number"
+                        ref="form-field-dia"
+                        @keyup="onFieldKeyPress($event, editedItem.dia, 4)"
                         :rules="[rules.required, rules.lenField]"
                       ></v-text-field>
                     </v-flex>
@@ -344,7 +347,16 @@ export default {
        }
 
        return 'level-' + level;
-    }
+    },
+
+    onFieldKeyPress(event, _value, nextField) {
+       const value = parseInt(_value, 10);
+       if ((event.code !== 'Backspace') && !isNaN(value) && (value > 59)) {
+          this.$nextTick(function() {
+             this.$refs.form.$children[nextField].focus();
+          });
+       }
+    },
   }
 };
 </script>
