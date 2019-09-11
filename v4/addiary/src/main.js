@@ -12,17 +12,11 @@ import Lang from 'vuejs-localization';
 
 import VueTheMask from 'vue-the-mask';
 
+import firebaseConfig from './firebaseconfig';
+
 Vue.config.productionTip = false
 
-firebase.initializeApp({
-  apiKey: "AIzaSyCrtwjN2qoO5gZg53dlrNJat0ydzEgGEWE",
-  authDomain: "addiary-e3891.firebaseapp.com",
-  databaseURL: "https://addiary-e3891.firebaseio.com",
-  projectId: "addiary-e3891",
-  storageBucket: "",
-  messagingSenderId: "807585666905",
-  appId: "1:807585666905:web:db83fd9f501e6b83"
-});
+firebase.initializeApp(firebaseConfig);
 
 
 Lang.requireAll(require.context('./lang', true, /\.js$/));

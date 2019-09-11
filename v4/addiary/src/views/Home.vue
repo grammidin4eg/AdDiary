@@ -30,6 +30,6 @@ export default {
 
 <style lang="sass">
   .home-backgroung
-    background-image: url('https://firebasestorage.googleapis.com/v0/b/addiary-e3891.appspot.com/o/bright-light-textures2.jpg?alt=media&token=7cac1678-4c6c-451a-8475-3df997cf70fe')
+    background-image: url('https://firebasestorage.googleapis.com/v0/b/addiary-f4f05.appspot.com/o/bright-light-textures2.jpg?alt=media&token=6f5d2c92-848c-43cc-9674-6d8ef7bfebaa')
     background-repeat: repeat
 </style>
