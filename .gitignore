@@ -8,3 +8,4 @@ v2/js
 .directory
 v4/addiary/yarn.lock
 v4/addiary/.firebase/hosting.ZGlzdA.cache
+/v4/addiary/src/firebaseconfig.js

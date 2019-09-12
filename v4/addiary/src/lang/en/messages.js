@@ -38,5 +38,6 @@ module.exports = {
     SexMale: 'Male',
     SexFeMale: 'Female',
     FindError: 'Find error',
-    DonateProject: 'Donate project'
+    DonateProject: 'Donate project',
+    Print: 'Print'
 };

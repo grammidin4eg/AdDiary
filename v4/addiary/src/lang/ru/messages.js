@@ -38,5 +38,6 @@ module.exports = {
     SexMale: 'Мужской',
     SexFeMale: 'Женский',
     FindError: 'Нашли ошибку',
-    DonateProject: 'Поддержать проект'
+    DonateProject: 'Поддержать проект',
+    Print: 'Распечатать'
 };

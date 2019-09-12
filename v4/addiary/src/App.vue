@@ -8,6 +8,10 @@
       <!-- выбор даты -->
       <month-picker v-if="inDiaryPage"></month-picker>
       <v-spacer></v-spacer>
+      <!-- кнопка печати -->
+      <v-btn v-if="inDiaryPage" text small v-on:click="printTable" :title="$lang.messages.Print">
+         <v-icon>mdi-printer</v-icon>
+      </v-btn>
       <!-- имя пользователя -->
       <user-name-button></user-name-button>
       <!-- кнопка смены языка -->
@@ -70,9 +74,46 @@ export default {
     },
     isMobile() {
         return isMobile;
+    },
+    curMonth() {
+       return this.$store.getters.month;
+    },
+    curYear() {
+       return this.$store.getters.year;
+    },
+    curLang() {
+        return this.$store.getters.lang;
     }
   }, 
   methods: {
+     printTable() {
+        const diaryTagSelector = document.getElementsByClassName('diary');
+        if (diaryTagSelector.length > 0) {
+           const diaryTableTagSelector = diaryTagSelector[0].getElementsByTagName('table');
+           if (diaryTableTagSelector.length > 0) {
+              const diaryTableTag = diaryTableTagSelector[0];
+              const newWin= window.open("");
+              newWin.document.write(diaryTableTag.outerHTML);
+              const printTable = newWin.document.getElementsByTagName('table')[0];
+              printTable.setAttribute('border', '1');
+              printTable.setAttribute('align', 'center');
+              printTable.setAttribute('frame', 'border');
+              printTable.setAttribute('cellspacing', '0');
+              printTable.setAttribute('rules', 'all');
+              printTable.setAttribute('cellpadding', '10');
+              for( let trEl of printTable.getElementsByTagName('td')) {
+                 trEl.setAttribute('align', 'center');
+                 trEl.setAttribute('nowrap', '');
+              }
+              printTable.createCaption();
+              const printDate = new Date(this.curYear, (this.curMonth - 1), 1);
+              const printMonthText = printDate.toLocaleString(this.curLang, {month: 'long'});
+              printTable.caption.textContent = `${this.$lang.messages.AppName}, ${printMonthText} ${this.curYear}`;
+              newWin.print();
+              newWin.close();
+           }
+        }
+     }
   }
 };
 </script>

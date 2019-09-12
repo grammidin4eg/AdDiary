@@ -32,6 +32,9 @@
                   @click.prevent="saveUserOptions()"
           >{{$lang.messages.Save}}
           </v-btn>
+           <router-link to="/" class="ml-4" tag="span">
+              <v-btn>{{$lang.messages.Cancel}}</v-btn>
+           </router-link>
         </v-row>
       </v-flex>
     </v-layout>

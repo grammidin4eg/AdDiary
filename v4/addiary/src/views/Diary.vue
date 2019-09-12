@@ -15,7 +15,7 @@
     >
       <template v-slot:top>
         <v-toolbar flat color="white">
-          <v-dialog v-model="dialog" max-width="600px">
+          <v-dialog v-model="dialog" max-width="600px" :fullscreen="isMobile">
             <!-- <template v-slot:activator="{ on }">
             <v-btn color="primary" dark class="mb-2" v-on="on">New Item</v-btn>
             </template>-->
@@ -140,7 +140,7 @@
         </tr>
       </template>
     </v-data-table>
-    <div class="bottom-spacer"></div>
+    <!-- <div class="bottom-spacer"></div>-->
     <v-scale-transition>
     <v-btn v-if="showAddButton" color="pink" dark fixed right fab class="add-button" @click="createItem">
       <v-icon>add</v-icon>
@@ -152,6 +152,7 @@
 <script>
 import { setTimeout } from 'timers';
 import { mask } from 'vue-the-mask';
+import { isMobile } from 'mobile-device-detect'
 
 export default {
   directives: {mask},
@@ -261,6 +262,9 @@ export default {
     },
     diaryLoading() {
       return this.$store.getters.diaryLoading;
+    },
+    isMobile() {
+      return isMobile;
     }
   },
 
@@ -346,7 +350,14 @@ export default {
           level++;
        }
 
-       return 'level-' + level;
+       let res = 'level-' + level;
+
+       const lastId = this.items[this.items.length-1].id;
+       if (lastId === item.id) {
+          res+=' bottom-spacer';
+       }
+
+       return res;
     },
 
     onFieldKeyPress(event, _value, nextField) {
