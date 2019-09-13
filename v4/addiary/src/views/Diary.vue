@@ -113,7 +113,7 @@
               </v-card-text>
 
               <v-card-actions>
-                <v-btn v-if="editedIndex > 0"  color="red darken-1" text @click="deleteItem(editedItem);close()">{{$lang.messages.Delete}}</v-btn>
+                <v-btn v-if="editedIndex >= 0"  color="red darken-1" text @click="deleteItem(editedItem);close()">{{$lang.messages.Delete}}</v-btn>
                 <v-spacer></v-spacer>
                 <v-btn color="blue darken-1" text @click="close">{{$lang.messages.Cancel}}</v-btn>
                 <v-btn color="blue darken-1" text @click="save">{{$lang.messages.Save}}</v-btn>
@@ -151,7 +151,7 @@
          </tr></thead>
       </template>
     </v-data-table>
-    <div class="bottom-spacer"></div>
+    <div class="bottom-spacer" v-if="!isMobile"></div>
     <v-scale-transition>
     <v-btn v-if="showAddButton" color="pink" dark fixed right fab class="add-button" @click="createItem">
       <v-icon>add</v-icon>
@@ -207,7 +207,9 @@ export default {
   mounted() {
     setTimeout(() => {
       this.showAddButton = true;
-      this.$vuetify.goTo('.last-row');
+      if (this.items.length > 11) {
+         this.$vuetify.goTo('.last-row');
+      }
     }, 800);
   },
 
