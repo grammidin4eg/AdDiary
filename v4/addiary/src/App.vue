@@ -27,11 +27,13 @@
     </v-content>
     <v-footer dark class="grey darken-3" absolute>
         <v-flex class="footer-panel">
-            <a href="http://karachevtsevuu.ru" class="mr-4" target="_blank">&copy; Karachevtsev Yu.Yu.</a>
+            <a href="http://karachevtsevuu.ru" class="mr-3" target="_blank">&copy; Karachevtsev Yu.Yu.</a>
             <span class="mr-4"> | </span>
-            <a href="mailto:w3gSee@mail.ru" class="mr-4">{{$lang.messages.FindError}}?</a>
+            <a href="mailto:w3gSee@mail.ru" class="mr-3">{{$lang.messages.FindError}}?</a>
             <span class="mr-4"> | </span>
-            <a href="https://money.yandex.ru/to/41001512641224" class="mr-4" target="_blank">{{$lang.messages.DonateProject}}</a>
+            <a href="https://money.yandex.ru/to/41001512641224" class="mr-3" target="_blank">{{$lang.messages.DonateProject}}</a>
+           <span class="mr-4" v-if="isRuLang"> | </span>
+           <a href="https://vk.com/addiaryonline" v-if="isRuLang" class="mr-3" target="_blank">Группа вконтакте</a>
         </v-flex>
     </v-footer>
   </v-app>
@@ -83,6 +85,9 @@ export default {
     },
     curLang() {
         return this.$store.getters.lang;
+    },
+    isRuLang() {
+       return (this.$store.getters.lang === 'ru');
     }
   }, 
   methods: {

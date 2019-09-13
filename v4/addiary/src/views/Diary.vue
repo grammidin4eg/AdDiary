@@ -139,8 +139,19 @@
           <td class="text-start">{{item.comment}}</td>
         </tr>
       </template>
+      <template v-slot:header="header">
+         <thead v-if="isMobile" class="v-data-table-header"><tr>
+            <th role="columnheader" scope="col" aria-label="Число" aria-sort="none" width="40" class="text-left"><span>{{$lang.messages.Day}}</span></th>
+            <th role="columnheader" scope="col" aria-label="Время суток" aria-sort="none" width="50" class="text-start"><span>{{$lang.messages.TimesOfDay}}</span></th>
+            <th role="columnheader" scope="col" aria-label="Время" aria-sort="none" width="50" class="text-start"><span>{{$lang.messages.Time}}</span></th>
+            <th role="columnheader" scope="col" aria-label="SYS" aria-sort="none" width="50" class="text-start"><span>SYS</span></th>
+            <th role="columnheader" scope="col" aria-label="DIA" aria-sort="none" width="50" class="text-start"><span>DIA</span></th>
+            <th role="columnheader" scope="col" aria-label="Пульс" aria-sort="none" width="50" class="text-start"><span>{{$lang.messages.Pulse}}</span></th>
+            <th role="columnheader" scope="col" aria-label="Комментарий (самочувствие, аритмия, лекарства, левая/правая рука)" aria-sort="none" class="text-start"><span></span></th>
+         </tr></thead>
+      </template>
     </v-data-table>
-    <!-- <div class="bottom-spacer"></div>-->
+    <div class="bottom-spacer"></div>
     <v-scale-transition>
     <v-btn v-if="showAddButton" color="pink" dark fixed right fab class="add-button" @click="createItem">
       <v-icon>add</v-icon>
@@ -196,7 +207,7 @@ export default {
   mounted() {
     setTimeout(() => {
       this.showAddButton = true;
-      this.$vuetify.goTo('.bottom-spacer');
+      this.$vuetify.goTo('.last-row');
     }, 800);
   },
 
@@ -354,7 +365,7 @@ export default {
 
        const lastId = this.items[this.items.length-1].id;
        if (lastId === item.id) {
-          res+=' bottom-spacer';
+          res+=' last-row';
        }
 
        return res;
@@ -380,7 +391,7 @@ export default {
   cursor: pointer
 
 .bottom-spacer
-  height: 60px
+  height: 2rem
   width: 100%
 
 </style>
