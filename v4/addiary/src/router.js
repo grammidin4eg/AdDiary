@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import firebase from 'firebase/app'
-import Store from './store'
 
 Vue.use(Router);
 
@@ -51,7 +50,7 @@ export default new Router({
 })
 
 function checkAuth(next, waitCounter) {
-  if (Store.getters.isAuth) {
+  if (firebase.auth().currentUser) {
     next();
   } else {
     if (waitCounter) {
@@ -66,7 +65,7 @@ function checkAuth(next, waitCounter) {
 }
 
 function AuthGuard(from, to, next) {
-  checkAuth(next, 10);
+  checkAuth(next, 15);
 }
 
 function logOut(from, to, next) {

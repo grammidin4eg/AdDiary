@@ -151,7 +151,7 @@
          </tr></thead>
       </template>
     </v-data-table>
-    <div class="bottom-spacer" v-if="!isMobile"></div>
+    <div class="bottom-spacer"></div>
     <v-scale-transition>
     <v-btn v-if="showAddButton" color="pink" dark fixed right fab class="add-button" @click="createItem">
       <v-icon>add</v-icon>
