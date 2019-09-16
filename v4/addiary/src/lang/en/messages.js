@@ -40,5 +40,6 @@ module.exports = {
     FindError: 'Find error',
     DonateProject: 'Donate project',
     Print: 'Print',
-    NoDataText: 'No data available'
+    NoDataText: 'No data available',
+    CommentPrint: 'Comment',
 };

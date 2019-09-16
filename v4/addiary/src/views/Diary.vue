@@ -283,7 +283,6 @@ export default {
     },
     curentLang() {
       const lang = this.$store.getters.lang;
-      console.log('lang', lang + '-' + lang.toUpperCase())
       return lang + '-' + lang.toUpperCase();
     }
   },

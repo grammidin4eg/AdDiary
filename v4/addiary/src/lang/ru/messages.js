@@ -40,5 +40,6 @@ module.exports = {
     FindError: 'Нашли ошибку',
     DonateProject: 'Поддержать проект',
     Print: 'Распечатать',
-    NoDataText: 'Нет данных'
+    NoDataText: 'Нет данных',
+    CommentPrint: 'Комментарий'
 };

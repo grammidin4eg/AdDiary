@@ -44,6 +44,7 @@ import LangButton from './components/LangButton'
 import MonthPicker from './components/MonthPicker'
 import UserNameButton from './components/UserNameButton'
 import { isMobile } from 'mobile-device-detect'
+import printJS from 'print-js'
 
 export default {
   name: 'App',
@@ -88,36 +89,65 @@ export default {
     },
     isRuLang() {
        return (this.$store.getters.lang === 'ru');
-    }
+    },
+    items() {
+       return this.$store.getters.items;
+    },
   }, 
   methods: {
      printTable() {
-        const diaryTagSelector = document.getElementsByClassName('diary');
-        if (diaryTagSelector.length > 0) {
-           const diaryTableTagSelector = diaryTagSelector[0].getElementsByTagName('table');
-           if (diaryTableTagSelector.length > 0) {
-              const diaryTableTag = diaryTableTagSelector[0];
-              const newWin= window.open("");
-              newWin.document.write(diaryTableTag.outerHTML);
-              const printTable = newWin.document.getElementsByTagName('table')[0];
-              printTable.setAttribute('border', '1');
-              printTable.setAttribute('align', 'center');
-              printTable.setAttribute('frame', 'border');
-              printTable.setAttribute('cellspacing', '0');
-              printTable.setAttribute('rules', 'all');
-              printTable.setAttribute('cellpadding', '10');
-              for( let trEl of printTable.getElementsByTagName('td')) {
-                 trEl.setAttribute('align', 'center');
-                 trEl.setAttribute('nowrap', '');
+        // const diaryTagSelector = document.getElementsByClassName('diary');
+        // if (diaryTagSelector.length > 0) {
+        //    const diaryTableTagSelector = diaryTagSelector[0].getElementsByTagName('table');
+        //    if (diaryTableTagSelector.length > 0) {
+        //       const diaryTableTag = diaryTableTagSelector[0];
+        //       const newWin= window.open("");
+        //       newWin.document.write(diaryTableTag.outerHTML);
+        //       const printTable = newWin.document.getElementsByTagName('table')[0];
+        //       printTable.setAttribute('border', '1');
+        //       printTable.setAttribute('align', 'center');
+        //       printTable.setAttribute('frame', 'border');
+        //       printTable.setAttribute('cellspacing', '0');
+        //       printTable.setAttribute('rules', 'all');
+        //       printTable.setAttribute('cellpadding', '10');
+        //       for( let trEl of printTable.getElementsByTagName('td')) {
+        //          trEl.setAttribute('align', 'center');
+        //          trEl.setAttribute('nowrap', '');
+        //       }
+        //       printTable.createCaption();
+        //       const printDate = new Date(this.curYear, (this.curMonth - 1), 1);
+        //       const printMonthText = printDate.toLocaleString(this.curLang, {month: 'long'});
+        //       printTable.caption.textContent = `${this.$lang.messages.AppName}, ${printMonthText} ${this.curYear}`;
+        //       newWin.print();
+        //       newWin.close();
+        //    }
+        // }
+        const columns = [[this.$lang.messages.Day, 'day'],[this.$lang.messages.TimesOfDay, 'amtext'],[this.$lang.messages.Time, 'time'],['sys', 'sys'],
+           ['dia', 'dia'],[this.$lang.messages.Pulse, 'pulse'],[this.$lang.messages.CommentPrint, 'comment']];
+        const printData = this.items.map((item) => {
+           const res = {};
+           columns.forEach((column) => {
+              let value = item[column[1]] || '';
+              if (column[1] === 'amtext') {
+                 const isPm = (parseInt(item.time.substr(0, 2), 10) > 17);
+                 value = isPm ? this.$lang.messages.Evening : this.$lang.messages.Morning;
               }
-              printTable.createCaption();
-              const printDate = new Date(this.curYear, (this.curMonth - 1), 1);
-              const printMonthText = printDate.toLocaleString(this.curLang, {month: 'long'});
-              printTable.caption.textContent = `${this.$lang.messages.AppName}, ${printMonthText} ${this.curYear}`;
-              newWin.print();
-              newWin.close();
-           }
-        }
+              res[column[0]] = value;
+           });
+           return res;
+        });
+
+        const printDate = new Date(this.curYear, (this.curMonth - 1), 1);
+        const printMonthText = printDate.toLocaleString(this.curLang, {month: 'long'});
+        const printTitle = `${this.$lang.messages.AppName}, ${printMonthText} ${this.curYear}`;
+
+        printJS({printable: printData,
+           properties: [this.$lang.messages.Day, this.$lang.messages.TimesOfDay, this.$lang.messages.Time, 'sys', 'dia', this.$lang.messages.Pulse, this.$lang.messages.CommentPrint],
+           type: 'json',
+           gridStyle: 'text-align: center;border: 1px solid lightgray;font-size: 18px;max-width: 300px;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;',
+           documentTitle: printTitle,
+           gridHeaderStyle: 'text-align: center;border: 1px solid lightgray;font-weight: bold;font-size: 18px;'
+        });
      }
   }
 };
