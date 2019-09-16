@@ -9,6 +9,8 @@
       hide-default-footer
       disable-filtering
       fixed-header
+      :locale="curentLang"
+      :no-data-text="$lang.messages.NoDataText"
       :items-per-page="100"
       class="elevation-1"
       ref="datatable"
@@ -278,6 +280,11 @@ export default {
     },
     isMobile() {
       return isMobile;
+    },
+    curentLang() {
+      const lang = this.$store.getters.lang;
+      console.log('lang', lang + '-' + lang.toUpperCase())
+      return lang + '-' + lang.toUpperCase();
     }
   },
 
@@ -393,7 +400,7 @@ export default {
   cursor: pointer
 
 .bottom-spacer
-  height: 2rem
+  height: 4rem
   width: 100%
 
 </style>

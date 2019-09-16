@@ -59,7 +59,7 @@ export default {
     language = language.substr(0, 2).toLowerCase();
 
     if (language === 'ru') {
-      this.curLang = language;
+      //this.curLang = language;
       this.$lang.setLang(language);
       this.$store.dispatch('setLang', language);
     }

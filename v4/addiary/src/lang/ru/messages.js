@@ -39,5 +39,6 @@ module.exports = {
     SexFeMale: 'Женский',
     FindError: 'Нашли ошибку',
     DonateProject: 'Поддержать проект',
-    Print: 'Распечатать'
+    Print: 'Распечатать',
+    NoDataText: 'Нет данных'
 };

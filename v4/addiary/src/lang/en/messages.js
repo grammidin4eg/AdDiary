@@ -39,5 +39,6 @@ module.exports = {
     SexFeMale: 'Female',
     FindError: 'Find error',
     DonateProject: 'Donate project',
-    Print: 'Print'
+    Print: 'Print',
+    NoDataText: 'No data available'
 };
