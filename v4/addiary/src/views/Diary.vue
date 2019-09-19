@@ -77,23 +77,24 @@
                         v-if="dialog"
                         type="number"
                         autofocus
-                        @keyup="onFieldKeyPress($event, editedItem.sys, 3)"
+                        @keyup="onFieldKeyPress($event, editedItem.sys, 'form-field-dia')"
                         :rules="[rules.required, rules.lenField]"
                       ></v-text-field>
                     </v-flex>
                     <v-flex xs4 sm4 md4>
                       <v-text-field
                         v-model="editedItem.dia"
+                        id="form-field-dia"
                         label="DIA"
                         type="number"
-                        ref="form-field-dia"
-                        @keyup="onFieldKeyPress($event, editedItem.dia, 4)"
+                        @keyup="onFieldKeyPress($event, editedItem.dia, 'form-field-pulse')"
                         :rules="[rules.required, rules.lenField]"
                       ></v-text-field>
                     </v-flex>
                     <v-flex xs4 sm4 md4>
                       <v-text-field
                         v-model="editedItem.pulse"
+                        id="form-field-pulse"
                         type="number"
                         v-on:keypress.enter.prevent="save()"
                         :label="$lang.messages.Pulse"
@@ -383,7 +384,12 @@ export default {
        const value = parseInt(_value, 10);
        if ((event.code !== 'Backspace') && !isNaN(value) && (value > 59)) {
           this.$nextTick(function() {
-             this.$refs.form.$children[nextField].focus();
+             const nextFieldObj = this.$refs.form.$children.find((item) => {
+                return (item.id === nextField);
+             });
+             if (nextFieldObj) {
+                nextFieldObj.focus();
+             }
           });
        }
     },
