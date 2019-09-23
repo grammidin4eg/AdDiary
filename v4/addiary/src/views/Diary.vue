@@ -130,6 +130,7 @@
         <tr @click="editItem(item)" class="data-grid-row" :class="getGLevel(item)">
           <td class="text-left">
             <span v-if="!item.secondDay">{{item.day}}</span>
+            <span v-if="!item.secondDay" class="table-cell-ml2">{{weekDayStr(item)}}</span>
           </td>
           <td class="text-start">
             <span v-if="!item.isPm && !item.secondDayPm">{{$lang.messages.Morning}}</span>
@@ -283,8 +284,7 @@ export default {
       return isMobile;
     },
     curentLang() {
-      const lang = this.$store.getters.lang;
-      return lang + '-' + lang.toUpperCase();
+      return this.$store.getters.lang;
     }
   },
 
@@ -358,6 +358,14 @@ export default {
           return null;
        }
        return (parseInt(item.time.substr(0, 2), 10) > 17);
+    },
+
+    weekDayStr(item) {
+       if (!item || !item.date) {
+          return '';
+       }
+
+       return item.date.toLocaleString(this.curentLang, {weekday: 'short'});
     },
 
     getGLevel(item) {
@@ -450,5 +458,9 @@ tr.data-grid-row {
 
 .theme--light.v-data-table tbody tr.data-grid-row.level-2:hover:not(.v-data-table__expand-row) {
   background-color: #fbb8b8;
+}
+
+.table-cell-ml2 {
+   margin-left: 2px;
 }
 </style>

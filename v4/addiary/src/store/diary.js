@@ -46,6 +46,7 @@ export default {
                     let ladderArray = [];
                     let lastDay;
                     let lastDayPm;
+                    const curDate = new Date(curYear, (curMonth - 1), 1);
                     function isPmValue(item) {
                       if (!item || !item.time) {
                          return null;
@@ -58,6 +59,7 @@ export default {
                         _data.secondDay = (lastDay === _data.day);
                         _data.secondDayPm = ((lastDayPm === _data.isPm) && (lastDay === _data.day));
                         _data.id = doc.id;
+                        _data.date = new Date(curDate.setDate(_data.day));
                         lastDay = _data.day;
                         lastDayPm = _data.isPm;
                         ladderArray.push(_data);

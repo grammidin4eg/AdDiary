@@ -128,9 +128,16 @@ export default {
            const res = {};
            columns.forEach((column) => {
               let value = item[column[1]] || '';
+              if ((column[1] === 'day') && (item.secondDay)) {
+                 value = '';
+              }
               if (column[1] === 'amtext') {
-                 const isPm = (parseInt(item.time.substr(0, 2), 10) > 17);
-                 value = isPm ? this.$lang.messages.Evening : this.$lang.messages.Morning;
+                 if (item.secondDayPm) {
+                    value = '';
+                 } else {
+                    const isPm = (parseInt(item.time.substr(0, 2), 10) > 17);
+                    value = isPm ? this.$lang.messages.Evening : this.$lang.messages.Morning;
+                 }
               }
               res[column[0]] = value;
            });
