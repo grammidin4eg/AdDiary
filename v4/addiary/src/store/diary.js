@@ -89,7 +89,9 @@ export default {
                 delete value.timeMask;
 
                 firebase.firestore().collection("diary").add(value)
-                .then(() => {})
+                .then(() => {
+                   dispatch('getItems');
+                })
                 .catch((error) => {
                     commit('setError', error)
                     dispatch('getItems');
@@ -100,6 +102,9 @@ export default {
         deleteItem({commit, dispatch}, id) {
             if (id) {
                 firebase.firestore().collection("diary").doc(id).delete()
+                .then(() => {
+                   dispatch('getItems');
+                })
                 .catch((error) => {
                     commit('setError', error)
                     dispatch('getItems');

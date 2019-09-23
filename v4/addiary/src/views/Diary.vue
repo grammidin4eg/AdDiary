@@ -315,9 +315,9 @@ export default {
     },
 
     deleteItem(item) {
-      const index = this.items.indexOf(item);
+      //const index = this.items.indexOf(item);
       this.$store.dispatch('deleteItem', item.id);
-      this.items.splice(index, 1);
+      //this.items.splice(index, 1);
       // if (confirm(this.$lang.messages.DELETE_MSG)) {
       //   this.$store.dispatch('deleteItem', item.id);
       //   this.items.splice(index, 1);
