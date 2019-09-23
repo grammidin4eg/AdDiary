@@ -132,8 +132,8 @@
             <span v-if="!item.secondDay">{{item.day}}</span>
           </td>
           <td class="text-start">
-            <span v-if="!isPmValue(item)">{{$lang.messages.Morning}}</span>
-            <span v-if="isPmValue(item)">{{$lang.messages.Evening}}</span>
+            <span v-if="!item.isPm && !item.secondDayPm">{{$lang.messages.Morning}}</span>
+            <span v-if="item.isPm && !item.secondDayPm">{{$lang.messages.Evening}}</span>
           </td>
           <td class="text-start">{{item.time}}</td>
           <td class="text-start">{{item.sys}}</td>

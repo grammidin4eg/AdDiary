@@ -45,12 +45,21 @@ export default {
                 .get().then((snapshot) => {
                     let ladderArray = [];
                     let lastDay;
+                    let lastDayPm;
+                    function isPmValue(item) {
+                      if (!item || !item.time) {
+                         return null;
+                      }
+                      return (parseInt(item.time.substr(0, 2), 10) > 17);
+                    }
                     snapshot.forEach((doc) => {
                         let _data = doc.data();
-                        _data.amtext = _data.am ? 'Утро' : 'Вечер';
+                        _data.isPm = isPmValue(_data);
                         _data.secondDay = (lastDay === _data.day);
+                        _data.secondDayPm = ((lastDayPm === _data.isPm) && (lastDay === _data.day));
                         _data.id = doc.id;
                         lastDay = _data.day;
+                        lastDayPm = _data.isPm;
                         ladderArray.push(_data);
                     });
                     //console.log('RES!!!!!!', ladderArray);
