@@ -13,8 +13,10 @@
     "mobile-device-detect": "^0.2.3",
     "print-js": "^1.0.61",
     "vue": "^2.6.10",
+    "vue-google-charts": "^0.3.2",
     "vue-router": "^3.0.3",
     "vue-the-mask": "^0.11.1",
+    "vue-window-size": "^0.2.3",
     "vuejs-localization": "^1.0.3",
     "vuetify": "^2.0.0",
     "vuex": "^3.0.1"

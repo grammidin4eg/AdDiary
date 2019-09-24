@@ -14,7 +14,11 @@ import VueTheMask from 'vue-the-mask';
 
 import firebaseConfig from './firebaseconfig';
 
-Vue.config.productionTip = false
+import VueGoogleCharts from 'vue-google-charts';
+
+import VueWindowSize from 'vue-window-size';
+
+Vue.config.productionTip = false;
 
 firebase.initializeApp(firebaseConfig);
 
@@ -26,6 +30,10 @@ Vue.use(Lang);
 //this.$lang.setLang('ru');
 
 Vue.use(VueTheMask);
+
+Vue.use(VueGoogleCharts);
+
+Vue.use(VueWindowSize);
 
 
 new Vue({
