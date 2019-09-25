@@ -157,12 +157,8 @@
             </thead>
          </template>
       </v-data-table>
-      <GChart
-              v-if="showChart"
-              type="ColumnChart"
-              :data="chartData"
-              :options="chartOptions"
-              :class="{'fullside' : !isMobile}"
+      <Chart
+              :items="items"
       />
       <div class="bottom-spacer"></div>
       <v-scale-transition>
@@ -177,13 +173,13 @@
    import {setTimeout} from 'timers';
    import {mask} from 'vue-the-mask';
    import {isMobile} from 'mobile-device-detect';
-   import {GChart} from 'vue-google-charts';
    import { vueWindowSizeMixin } from 'vue-window-size';
+   import Chart from '../components/Chart';
 
    export default {
       directives: {mask},
       components: {
-         GChart
+         Chart
       },
       mixins: [vueWindowSizeMixin],
       data() {
@@ -300,59 +296,6 @@
          },
          curentLang() {
             return this.$store.getters.lang;
-         },
-
-         chartData() {
-            let res = [
-               ['day', 'SYS', { role: 'style' }, 'DIA', { role: 'style' }, 'Pulse', { role: 'style' }]
-            ];
-
-            const ADLEVEL = {
-               'SYS': [129, 139],
-               'DIA': [85, 89]
-            };
-
-            function getAdColor(value, type) {
-               value = parseInt(value, 10);
-               let color = 'color: #97D05A';
-               if (value > ADLEVEL[type][0]) {
-                  color = 'color: #E8DD10';
-               }
-               if (value > ADLEVEL[type][1]) {
-                  color = 'color: #CA3C3C';
-               }
-               return color;
-            }
-
-            this.items.forEach((item) => {
-               res.push([
-                  parseInt(item.day, 10),
-                  parseInt(item.sys, 10),
-                  getAdColor(item.sys, 'SYS'),
-                  parseInt(item.dia, 10),
-                  getAdColor(item.dia, 'DIA'),
-                  parseInt(item.pulse, 10),
-                  '#3366cc'
-               ]);
-            });
-
-            return res;
-         },
-         chartOptions() {
-            return {
-               chart: {
-                  title: '',
-                  subtitle: '',
-               },
-               legend: {
-                  position: 'none'
-               },
-               chartArea:{left:0,top:0,width:'100%',height:'90%'},
-               width: (isMobile ? this.windowWidth : this.windowWidth / 2)
-            }
-         },
-         showChart() {
-           return this.items.length > 3;
          },
       },
 
