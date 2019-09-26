@@ -83,7 +83,9 @@ export default {
                 value.user = getters.userId;
 
                 firebase.firestore().collection("diary").doc(id).set(value)
-                .then(() => {})
+                .then(() => {
+                   dispatch('getItems');
+                })
                 .catch((error) => {
                     commit('setError', error)
                     dispatch('getItems');

@@ -55,17 +55,58 @@
                return color;
             }
 
-            this.items.forEach((item) => {
+            let curDay;
+            let curSys = [];
+            let curDia = [];
+            let curPulse = [];
+
+            let itemDay = 0;
+            let itemSys = 0;
+            let itemDia = 0;
+            let itemPulse = 0;
+
+            function getAvg(grades) {
+               const total = grades.reduce((acc, c) => acc + c, 0);
+               return total / grades.length;
+            }
+            
+            function pushToRes(_day, _sys, _dia, _pulse) {
+               const _curSys = getAvg(_sys);
+               const _curDia = getAvg(_dia);
                res.push([
-                  parseInt(item.day, 10),
-                  parseInt(item.sys, 10),
-                  getAdColor(item.sys, 'SYS'),
-                  parseInt(item.dia, 10),
-                  getAdColor(item.dia, 'DIA'),
-                  parseInt(item.pulse, 10),
-                  '#3366cc'
+                  _day,
+                  _curSys,
+                  getAdColor(_curSys, 'SYS'),
+                  _curDia,
+                  getAdColor(_curDia, 'DIA'),
+                  getAvg(_pulse),
+                  '#67a0cc'
                ]);
+            }
+
+            this.items.forEach((item) => {
+
+               itemDay = parseInt(item.day, 10);
+               itemSys = parseInt(item.sys, 10);
+               itemDia = parseInt(item.dia, 10);
+               itemPulse = parseInt(item.pulse, 10);
+
+               if (curDay && (curDay !== item.day)) {
+                  pushToRes(curDay, curSys, curDia, curPulse);
+
+                  curDay = 0;
+                  curSys = [];
+                  curDia = [];
+                  curPulse = [];
+               }
+
+               curDay = itemDay;
+               curSys.push(itemSys);
+               curDia.push(itemDia);
+               curPulse.push(itemPulse);
             });
+
+            pushToRes(curDay, curSys, curDia, curPulse);
 
             return res;
          },

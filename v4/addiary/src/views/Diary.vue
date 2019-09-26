@@ -158,6 +158,7 @@
          </template>
       </v-data-table>
       <Chart
+              v-if="numOfDays > 4"
               :items="items"
       />
       <div class="bottom-spacer"></div>
@@ -297,6 +298,17 @@
          curentLang() {
             return this.$store.getters.lang;
          },
+         numOfDays() {
+            let days = 0;
+            let curDay;
+            this.items.forEach((item) => {
+               if( curDay !== item.day) {
+                  curDay = item.day;
+                  days++;
+               }
+            });
+            return days;
+         },
       },
 
       watch: {
@@ -349,7 +361,7 @@
                   Object.assign(this.items[this.editedIndex], this.editedItem);
                   this.$store.dispatch('setItem', this.editedItem);
                } else {
-                  this.items.push(this.editedItem);
+                  //this.items.push(this.editedItem);
                   this.$store.dispatch('addItem', this.editedItem);
                }
                this.close();
