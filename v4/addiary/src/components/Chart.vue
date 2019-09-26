@@ -21,11 +21,15 @@
    export default {
       name: 'Chart',
       props: ['items'],
+      created() {
+         if (localStorage) {
+            this.minimized = (localStorage.getItem('addiary-chart-min') === 'true');
+         }
+      },
       components: {
          GChart
       },
       data: () => ({
-         items: [],
          minimized: false
       }),
       computed: {
@@ -91,6 +95,9 @@
       methods: {
          toggleMinimized() {
             this.minimized = !this.minimized;
+            if (localStorage) {
+               localStorage.setItem('addiary-chart-min', this.minimized);
+            }
          }
       }
    }
