@@ -42,4 +42,5 @@ module.exports = {
     Print: 'Print',
     NoDataText: 'No data available',
     CommentPrint: 'Comment',
+    MonthSumText: 'Monthly average pressure'
 };

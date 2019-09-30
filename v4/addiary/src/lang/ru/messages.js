@@ -41,5 +41,6 @@ module.exports = {
     DonateProject: 'Поддержать проект',
     Print: 'Распечатать',
     NoDataText: 'Нет данных',
-    CommentPrint: 'Комментарий'
+    CommentPrint: 'Комментарий',
+    MonthSumText: 'Среднее давление за месяц'
 };

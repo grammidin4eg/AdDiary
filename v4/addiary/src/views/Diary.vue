@@ -157,6 +157,7 @@
             </thead>
          </template>
       </v-data-table>
+      <MonthSum v-if="numOfDays > 4" :items="items" />
       <Chart
               v-if="numOfDays > 4"
               :items="items"
@@ -176,11 +177,13 @@
    import {isMobile} from 'mobile-device-detect';
    import { vueWindowSizeMixin } from 'vue-window-size';
    import Chart from '../components/Chart';
+   import MonthSum from "../components/MonthSum";
 
    export default {
       directives: {mask},
       components: {
-         Chart
+         Chart,
+         MonthSum
       },
       mixins: [vueWindowSizeMixin],
       data() {
