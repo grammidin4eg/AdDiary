@@ -1,35 +1,56 @@
 <template>
-  <v-container fluid fill-height class="home-backgroung">
-    <v-layout align-center justify-center>
-      <section>
-        <v-layout column align-center justify-center class="white--text">
-            <h1
-              class="white--text mb-2 display-1 text-xs-center"
-              style="font-weight: 900; text-shadow: 3px 2px #000000"
-            >{{$lang.messages.AppName}}</h1>
-            <div
-              class="white--text subheading mb-3 text-xs-center"
-              style="font-weight: 900; text-shadow: 2px 2px #000000"
-            >{{userName}}</div>
-            <v-btn class="blue lighten-2 mt-5" dark large href="/diary">{{$lang.messages.gotoDiary}}</v-btn>
-          </v-layout>
-      </section>
-    </v-layout>
-  </v-container>
+    <v-container>
+        <div class="landing-body">
+            <h1>{{$lang.messages.landingTitle}}</h1>
+            <p>{{$lang.messages.landingWhy}}</p>
+            <p>{{$lang.messages.landingWhy2}}</p>
+
+            <p>{{$lang.messages.landingRegularTitle}}</p>
+            <ul>
+                <li>{{$lang.messages.landingRegular1}}</li>
+                <li>{{$lang.messages.landingRegular2}}</li>
+                <li>{{$lang.messages.landingRegular3}}</li>
+                <li>{{$lang.messages.landingRegular4}}</li>
+            </ul>
+
+            <h1>{{$lang.messages.landingHowTitle}}</h1>
+            <p>{{$lang.messages.landingHow}}</p>
+            <p>{{$lang.messages.landingHow2}}</p>
+            <p>{{$lang.messages.landingHow3}}</p>
+            <EnterButton />
+        </div>
+        <div class="bottom-spacer"></div>
+    </v-container>
 </template>
 
 <script>
-export default {
-   computed: {
-      userName() {
-        return this.$store.getters.userName;
-      }
-   }
-};
+    import EnterButton from '../components/EnterButton';
+    export default {
+        components: {
+            EnterButton
+        }
+    };
 </script>
 
-<style lang="sass">
-  .home-backgroung
-    background-image: url('https://firebasestorage.googleapis.com/v0/b/addiary-f4f05.appspot.com/o/bright-light-textures2.jpg?alt=media&token=6f5d2c92-848c-43cc-9674-6d8ef7bfebaa')
-    background-repeat: repeat
+<style scoped>
+    .home-backgroung {
+        background-image: url('https://firebasestorage.googleapis.com/v0/b/addiary-f4f05.appspot.com/o/bright-light-textures2.jpg?alt=media&token=6f5d2c92-848c-43cc-9674-6d8ef7bfebaa');
+        background-repeat: repeat;
+    }
+
+    .bottom-spacer {
+        height: 4rem;
+        width: 100%;
+    }
+
+    .landing-body {
+        margin: auto;
+        width: 90%;
+    }
+
+    h1 {
+        margin: 12px 0;
+        font-size: 1.5rem;
+        color: cornflowerblue;
+    }
 </style>
