@@ -1,6 +1,6 @@
 <template>
     <div class="landing-button">
-        <v-btn v-if="userName" class="blue lighten-2" dark large href="/diary">
+        <v-btn v-if="userName" class="blue lighten-2" dark large href="/">
             {{$lang.messages.gotoDiary}}
         </v-btn>
         <v-btn v-if="!userName" class="blue lighten-2" dark large href="/login">

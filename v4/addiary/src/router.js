@@ -58,7 +58,7 @@ function checkAuth(next, waitCounter) {
     if (firebase.auth().currentUser) {
         next();
     } else {
-        if (waitCounter) {
+        if (waitCounter > 0) {
             setTimeout(() => {
                 waitCounter--;
                 checkAuth(next, waitCounter)
@@ -70,7 +70,7 @@ function checkAuth(next, waitCounter) {
 }
 
 function AuthGuard(from, to, next) {
-    checkAuth(next, 15);
+    checkAuth(next, 18);
 }
 
 function logOut(from, to, next) {
