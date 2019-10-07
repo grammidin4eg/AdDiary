@@ -13,6 +13,11 @@ export default new Router({
             component: () => import('./views/Diary.vue')
         },
         {
+            path: '/home',
+            name: 'landing',
+            component: () => import('./views/Home.vue')
+        },
+        {
             path: '/reg',
             name: 'registration',
             beforeEnter: logOut,
@@ -30,21 +35,10 @@ export default new Router({
             component: () => import('./views/RecoverPassword.vue')
         },
         {
-            path: '/diary',
-            name: 'diary',
-            beforeEnter: AuthGuard,
-            component: () => import('./views/Diary.vue')
-        },
-        {
             path: '/profile',
             name: 'profile',
             beforeEnter: AuthGuard,
             component: () => import('./views/UserProfile.vue')
-        },
-        {
-            path: '/home',
-            name: 'landing',
-            component: () => import('./views/Home.vue')
         },
         {
             path: '*',
@@ -70,7 +64,7 @@ function checkAuth(next, waitCounter) {
 }
 
 function AuthGuard(from, to, next) {
-    checkAuth(next, 18);
+    checkAuth(next, 10);
 }
 
 function logOut(from, to, next) {

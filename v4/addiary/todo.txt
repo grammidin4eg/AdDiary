@@ -42,4 +42,4 @@ https://habr.com/ru/post/246907/
 
 = deploy
 
-firebase deploy
+firebase deploy --only hosting
