@@ -1,0 +1,3 @@
+User-agent: *
+Host: addiary.ru
+Sitemap: http://addiary.ru/sitemap.xml
