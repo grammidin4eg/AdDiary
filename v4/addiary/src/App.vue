@@ -40,6 +40,7 @@
                 <a href="https://money.yandex.ru/to/41001512641224" class="mr-3" target="_blank">{{$lang.messages.DonateProject}}</a>
                 <span class="mr-4" v-if="isRuLang"> | </span>
                 <a href="https://vk.com/addiaryonline" v-if="isRuLang" class="mr-3" target="_blank">Группа вконтакте</a>
+                <a class="yandex-x" href="https://webmaster.yandex.ru/sqi?host=addiary.ru"><img width="88" height="31" alt="" border="0" src="https://yandex.ru/cycounter?addiary.ru&theme=dark&lang=ru"/></a>
             </v-flex>
         </v-footer>
     </v-app>
@@ -186,5 +187,12 @@
 
         .footer-panel a
             color: white
+
+    .yandex-x
+        position: absolute
+        width: 2px
+        height: 24px
+        overflow: hidden
+        display: inline-block
 </style>
 
