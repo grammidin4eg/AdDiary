@@ -41,6 +41,16 @@
             <v-spacer></v-spacer>
             <router-link v-if="isLogin" to="/restore" class="mr-4">{{$lang.messages.fogotPassword}}</router-link>
             <v-btn
+                    v-if="isLogin"
+                    text
+                    icon
+                    color="primary"
+                    :title="$lang.messages.authGoogle"
+                    @click.prevent="validateGoogle()"
+                    :loading="loading"
+                    :disabled="loading"
+            ><v-icon>mdi-google</v-icon></v-btn>
+            <v-btn
               color="primary"
               @click.prevent="validate()"
               :loading="loading"
@@ -84,6 +94,10 @@ export default {
           localStorage.setItem('addiary-login', this.login);
         }
       }
+    },
+
+    validateGoogle() {
+      this.$store.dispatch('googleLogin');
     }
   },
 

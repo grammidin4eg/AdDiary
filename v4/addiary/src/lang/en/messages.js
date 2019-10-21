@@ -55,4 +55,5 @@ module.exports = {
     landingRegular2: 'More accurate results due to a calm environment and the ability to take measurements at the same time.',
     landingRegular3: 'The ability to track the reasons that affect the change in blood pressure during the day, several days, a certain time period.',
     landingRegular4: 'The possibility of influencing the risk of developing cardiovascular complications due to the constant monitoring of the patient\'s condition and the level of his blood pressure.',
+    authGoogle: 'Auth with Google'
 };

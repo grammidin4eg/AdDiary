@@ -56,6 +56,17 @@ export default {
          });
       },
 
+      googleLogin({commit}) {
+         commit('clearError');
+         const provider = new firebase.auth.GoogleAuthProvider();
+         firebase.auth().signInWithPopup(provider).then(function(result) {
+            const user = result.user;
+            commit('stateChange', user);
+         }).catch(function(error) {
+            commit('setError', error);
+         });
+      },
+
       recover({commit}, mail) {
          commit('clearError');
          commit('clearEvent');
