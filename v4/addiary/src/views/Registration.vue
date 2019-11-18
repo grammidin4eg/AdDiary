@@ -135,7 +135,7 @@ export default {
     },
     isAuth(value) {
       if (value) {
-        const page = this.isLogin ? '/' : '/profile';
+        const page = this.isLogin ? '/diary' : '/profile';
         this.$router.push(page);
       }
     }

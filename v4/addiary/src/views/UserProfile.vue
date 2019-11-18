@@ -65,7 +65,7 @@
                   birth: this.birth,
                   weight: this.weight
                });
-               this.$router.push('/');
+               this.$router.push('/diary');
             }
          },
 

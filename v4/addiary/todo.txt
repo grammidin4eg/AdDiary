@@ -1,10 +1,11 @@
 = на проверку
 
+- landing садим на роут /
+
 = Ошибки
 
 = Фичи
 
-- вход через гугл
 - доработать лэндинг (чтобы был красивый)
 
 = На будущее
@@ -31,4 +32,5 @@ https://habr.com/ru/post/246907/
 
 = deploy
 
+yarn build
 firebase deploy --only hosting

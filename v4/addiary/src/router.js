@@ -8,14 +8,14 @@ export default new Router({
     routes: [
         {
             path: '/',
+            name: 'landing',
+            component: () => import('./views/Home.vue')
+        },
+        {
+            path: '/diary',
             name: 'home',
             beforeEnter: AuthGuard,
             component: () => import('./views/Diary.vue')
-        },
-        {
-            path: '/home',
-            name: 'landing',
-            component: () => import('./views/Home.vue')
         },
         {
             path: '/reg',
