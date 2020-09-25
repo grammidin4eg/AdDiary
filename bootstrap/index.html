@@ -10,42 +10,43 @@
 
     <title>Дневник давления</title>
   </head>
-  <body>
-    <!-- панель навигации -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">Дневник давления</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav">
-            <li class="nav-item active">
-              <a class="nav-link" href="#">Главная <span class="sr-only">(current)</span></a>
-            </li>
-          </ul>
+  <body class="d-flex flex-column h-100">
+      <main class="flex-shrink-0">
+        <!-- панель навигации -->
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="#">Дневник давления</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                <a class="nav-link" href="#">Главная <span class="sr-only">(current)</span></a>
+                </li>
+            </ul>
+            </div>
+        </nav>
+        <!-- Главная область с кнопкой -->
+        <div class="jumbotron">
+            <div class="container">
+                <h1 class="display-5">Электронный дневник давления</h1>
+                <p class="lead">
+                    таблица результатов измерений артериального давления в течение суток, 
+                    данные из которой понадобятся самому больному и его лечащему врачу и его лечащему врачу.
+                </p>
+                <hr class="my-4">
+                <p>
+                    Для полноценного контроля состояния сердечно-сосудистой системы и артериального давления
+                    врачу нужно знать, как изменяются показатели уровня АД в течение дня. Информативными будут как минимум 
+                    два измерения АД в сутки: утром, после пробуждения и в вечернее время. Оценивая показатели в динамике, 
+                    врач сможет сделать выводы о переносимости дневных нагрузок, эффективности назначенной 
+                    антигипертензивной терапии, влиянии циркадных ритмов на уровень АД.
+                </p>
+                <a class="btn btn-primary btn-lg" href="./diary.html" role="button">Открыть дневник</a>
+            </div>
         </div>
-    </nav>
-    <!-- Главная область с кнопкой -->
-    <div class="jumbotron">
+        <!-- блоки -->
         <div class="container">
-            <h1 class="display-5">Электронный дневник давления</h1>
-            <p class="lead">
-                таблица результатов измерений артериального давления в течение суток, 
-                данные из которой понадобятся самому больному и его лечащему врачу и его лечащему врачу.
-            </p>
-            <hr class="my-4">
-            <p>
-                Для полноценного контроля состояния сердечно-сосудистой системы и артериального давления
-                врачу нужно знать, как изменяются показатели уровня АД в течение дня. Информативными будут как минимум 
-                два измерения АД в сутки: утром, после пробуждения и в вечернее время. Оценивая показатели в динамике, 
-                врач сможет сделать выводы о переносимости дневных нагрузок, эффективности назначенной 
-                антигипертензивной терапии, влиянии циркадных ритмов на уровень АД.
-            </p>
-            <a class="btn btn-primary btn-lg" href="#" role="button">Открыть дневник</a>
-        </div>
-    </div>
-    <!-- блоки -->
-    <div class="container">
         <div class="row mx-1">
             <h5>Регулярное измерение и контроль давления это:</h5>
         </div>
@@ -84,6 +85,25 @@
             <p>За час до измерения не рекомендуется: пить кофе или крепкий чай, принимать пищу, курить</p>
             <p>Во время измерения нужно принять удобное положение сидя, расслабиться. Не стоит беспокоиться, дышите спокойно и расслабленно. Не стоит скрещивать ноги. Одежда не должна быть тесной, а руку, где будет измеряться АД, нужно освободить от рукава (закатанный рукав может создать эффект жгута, что повлияет на реальные показатели АД). Руку согнуть в локте и положить на ровную поверхность так, чтобы надетая манжета располагалась напротив сердца. Важно правильно подобрать манжету: она должна быть достаточно широкой, чтобы при надевании обхватить не менее 80% окружности руки, и при этом располагалась на предплечье так, чтобы занять на нем около половины длины.</p>
         </div>
-    </div>
+        </div>
+    </main>
+    <footer class="footer mt-auto py-3 bg-light">
+        <div class="container">
+            <ul class="nav">
+                <li class="nav-item">
+                  <a class="nav-link" href="http://karachevtsevuu.ru" target="_blank">© Karachevtsev Yu. Yu.</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="mailto:w3gSee@mail.ru">Нашли ошибку?</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="https://money.yandex.ru/to/41001512641224" target="_blank">Поддержать проект </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://vk.com/addiaryonline" target="_blank">Группа вконтакте </a>
+                  </li>
+              </ul>
+        </div>
+    </footer>
   </body>
 </html>
