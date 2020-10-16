@@ -10,17 +10,31 @@
 
     <title>Дневник давления</title>
     <style>
+      .sticky-table th {
+        position: -webkit-sticky;
+        position: sticky;
+        top: 0;
+        z-index: 1020;
+      }
+
+      .sticky-table {
+        border-top: 0;
+      }
+
+      .sticky-table tbody tr {
+        cursor: pointer;
+      }
+
       #float-button {
         width: 50px;
         height: 50px;
-        border-radius: 50%;
-        position: relative;
-        right: 30px;
-        bottom: 0px;
+        border-radius: 50% 0 0 50%;
+        position: fixed;
+        right: 0px;
+        bottom: 30px;
         padding-left: 0;
         padding-right: 0;
         white-space: normal;
-        top: 20px;
         margin-left: auto;
       }
     </style>
@@ -42,16 +56,16 @@
             </div>
         </nav>
         <!-- таблица -->
-        <table class="table table-bordered table-hover w-100">
+        <table class="table table-bordered table-hover w-100 sticky-table">
             <thead>
-              <tr class="sticky-top table-secondary">
-                <th scope="col" class="sticky-top border-0">Число</th>
-                <th scope="col" class="sticky-top border-0">Время суток</th>
-                <th scope="col" class="sticky-top border-0">Время</th>
-                <th scope="col" class="sticky-top border-0">SYS</th>
-                <th scope="col" class="sticky-top border-0">DIA</th>
-                <th scope="col" class="sticky-top border-0">Пульс</th>
-                <th scope="col" class="col-8 d-none d-sm-table-cell sticky-top border-0">Комментарий</th>
+              <tr class="table-secondary">
+                <th scope="col" class="border-0">Число</th>
+                <th scope="col" class="border-0">Время суток</th>
+                <th scope="col" class="border-0">Время</th>
+                <th scope="col" class="border-0">SYS</th>
+                <th scope="col" class="border-0">DIA</th>
+                <th scope="col" class="border-0">Пульс</th>
+                <th scope="col" class="col-8 d-none d-sm-table-cell sticky-top2 border-0">Комментарий</th>
               </tr>
             </thead>
             <tbody>
@@ -178,17 +192,40 @@
             <div class="modal-dialog">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h5 class="modal-title">Modal title</h5>
+                  <h5 class="modal-title">Новая запись</h5>
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                   </button>
                 </div>
                 <div class="modal-body">
-                  <p>Modal body text goes here.</p>
+                  <div class="form-row">
+                    <div class="form-group col-2">
+                      <label for="inputDay">Число</label>
+                      <input type="number" class="form-control" id="inputDay">
+                    </div>
+                    <div class="form-group col-3">
+                      <label for="inputTime">Время</label>
+                      <input type="time" class="form-control" id="inputTime">
+                    </div>
+                  </div>
+                  <div class="form-row">
+                    <div class="form-group col">
+                      <label for="inputSys">SYS</label>
+                      <input type="number" class="form-control" id="inputSys">
+                    </div>
+                    <div class="form-group col">
+                      <label for="inputDia">DIA</label>
+                      <input type="number" class="form-control" id="inputDia">
+                    </div>
+                    <div class="form-group col">
+                      <label for="inputPulse">Пульс</label>
+                      <input type="number" class="form-control" id="inputPulse">
+                    </div>
+                  </div>
                 </div>
                 <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                  <button type="button" class="btn btn-primary">Save changes</button>
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
+                  <button type="button" class="btn btn-primary">Сохранить</button>
                 </div>
               </div>
             </div>
@@ -224,6 +261,10 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
     <script>
       $('#float-button').click(function() {
+        $('#editDialog').modal('show');
+      })
+
+      $('.sticky-table tbody tr').click(function() {
         $('#editDialog').modal('show');
       })
     </script>
