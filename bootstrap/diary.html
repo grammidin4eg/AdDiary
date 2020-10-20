@@ -7,37 +7,9 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" href="diary.css">
 
     <title>Дневник давления</title>
-    <style>
-      .sticky-table th {
-        position: -webkit-sticky;
-        position: sticky;
-        top: 0;
-        z-index: 1020;
-      }
-
-      .sticky-table {
-        border-top: 0;
-      }
-
-      .sticky-table tbody tr {
-        cursor: pointer;
-      }
-
-      #float-button {
-        width: 50px;
-        height: 50px;
-        border-radius: 50% 0 0 50%;
-        position: fixed;
-        right: 0px;
-        bottom: 30px;
-        padding-left: 0;
-        padding-right: 0;
-        white-space: normal;
-        margin-left: auto;
-      }
-    </style>
   </head>
   <body class="d-flex flex-column vh-100">
       <main class="flex-shrink-0 flex-grow-1">
@@ -189,7 +161,7 @@
             </tbody>
           </table>
           <div id="editDialog" class="modal" tabindex="-1">
-            <div class="modal-dialog">
+            <div class="modal-dialog modal-dialog-centered">
               <div class="modal-content">
                 <div class="modal-header">
                   <h5 class="modal-title">Новая запись</h5>
@@ -222,8 +194,13 @@
                       <input type="number" class="form-control" id="inputPulse">
                     </div>
                   </div>
+                  <div class="form-row">
+                    <input type="text" class="form-control" id="inputPulse" placeholder="Комментарий (самочувствие, аритмия, лекарства, левая/правая рука)">
+                  </div>
                 </div>
                 <div class="modal-footer">
+                  <button type="button" class="btn btn-outline-danger">Удалить</button>
+                  <div class="flex-fill"></div>
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
                   <button type="button" class="btn btn-primary">Сохранить</button>
                 </div>
