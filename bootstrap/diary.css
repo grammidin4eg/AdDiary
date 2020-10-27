@@ -25,3 +25,7 @@
     white-space: normal;
     margin-left: auto;
   }
+
+  nav .dropdown-menu {
+    z-index: 1500;
+  }
