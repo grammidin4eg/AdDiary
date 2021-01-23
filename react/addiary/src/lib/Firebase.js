@@ -1,5 +1,7 @@
-import React, {useContext} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import firebase from 'firebase';
+import {ErrorPanelContext} from "../components/ErrorPanel";
+import { useHistory } from "react-router-dom";
 
 // Initialize Firebase
 if (!firebase.apps.length) {
@@ -18,29 +20,40 @@ console.log('firebase', firebase);
 
 const FirebaseContext = React.createContext({});
 
-function isAuth() {
-    return !!firebase.auth().getUid();
-}
-
-function auth(email, password) {
-    //https://firebase.google.com/docs/auth/web/start?authuser=0
-    firebase.auth().signInWithEmailAndPassword(email, password)
-        .then((userCredential) => {
-            // Signed in
-            var user = userCredential.user;
-            console.log('user', user);
-            // ...
-        })
-        .catch((error) => {
-            var errorCode = error.code;
-            var errorMessage = error.message;
-            console.error('error', error);
-        });
-}
-
 export const Firebase = ({children}) => {
+    const showError = useContext(ErrorPanelContext);
+    let history = useHistory();
+    const [user, setUser] = useState(null);
+
+    function isAuth() {
+        console.log('isAuth', !!firebase.auth().getUid(), firebase.auth().getUid(), firebase.auth());
+        return !!firebase.auth().getUid();
+    }
+
+    function auth(email, password) {
+        console.log('auth', email, password);
+        if (!email || !password) {
+            return;
+        }
+        //https://firebase.google.com/docs/auth/web/start?authuser=0
+        showError('');
+        firebase.auth().signInWithEmailAndPassword(email, password)
+            .then((userCredential) => {
+                // Signed in
+                const user = userCredential.user;
+                console.log('user', user);
+                history.push("/diary");
+            })
+            .catch(showError);
+    }
+    useEffect(() => {
+        firebase.auth().onAuthStateChanged((newUser) => {
+            console.log('onAuthStateChanged', newUser);
+            setUser(newUser);
+        });
+    }, []);
     return (
-        <FirebaseContext.Provider value={{isAuth}}>
+        <FirebaseContext.Provider value={{isAuth, auth, user}}>
             {children}
         </FirebaseContext.Provider>
     );
