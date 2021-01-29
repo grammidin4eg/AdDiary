@@ -68,6 +68,9 @@ export const Firebase = ({children}) => {
             .catch(showError);
     }
 
+    /**
+     * Войти с помощью google аккаунта
+     */
     function signInWithGoogle() {
         firebase.auth()
             .signInWithPopup(firebase.googleProvider)
@@ -79,6 +82,19 @@ export const Firebase = ({children}) => {
             }).catch(showError);
     }
 
+    /**
+     * Восстановить пароль
+     * @param emailAddress {string} почта
+     * @param callback {func} функция, которая вызывается после отправки письма
+     */
+    function restore(emailAddress, callback) {
+        firebase.auth().sendPasswordResetEmail(emailAddress).then(function() {
+            if (callback) {
+                callback(emailAddress);
+            }
+        }).catch(showError);
+    }
+
     useEffect(() => {
         firebase.auth().onAuthStateChanged((newUser) => {
             console.log('onAuthStateChanged', newUser);
@@ -86,7 +102,7 @@ export const Firebase = ({children}) => {
         });
     }, []);
     return (
-        <FirebaseContext.Provider value={{isAuth, auth, registration, signInWithGoogle, user}}>
+        <FirebaseContext.Provider value={{isAuth, auth, registration, signInWithGoogle, restore, user}}>
             {children}
         </FirebaseContext.Provider>
     );
@@ -94,7 +110,7 @@ export const Firebase = ({children}) => {
 
 /**
  * хук использования функций firebase
- * @returns {{isAuth, auth, registration, user}} объект с публичными методами и объектами firebase
+ * @returns {{isAuth, auth, registration, signInWithGoogle, restore, user}} объект с публичными методами и объектами firebase
  */
 export const useFirebase = () => {
     const context = useContext(FirebaseContext);

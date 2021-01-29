@@ -12,6 +12,7 @@ import ErrorPanel from "./components/ErrorPanel";
 import Diary from "./components/Diary";
 import PrivateRoute from "./lib/PrivateRoute";
 import Registration from "./components/Registration";
+import Restore from "./components/Restore";
 
 const rootReducer = combineReducers({
     form: formReducer
@@ -40,7 +41,7 @@ function App() {
                                         <Registration/>
                                     </Route>
                                     <Route path="/restore">
-                                        restore
+                                        <Restore/>
                                     </Route>
                                     <Redirect to="/"></Redirect>
                                 </Switch>
