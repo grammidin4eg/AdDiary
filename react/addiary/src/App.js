@@ -11,6 +11,7 @@ import {reducer as formReducer} from 'redux-form'
 import ErrorPanel from "./components/ErrorPanel";
 import Diary from "./components/Diary";
 import PrivateRoute from "./lib/PrivateRoute";
+import Registration from "./components/Registration";
 
 const rootReducer = combineReducers({
     form: formReducer
@@ -36,7 +37,7 @@ function App() {
                                         <Login/>
                                     </Route>
                                     <Route path="/reg">
-                                        REG
+                                        <Registration/>
                                     </Route>
                                     <Route path="/restore">
                                         restore

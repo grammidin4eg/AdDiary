@@ -14,22 +14,27 @@ if (!firebase.apps.length) {
         messagingSenderId: "436974978522",
         appId: "1:436974978522:web:7ccc4ee7ccbd77a23c2ce3"
     });
-}
+    firebase.googleProvider = new firebase.auth.GoogleAuthProvider();
 
-console.log('firebase', firebase);
+}
 
 const FirebaseContext = React.createContext({});
 
 export const Firebase = ({children}) => {
     const showError = useContext(ErrorPanelContext);
     let history = useHistory();
-    const [user, setUser] = useState(null);
+    const [user, setUser] = useState(firebase.auth().currentUser || null);
 
     function isAuth() {
-        console.log('isAuth', !!firebase.auth().getUid(), firebase.auth().getUid(), firebase.auth());
-        return !!firebase.auth().getUid();
+        console.log('isAuth', !!firebase.auth().currentUser);
+        return !!firebase.auth().currentUser;
     }
 
+    /**
+     * Авторизация с помощью firebase
+     * @param email {string} почта
+     * @param password {string} пароль
+     */
     function auth(email, password) {
         console.log('auth', email, password);
         if (!email || !password) {
@@ -39,13 +44,41 @@ export const Firebase = ({children}) => {
         showError('');
         firebase.auth().signInWithEmailAndPassword(email, password)
             .then((userCredential) => {
-                // Signed in
-                const user = userCredential.user;
-                console.log('user', user);
+                setUser(userCredential.user);
                 history.push("/diary");
             })
             .catch(showError);
     }
+
+    /**
+     * Регистрация с помощью firebase
+     * @param email {string} почта
+     * @param password {string} пароль
+     */
+    function registration(email, password) {
+        if (!email || !password) {
+            return;
+        }
+        showError('');
+        firebase.auth().createUserWithEmailAndPassword(email, password)
+            .then((userCredential) => {
+                setUser(userCredential.user);
+                history.push("/diary");
+            })
+            .catch(showError);
+    }
+
+    function signInWithGoogle() {
+        firebase.auth()
+            .signInWithPopup(firebase.googleProvider)
+            .then((result) => {
+                if (result.user) {
+                    setUser(result.user);
+                    history.push("/diary");
+                }
+            }).catch(showError);
+    }
+
     useEffect(() => {
         firebase.auth().onAuthStateChanged((newUser) => {
             console.log('onAuthStateChanged', newUser);
@@ -53,13 +86,16 @@ export const Firebase = ({children}) => {
         });
     }, []);
     return (
-        <FirebaseContext.Provider value={{isAuth, auth, user}}>
+        <FirebaseContext.Provider value={{isAuth, auth, registration, signInWithGoogle, user}}>
             {children}
         </FirebaseContext.Provider>
     );
 };
 
-
+/**
+ * хук использования функций firebase
+ * @returns {{isAuth, auth, registration, user}} объект с публичными методами и объектами firebase
+ */
 export const useFirebase = () => {
     const context = useContext(FirebaseContext);
     return context;
