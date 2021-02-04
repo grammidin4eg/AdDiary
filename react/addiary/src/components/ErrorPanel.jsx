@@ -4,10 +4,18 @@ export const ErrorPanelContext = React.createContext('');
 
 const ErrorPanel = ({children}) => {
     const [value, setValue] = useState('');
+
+    /**
+     * Показать панель с ошибкой
+     * @param error {Object} объект ошибки
+     */
     function showError(error) {
         setValue(error.message);
     }
 
+    /**
+     * Скрыть панель с ошибкой
+     */
     function hideError() {
         setValue('');
     }
@@ -20,7 +28,7 @@ const ErrorPanel = ({children}) => {
         </div>
     );
 return (
-    <ErrorPanelContext.Provider value={showError}>
+    <ErrorPanelContext.Provider value={{showError, hideError}}>
         {value && errorPanel}
         {children}
     </ErrorPanelContext.Provider>

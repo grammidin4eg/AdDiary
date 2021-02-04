@@ -21,13 +21,25 @@ if (!firebase.apps.length) {
 const FirebaseContext = React.createContext({});
 
 export const Firebase = ({children}) => {
-    const showError = useContext(ErrorPanelContext);
+    const {showError, hideError} = useContext(ErrorPanelContext);
     let history = useHistory();
     const [user, setUser] = useState(firebase.auth().currentUser || null);
 
     function isAuth() {
         console.log('isAuth', !!firebase.auth().currentUser);
         return !!firebase.auth().currentUser;
+    }
+
+    /**
+     * Установить объект пользователя и перейти на страницу дневника
+     * @param userObj {Object} объект пользователя firebase
+     */
+    function setUserAndGoToDiary(userObj) {
+        if (userObj && userObj.user) {
+            setUser(userObj.user);
+            hideError();
+            history.push("/diary");
+        }
     }
 
     /**
@@ -41,12 +53,9 @@ export const Firebase = ({children}) => {
             return;
         }
         //https://firebase.google.com/docs/auth/web/start?authuser=0
-        showError('');
+        hideError();
         firebase.auth().signInWithEmailAndPassword(email, password)
-            .then((userCredential) => {
-                setUser(userCredential.user);
-                history.push("/diary");
-            })
+            .then(setUserAndGoToDiary)
             .catch(showError);
     }
 
@@ -59,12 +68,9 @@ export const Firebase = ({children}) => {
         if (!email || !password) {
             return;
         }
-        showError('');
+        hideError();
         firebase.auth().createUserWithEmailAndPassword(email, password)
-            .then((userCredential) => {
-                setUser(userCredential.user);
-                history.push("/diary");
-            })
+            .then(setUserAndGoToDiary)
             .catch(showError);
     }
 
@@ -74,12 +80,7 @@ export const Firebase = ({children}) => {
     function signInWithGoogle() {
         firebase.auth()
             .signInWithPopup(firebase.googleProvider)
-            .then((result) => {
-                if (result.user) {
-                    setUser(result.user);
-                    history.push("/diary");
-                }
-            }).catch(showError);
+            .then(setUserAndGoToDiary).catch(showError);
     }
 
     /**
