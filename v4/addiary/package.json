@@ -18,7 +18,7 @@
     "vue-the-mask": "^0.11.1",
     "vue-window-size": "^0.2.3",
     "vuejs-localization": "^1.0.3",
-    "vuetify": "^2.0.0",
+    "vuetify": "^2.6.10",
     "vuex": "^3.0.1"
   },
   "devDependencies": {
